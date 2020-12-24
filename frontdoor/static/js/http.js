@@ -11,7 +11,7 @@ axios.interceptors.request.use(
     const token = getCookie('session'); //获取Cookie
     config.data = JSON.stringify(config.data);
     config.headers = {
-      'Content-Type':'application/x-www-form-urlencoded' //设置跨域头部
+      'Content-Type': 'application/x-www-form-urlencoded' //设置跨域头部
     };
     if (token) {
       config.params = {'token': token} //后台接收的参数，后面我们将说明后台如何接收
@@ -28,7 +28,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
 //response.data.errCode是我接口返回的值，如果值为2，说明Cookie丢失，然后跳转到登录页，这里根据大家自己的情况来设定
-    if(response.data.errCode == 2) {
+    if (response.data.errCode == 2) {
       router.push({
         path: '/login',
         query: {redirect: router.currentRoute.fullPath} //从哪个页面跳转

@@ -39,13 +39,15 @@
             plain
             @click="submit"
             :loading="logining"
-          >登录</el-button>
+          >登录
+          </el-button>
           <el-button
             class="loginBut"
             type="primary"
             plain
             @click="resetForm()"
-          >重置</el-button>
+          >重置
+          </el-button>
         </el-form-item>
       </el-form>
 
@@ -64,10 +66,10 @@ export default {
       },
       ruleForm: {
         name: [
-          { required: true, message: '请输入账号', trigger: 'blur' },
+          {required: true, message: '请输入账号', trigger: 'blur'},
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
+          {required: true, message: '请输入密码', trigger: 'blur'},
         ]
       }
     }
@@ -81,7 +83,7 @@ export default {
             this.form.password === '123456') {
             this.logining = false;
             sessionStorage.setItem('user', this.form.name);
-            this.$cookie.set('name',this.form.name,1);
+            this.$cookie.set('name', this.form.name, 1);
             this.$router.push('/main');
           } else {
             this.logining = false;
@@ -117,16 +119,19 @@ export default {
   background: #fff;
   border: 1px solid #dcdfe6;
 }
+
 .loginForm {
   text-align: center;
   padding-top: 15px;
   padding-right: 30px;
   top: 10px;
 }
+
 .homeBut {
   position: absolute;
   left: 0px;
 }
+
 .loginBut {
   position: absolute;
   right: 0px;
