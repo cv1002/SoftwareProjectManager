@@ -19,7 +19,7 @@
         </el-col>
         <el-col :span="8">
           <el-menu-item index="2">
-            <a href="/login" target = "_self" class="distence_to_border" >
+            <a href="/login" target="_self" class="distence_to_border">
               <el-avatar :size="40" :src="circleUrl">
               </el-avatar>
             </a>
@@ -30,58 +30,58 @@
       </el-menu>
     </div>
     <div class="div1">
-          <el-menu
-            default-active="2"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="#ffd04b">
-            <router-link to="/entire" class="router-link-active" style="color: white">
-              <el-menu-item index="1" class="menu1">
-                <i class="el-icon-ice-cream-round"></i>
-                <span slot="title">
+      <el-menu
+        default-active="2"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <router-link to="/entire" class="router-link-active" style="color: white">
+          <el-menu-item index="1" class="menu1">
+            <i class="el-icon-ice-cream-round"></i>
+            <span slot="title">
                   项目整体进展</span>
-              </el-menu-item>
-            </router-link>
-            <router-link to="/individual" class="router-link-active" style="color: white">
-              <el-menu-item index="2" class="menu1">
-                <i class="el-icon-lollipop"></i>
-                <span slot="title">
+          </el-menu-item>
+        </router-link>
+        <router-link to="/individual" class="router-link-active" style="color: white">
+          <el-menu-item index="2" class="menu1">
+            <i class="el-icon-lollipop"></i>
+            <span slot="title">
                   项目个人进展</span>
-              </el-menu-item>
-            </router-link>
-            <router-link to="/homework" class="router-link-active" style="color: white">
-              <el-menu-item index="3" class="menu1">
-                <i class="el-icon-s-order"></i>
-                <span slot="title">
+          </el-menu-item>
+        </router-link>
+        <router-link to="/homework" class="router-link-active" style="color: white">
+          <el-menu-item index="3" class="menu1">
+            <i class="el-icon-s-order"></i>
+            <span slot="title">
                   作业提交区域</span>
-              </el-menu-item>
-            </router-link>
-            <router-link to="/individual" class="router-link-active" style="color: white">
-              <el-menu-item index="4" class="menu1">
-                <i class="el-icon-pie-chart"></i>
-                <span slot="title">绘制图表区域</span>
-              </el-menu-item>
-            </router-link>
-            <router-link to="/vueeditor" class="router-link-active" style="color: white">
-              <el-menu-item index="5" class="menu1">
-                <i class="el-icon-chat-line-round"></i>
-                <span slot="title">交流讨论区域</span>
-              </el-menu-item>
-            </router-link>
-            <router-link to="/tabs" class="router-link-active" style="color: white">
-            <el-menu-item index="6" class="menu1">
-              <i class="el-icon-chat-dot-square"></i>
-              <span slot="title">教师反馈区域</span>
-            </el-menu-item>
-            </router-link>
-            <el-menu-item index="7" class="menu1" disabled>
-              <i class="el-icon-setting"></i>
-              <span slot="title">权限管理</span>
-            </el-menu-item>
-          </el-menu>
+          </el-menu-item>
+        </router-link>
+        <router-link to="/individual" class="router-link-active" style="color: white">
+          <el-menu-item index="4" class="menu1">
+            <i class="el-icon-pie-chart"></i>
+            <span slot="title">绘制图表区域</span>
+          </el-menu-item>
+        </router-link>
+        <router-link to="/vueeditor" class="router-link-active" style="color: white">
+          <el-menu-item index="5" class="menu1">
+            <i class="el-icon-chat-line-round"></i>
+            <span slot="title">交流讨论区域</span>
+          </el-menu-item>
+        </router-link>
+        <router-link to="/tabs" class="router-link-active" style="color: white">
+          <el-menu-item index="6" class="menu1">
+            <i class="el-icon-chat-dot-square"></i>
+            <span slot="title">教师反馈区域</span>
+          </el-menu-item>
+        </router-link>
+        <el-menu-item index="7" class="menu1" disabled>
+          <i class="el-icon-setting"></i>
+          <span slot="title">权限管理</span>
+        </el-menu-item>
+      </el-menu>
     </div>
     <div class="div2">
       <router-view></router-view>
@@ -109,7 +109,7 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    logout:function (event) {
+    logout: function (event) {
       this.$cookie.delete('name');
     }
   }
@@ -117,34 +117,41 @@ export default {
 </script>
 
 <style>
-.distence_to_border{
+.distence_to_border {
   margin-left: 340px;
 }
-.menu1{
+
+.menu1 {
   height: 80px;
 }
-.div1{
+
+.div1 {
   width: 20%;
   height: 650px;
   background-color: #545c64;
   float: left;
 }
-.div2{
+
+.div2 {
   width: 80%;
   height: 650px;
   float: left;
 }
+
 .router-link-active {
   text-decoration: none;
 }
-.atype{
+
+.atype {
   text-decoration: none;
   color: white;
 }
-.font1{
+
+.font1 {
   font-size: 30px;
 }
-.div3{
+
+.div3 {
   height: 80px;
 }
 

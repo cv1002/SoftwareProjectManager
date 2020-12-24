@@ -23,19 +23,19 @@ export default new VueRouter({
       props: true,
       //跳转的组件
       component: Main,
-      redirect:'/entire',
+      redirect: '/entire',
       children: [
-        {path: '/entire',component: Entire},
-        {path: '/individual',component: Individual},
-        {path: '/homework',component: Homework},
-        {path: '/tabs',component: Tabs},
-        {path: '/vueeditor',component: VueEditor}
+        {path: '/entire', component: Entire},
+        {path: '/individual', component: Individual},
+        {path: '/homework', component: Homework},
+        {path: '/tabs', component: Tabs},
+        {path: '/vueeditor', component: VueEditor}
       ]
     },
     {
       //路由路径
       path: '/login',
-      name: 'login'   ,
+      name: 'login',
       //跳转的组件
       component: Login
     },
