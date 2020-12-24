@@ -75,7 +75,7 @@ export default {
     }
   },
   methods: {
-    submit(event) {
+    submit() {
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.logining = true;

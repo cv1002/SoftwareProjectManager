@@ -90,7 +90,7 @@ export default {
     quillEditor
   },
   methods: {
-    onEditorChange({editor, html, text}) {
+    onEditorChange({html}) {
       this.content = html;
     },
     submit() {

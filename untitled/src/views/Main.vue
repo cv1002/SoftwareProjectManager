@@ -23,7 +23,7 @@
               <el-avatar :size="40" :src="circleUrl">
               </el-avatar>
             </a>
-            {{ word }} &nbsp
+            {{ word }} &nbsp;
             <a href="/main" v-on:click="logout" class="atype">退出</a>
           </el-menu-item>
         </el-col>
@@ -109,7 +109,7 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    logout: function (event) {
+    logout: function () {
       this.$cookie.delete('name');
     }
   }

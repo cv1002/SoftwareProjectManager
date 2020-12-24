@@ -6,7 +6,7 @@ import VueCookie from 'vue-cookie'
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(VueCookie)   // 挂在在全局了
+Vue.use(VueCookie)   //挂在在全局了
 
 Vue.use(Element);
 
