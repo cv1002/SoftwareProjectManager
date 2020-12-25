@@ -20,16 +20,20 @@
         <el-col :span="8">
           <el-menu-item index="2" class="div3">
             <a href="/login" target="_self" class="distence_to_border" v-if="!visible">
-              <el-avatar style="width: 40px; height: 40px" :size="40" :src="circleUrl"  >
-              </el-avatar>
+              <el-tooltip class="item" effect="dark" content="登陆" placement="bottom">
+                <el-avatar style="width: 40px; height: 40px" :size="40" :src="circleUrl"  >
+                </el-avatar>
+              </el-tooltip>
             </a>
             <a href="/person" target="_self" class="distence_to_border" v-else>
-              <el-avatar style="width: 40px; height: 40px"
-                         :src="require('@/statics/img/picture.jpg')"
-                         fit="fill"
-
-              ></el-avatar>
+              <el-tooltip class="item" effect="dark" content="个人资料" placement="bottom">
+                <el-avatar style="width: 40px; height: 40px"
+                           :src="require('@/statics/img/picture.jpg')"
+                           fit="fill"
+                ></el-avatar>
+              </el-tooltip>
             </a>
+
             {{ word }}
             <a href="/main" v-on:click="logout" class="atype">退出</a>
           </el-menu-item>
@@ -88,6 +92,18 @@
           <i class="el-icon-setting"></i>
           <span slot="title">权限管理</span>
         </el-menu-item>
+        <router-link to="/groupprogress" class="router-link-active" style="color: white">
+          <el-menu-item index="8" class="menu1">
+            <i class="el-icon-chat-dot-square"></i>
+            <span slot="title">学生项目组进度</span>
+          </el-menu-item>
+        </router-link>
+        <router-link to="/ogp" class="router-link-active" style="color: white">
+          <el-menu-item index="9" class="menu1">
+            <i class="el-icon-chat-dot-square"></i>
+            <span slot="title">学生项目个人进度</span>
+          </el-menu-item>
+        </router-link>
       </el-menu>
     </div>
     <div class="div2">
@@ -132,6 +148,9 @@ export default {
 
 .menu1 {
   height: 80px;
+}
+.item {
+  margin: 4px;
 }
 
 .div1 {

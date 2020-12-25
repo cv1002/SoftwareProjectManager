@@ -32,6 +32,10 @@
     <el-progress :percentage="100" status="success"></el-progress>
     <el-progress :percentage="100" status="warning"></el-progress>
     <el-progress :percentage="50" status="exception"></el-progress>
+    <el-progress :text-inside="true" :stroke-width="24" :percentage="progress" v-if="visible"></el-progress>
+    <el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success" v-if="!visible"></el-progress>
+    <el-progress :text-inside="true" :stroke-width="24" :percentage="80" status="warning"></el-progress>
+    <el-progress :text-inside="true" :stroke-width="24" :percentage="50" status="exception"></el-progress>
     <button v-on:click="changepercent">加</button>
     <button v-on:click="reset">reset</button>
 
@@ -90,7 +94,7 @@ export default {
   },
   methods: {
     format(percentage) {
-      return percentage === 100 ? '满' : `${percentage}%`;
+      return percentage === 100 ? '已完成' : `${percentage}%`;
     },
     changepercent:function () {
       this.progress = this.progress+10;
