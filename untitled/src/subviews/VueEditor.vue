@@ -2,6 +2,7 @@
   <div>
     <div>
       <el-table
+        :default-sort = "{prop: 'date', order: 'descending'}"
         :data="tableData"
         height="400"
         border
@@ -9,7 +10,7 @@
         <el-table-column
           prop="date"
           label="日期"
-          width="180">
+          width="250">
         </el-table-column>
         <el-table-column
           prop="name"
@@ -17,8 +18,8 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="address"
-          label="地址">
+          prop="comment"
+          label="评论">
         </el-table-column>
       </el-table>
     </div>
@@ -36,49 +37,36 @@ import 'quill/dist/quill.bubble.css';
 import {quillEditor} from 'vue-quill-editor';
 
 export default {
-  name: 'editor',
   data: function () {
     return {
       tableData: [{
         date: '2016-05-03',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        comment: '上海市普陀区金沙江路 1518 弄'
       }, {
         date: '2016-05-02',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        comment: '上海市普陀区金沙江路 1518 弄'
       }, {
         date: '2016-05-04',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-08',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
+        comment: '上海市普陀区金沙江路 1518 弄'
+      },  {
         date: '2016-05-07',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        comment: '上海市普陀区金沙江路 1518 弄'
       }, {
         date: '2016-05-06',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        comment: '上海市普陀区金沙江路 1518 弄'
       }, {
         date: '2016-05-06',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        comment: '上海市普陀区金沙江路 1518 弄'
       }, {
         date: '2016-05-06',
         name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        comment: '上海市普陀区金沙江路 1518 弄'
       }],
       content: '',
       editorOption: {
@@ -94,7 +82,13 @@ export default {
       this.content = html;
     },
     submit() {
+      var now = new Date();
+      var textcontent = this.content.replace(/<[^>]+>/g, "");
+      var timenow = now.toLocaleString();
+      this.tableData.push({date:timenow,name:'王小虎',comment:textcontent});
+      console.log(now.toLocaleString());
       console.log(this.content);
+      console.log(textcontent)
       this.$message.success('提交成功！');
     }
   }

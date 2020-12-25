@@ -84,6 +84,7 @@ export default {
             this.logining = false;
             sessionStorage.setItem('user', this.form.name);
             this.$cookie.set('name', this.form.name, 1);
+            this.$cookie.set('visible',true,1);
             this.$router.push('/main');
           } else {
             this.logining = false;

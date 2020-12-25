@@ -8,6 +8,8 @@ import Individual from "../subviews/Individual";
 import Homework from "../subviews/Homework";
 import Tabs from "../subviews/Tabs";
 import VueEditor from "../subviews/VueEditor";
+import Journal from "@/subviews/Journal";
+import Person from "@/subviews/Person";
 //安装路由
 Vue.use(VueRouter);
 
@@ -28,7 +30,9 @@ export default new VueRouter({
         {path: '/individual', component: Individual},
         {path: '/homework', component: Homework},
         {path: '/tabs', component: Tabs},
-        {path: '/vueeditor', component: VueEditor}
+        {path: '/vueeditor', component: VueEditor},
+        {path: '/journal',component: Journal},
+        {path: '/person',component: Person}
       ]
     },
     {
