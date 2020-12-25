@@ -10,6 +10,9 @@ import Tabs from "../subviews/Tabs";
 import VueEditor from "../subviews/VueEditor";
 import Journal from "@/subviews/Journal";
 import Person from "@/subviews/Person";
+import GroupProgress from "@/teacherviews/GroupProgress";
+import OneGroupProgress from "@/teacherviews/OneGroupProgress";
+
 //安装路由
 Vue.use(VueRouter);
 
@@ -32,7 +35,9 @@ export default new VueRouter({
         {path: '/tabs', component: Tabs},
         {path: '/vueeditor', component: VueEditor},
         {path: '/journal',component: Journal},
-        {path: '/person',component: Person}
+        {path: '/person',component: Person},
+        {path: '/groupprogress',component: GroupProgress},
+        {path: '/ogp',component: OneGroupProgress}
       ]
     },
     {
