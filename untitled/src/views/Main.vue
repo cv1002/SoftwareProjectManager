@@ -18,12 +18,19 @@
           </el-menu-item>
         </el-col>
         <el-col :span="8">
-          <el-menu-item index="2">
-            <a href="/login" target="_self" class="distence_to_border">
-              <el-avatar :size="40" :src="circleUrl">
+          <el-menu-item index="2" class="div3">
+            <a href="/login" target="_self" class="distence_to_border" v-if="!visible">
+              <el-avatar style="width: 40px; height: 40px" :size="40" :src="circleUrl"  >
               </el-avatar>
             </a>
-            {{ word }} &nbsp;
+            <a href="/person" target="_self" class="distence_to_border" v-else>
+              <el-avatar style="width: 40px; height: 40px"
+                         :src="require('@/statics/img/picture.jpg')"
+                         fit="fill"
+
+              ></el-avatar>
+            </a>
+            {{ word }}
             <a href="/main" v-on:click="logout" class="atype">退出</a>
           </el-menu-item>
         </el-col>
@@ -31,7 +38,7 @@
     </div>
     <div class="div1">
       <el-menu
-        default-active="2"
+        default-active="1"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
@@ -59,10 +66,10 @@
                   作业提交区域</span>
           </el-menu-item>
         </router-link>
-        <router-link to="/individual" class="router-link-active" style="color: white">
+        <router-link to="/journal" class="router-link-active" style="color: white">
           <el-menu-item index="4" class="menu1">
             <i class="el-icon-pie-chart"></i>
-            <span slot="title">绘制图表区域</span>
+            <span slot="title">项目日志记录</span>
           </el-menu-item>
         </router-link>
         <router-link to="/vueeditor" class="router-link-active" style="color: white">
@@ -94,6 +101,7 @@ export default {
   data() {
     return {
       word: this.$cookie.get('name'),
+      visible: this.$cookie.get('visible'),
       activeIndex: '1',
       activeIndex2: '1',
       circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
@@ -111,12 +119,13 @@ export default {
     },
     logout: function () {
       this.$cookie.delete('name');
+      this.$cookie.delete('visible');
     }
   }
 }
 </script>
 
-<style>
+<style scoped="scoped">
 .distence_to_border {
   margin-left: 340px;
 }
