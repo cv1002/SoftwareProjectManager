@@ -11,7 +11,6 @@ import VueEditor from "../subviews/VueEditor";
 //安装路由
 Vue.use(VueRouter);
 
-
 //配置导出路由，别人可以使用
 export default new VueRouter({
   mode: 'history',
