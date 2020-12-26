@@ -2,24 +2,24 @@
   <div>
     <div>
       <el-table
-        :default-sort = "{prop: 'date', order: 'descending'}"
-        :data="tableData"
-        height="400"
-        border
-        style="width: 100%">
+          :default-sort = "{prop: 'date', order: 'descending'}"
+          :data="tableData"
+          height="400"
+          border
+          style="width: 100%">
         <el-table-column
-          prop="date"
-          label="日期"
-          width="250">
+            prop="date"
+            label="日期"
+            width="250">
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
+            prop="name"
+            label="姓名"
+            width="180">
         </el-table-column>
         <el-table-column
-          prop="comment"
-          label="评论">
+            prop="comment"
+            label="任务">
         </el-table-column>
       </el-table>
     </div>

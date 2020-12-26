@@ -2,14 +2,18 @@
   <div>
     <el-row>
       <el-col :span="8">
-        <p>group1</p>
+        <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
+                     class="font1" style="color: darkblue">{{ groupname1 }}</router-link>
+        <br>
         <el-progress type="circle" :percentage="0"></el-progress>
         <br>
         评分:
         <el-rate v-model="value1"></el-rate>
       </el-col>
       <el-col :span="8">
-        <p>group2</p>
+        <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
+                     class="font1" style="color: darkblue">{{groupname2}}</router-link>
+        <br>
         <el-progress type="circle" :percentage="25"></el-progress>
         <br>
         评分:
@@ -57,6 +61,8 @@
 export default {
   data(){
     return{
+      groupname1:'group1',
+      groupname2:'group2',
       value1: null,
       value2: null,
       value3: null,
@@ -68,11 +74,15 @@ export default {
   methods:{
     test:function (){
       console.log(this.value1);
-    }
+    },
+
   }
 }
 </script>
 
 <style scoped>
-
+.font1 {
+  font-size: 20px;
+  text-decoration: none;
+}
 </style>

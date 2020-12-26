@@ -12,6 +12,12 @@ import Journal from "@/subviews/Journal";
 import Person from "@/subviews/Person";
 import GroupProgress from "@/teacherviews/GroupProgress";
 import OneGroupProgress from "@/teacherviews/OneGroupProgress";
+import FirstPage from "@/subviews/FirstPage";
+import MessageSend from "@/teacherviews/MessageSend";
+import GroupSetUp from "@/leaderviews/GroupSetUp";
+import GroupInfo from "@/leaderviews/GroupInfo";
+import ProgressSet from "@/leaderviews/ProgressSet";
+import MissionSet from "@/leaderviews/MissionSet";
 
 //安装路由
 Vue.use(VueRouter);
@@ -23,12 +29,12 @@ export default new VueRouter({
   routes: [
     {
       //路由路径
-      path: '/main',
+      path: '/',
       name: 'main',
       props: true,
       //跳转的组件
       component: Main,
-      redirect: '/entire',
+      redirect: '/firstpage',
       children: [
         {path: '/entire', component: Entire},
         {path: '/individual', component: Individual},
@@ -38,7 +44,14 @@ export default new VueRouter({
         {path: '/journal',component: Journal},
         {path: '/person',component: Person},
         {path: '/groupprogress',component: GroupProgress},
-        {path: '/ogp',component: OneGroupProgress}
+        {path: '/ogp',component: OneGroupProgress},
+        {path: '/firstpage',component: FirstPage},
+        {path: '/messagesend',component: MessageSend},
+        {path: '/groupsetup',component: GroupSetUp},
+        {path: '/groupinfo',component: GroupInfo},
+        {path: '/progressset',component: ProgressSet},
+        {path: '/missionset',component: MissionSet}
+
       ]
     },
     {

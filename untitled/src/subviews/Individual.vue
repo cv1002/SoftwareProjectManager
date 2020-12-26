@@ -3,7 +3,7 @@
     <div>
     <el-table
         :data="tableData"
-        height="400"
+        height="600"
         border
         style="width: 100%">
       <el-table-column
@@ -27,17 +27,6 @@
       </el-table-column>
     </el-table>
   </div>
-    <el-progress :percentage="progress" v-if="visible"></el-progress>
-    <el-progress :percentage="100" :format="format" v-if="!visible"></el-progress>
-    <el-progress :percentage="100" status="success"></el-progress>
-    <el-progress :percentage="100" status="warning"></el-progress>
-    <el-progress :percentage="50" status="exception"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="24" :percentage="progress" v-if="visible"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success" v-if="!visible"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="24" :percentage="80" status="warning"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="24" :percentage="50" status="exception"></el-progress>
-    <button v-on:click="changepercent">加</button>
-    <button v-on:click="reset">reset</button>
 
   </div>
 </template>
@@ -71,47 +60,26 @@ export default {
         date: '2016-05-06',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-07',
+      },{
+        date: '2016-05-03',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
+      },{
+        date: '2016-05-03',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
+      },{
+        date: '2016-05-03',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1518 弄'
       }],
-      progress:0,
       visible:true,
     }
   },
   methods: {
-    format(percentage) {
-      return percentage === 100 ? '已完成' : `${percentage}%`;
-    },
-    changepercent:function () {
-      this.progress = this.progress+10;
-      if(this.progress == 100){
-        this.visible = false;
-      }
-    },
-    reset:function (){
-      this.progress = 0;
-      this.visible = true;
-    },
     handleDel(index) {
       this.tableData.splice(index, 1);
-      this.progress = this.progress+10;
-      if(this.progress == 100){
-        this.visible = false;
-      }
+      this.$message.success('已完成！请再接再厉');
     }
   }
 };

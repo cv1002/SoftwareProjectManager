@@ -85,8 +85,27 @@ export default {
             sessionStorage.setItem('user', this.form.name);
             this.$cookie.set('name', this.form.name, 1);
             this.$cookie.set('visible',true,1);
-            this.$router.push('/main');
-          } else {
+            this.$cookie.set('role','student',1);
+            this.$router.push('/');
+          }
+          else if (this.form.name === 'teacher' &&
+              this.form.password === '123456') {
+            this.logining = false;
+            sessionStorage.setItem('user', this.form.name);
+            this.$cookie.set('name', this.form.name, 1);
+            this.$cookie.set('visible',true,1);
+            this.$cookie.set('role','teacher',1);
+            this.$router.push('/');
+          }else if (this.form.name === 'leader' &&
+              this.form.password === '123456') {
+            this.logining = false;
+            sessionStorage.setItem('user', this.form.name);
+            this.$cookie.set('name', this.form.name, 1);
+            this.$cookie.set('visible',true,1);
+            this.$cookie.set('role','leader',1);
+            this.$router.push('/');
+          }
+          else {
             this.logining = false;
             this.$alert('name or password wrong!', 'info', {
               confirmButtonText: 'ok'
