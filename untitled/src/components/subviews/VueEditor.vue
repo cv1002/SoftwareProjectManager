@@ -24,8 +24,8 @@
       </el-table>
     </div>
     <div class="container">
-      <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor>
-      <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
+      <div><quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor></div>
+      <div><el-button class="editor-btn" type="primary" @click="submit">提交</el-button></div>
     </div>
   </div>
 </template>
@@ -39,6 +39,7 @@ import {quillEditor} from 'vue-quill-editor';
 export default {
   data: function () {
     return {
+      username: localStorage.getItem('ms_username'),
       tableData: [{
         date: '2016-05-03',
         name: '王小虎',
@@ -75,14 +76,14 @@ export default {
     }
   },
   components: {
-    quillEditor
+      quillEditor
   },
   methods: {
     submit() {
       var now = new Date();
       var textcontent = this.content.replace(/<[^>]+>/g, "");  //消除标签
       var timenow = now.toLocaleString();
-      this.tableData.push({date:timenow,name:'王小虎',comment:textcontent});
+      this.tableData.push({date:timenow,name:this.username,comment:textcontent});
       console.log(now.toLocaleString());
       console.log(this.content);
       console.log(textcontent)
@@ -93,11 +94,10 @@ export default {
 </script>
 <style scoped>
 .editor-btn {
-  margin-top: 50px;
+  margin-top: 230px;
 }
-
-.areasize {
-  height: 150px;
+.areasize{
+    height: 230px;
 }
 
 </style>
