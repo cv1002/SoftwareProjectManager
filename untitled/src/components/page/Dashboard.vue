@@ -223,14 +223,14 @@ export default {
     },
     computed: {
         role() {
-            if(this.name=='admin'){
-                return '普通用户';
+            if(this.name=='teacher'){
+                return '老师';
             }
             else if(this.name=='tang'){
                 return '组长';
             }
             else {
-                return '老师';
+                return '普通用户';
             }
         }
     },

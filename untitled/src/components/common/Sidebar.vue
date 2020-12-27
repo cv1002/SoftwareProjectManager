@@ -79,14 +79,9 @@ export default {
                     title: '系统首页'
                 },
                 {
-                    icon: 'el-icon-lx-cascades',
-                    index: 'table',
-                    title: '基础表格'
-                },
-                {
                     icon: 'el-icon-lx-copy',
                     index: 'tabs',
-                    title: '教师反馈区域'
+                    title: '公告'
                 },
                 {
                     icon: 'el-icon-lx-calendar',
@@ -165,27 +160,27 @@ export default {
                 {
                     icon: 'el-icon-ice-cream-round',
                     index: 'entire',
-                    title: '项目整体进度'
+                    title: '项目进度'
                 },
                 {
                     icon: 'el-icon-lollipop',
                     index: 'individual',
-                    title: '项目个人进度'
+                    title: '个人任务'
                 },
                 {
-                    icon: 'el-icon-s-order',
+                    icon: 'el-icon-upload',
                     index: 'homework',
-                    title: '作业提交区域'
+                    title: '作业提交'
                 },
                 {
                     icon: 'el-icon-pie-chart',
                     index: 'journal',
-                    title: '项目日志记录'
+                    title: '项目日志'
                 },
                 {
                     icon: 'el-icon-chat-line-round',
                     index: 'vueeditor',
-                    title: '交流讨论区域'
+                    title: '交流讨论'
                 }
             ],
             items2: [
@@ -195,20 +190,35 @@ export default {
                     title: '系统首页'
                 },
                 {
-                    icon: 'el-icon-user',
+                    icon: 'el-icon-lx-group',
                     index:'groupinfo',
                     title: '小组信息',
                 },
                 {
                     icon: 'el-icon-document-checked',
                     index:'groupsetup',
-                    title: '小组建立',
+                    title: '小组选题',
                 },
                 {
                     icon: 'el-icon-document',
                     index: 'missionset',
                     title:'任务发布',
-                }
+                },
+                {
+                    icon:  'el-icon-upload2',
+                    index: 'progressset',
+                    title: '进度上传'
+                },
+                {
+                    icon: 'el-icon-chat-line-round',
+                    index: 'vueeditor',
+                    title: '交流讨论'
+                },
+                {
+                    icon: 'el-icon-lx-copy',
+                    index: 'tabs',
+                    title: '公告'
+                },
             ],
             items3: [
                 {

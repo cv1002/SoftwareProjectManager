@@ -1,92 +1,100 @@
 <template>
   <div class="div4">
-    <div>
-      <p>
-        {{teacher}}
-      </p>
-      <p>{{group}}</p>
-      <p>{{leader}}</p>
-    </div>
     <div class="div5">
-      <p>头像大图</p>
-      <el-avatar
-          style="height: 200px ; width: 200px"
-          shape="square" :size="100" fit="fill"
-          :src="require('@/statics/img/picture.jpg')"></el-avatar>
+        <p>头像大图</p>
+        <div class="crop-demo">
+            <img :src="cropImg" class="pre-img">
+            <div class="crop-demo-btn">更换头像
+                <input class="crop-input" type="file" name="image" accept="image/*" @change="setImage"/>
+            </div>
+        </div>
+
+        <el-dialog title="裁剪图片" :visible.sync="dialogVisible" width="30%">
+            <vue-cropper ref='cropper' :src="imgSrc" :ready="cropImage" :zoom="cropImage" :cropmove="cropImage"
+                         style="width:100%;height:300px;"></vue-cropper>
+            <span slot="footer" class="dialog-footer">
+                    <el-button @click="cancelCrop">取 消</el-button>
+                    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                </span>
+        </el-dialog>
     </div>
     <div class="div6" >
-      <p>头像上传</p>
-      <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
-          style="width: 178px">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar" >
-        <i v-else class="el-icon-plus avatar-uploader-icon" ></i>
-      </el-upload>
-    </div>
 
+    </div>
+      <div>
+          <p>
+              老师：{{teacher}}
+          </p>
+          <p>所属小组：{{group}}</p>
+          <p>组长：{{leader}}</p>
+      </div>
   </div>
 </template>
 <script>
+import VueCropper  from 'vue-cropperjs';
 export default {
-  data() {
-    return {
-      imageUrl: '',
-      teacher:"老师",
-      group:"小组",
-      leader:"组长",
-    };
-  },
-  methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    name: 'upload',
+    data: function(){
+        return {
+            defaultSrc: require('../../statics/img/picture.jpg'),
+            fileList: [],
+            imgSrc: '',
+            cropImg: '',
+            dialogVisible: false,
+            imageUrl: '',
+            teacher:"老师",
+            group:"小组",
+            leader:"组长",
+        }
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
+    components: {
+        VueCropper
+    },
+    methods:{
+        setImage(e){
+            const file = e.target.files[0];
+            if (!file.type.includes('image/')) {
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                this.dialogVisible = true;
+                this.imgSrc = event.target.result;
+                this.$refs.cropper && this.$refs.cropper.replace(event.target.result);
+            };
+            reader.readAsDataURL(file);
+        },
+        cropImage () {
+            this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
+        },
+        cancelCrop(){
+            this.dialogVisible = false;
+            this.cropImg = this.defaultSrc;
+        },
+        imageuploaded(res) {
+            console.log(res)
+        },
+        handleError(){
+            this.$notify.error({
+                title: '上传失败',
+                message: '图片上传接口上传失败，可更改为自己的服务器接口'
+            });
+        },
+    },
+    created(){
+        this.cropImg = this.defaultSrc;
     }
-  }
 }
+
 </script>
 
-<style scoped="scoped">
-.avatar-uploader {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
+<style scoped>
 .avatar-uploader :hover {
   border-color: #409EFF;
 }
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  height: 178px;
-  width: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
-}
 .div4{
   float: left;
-  height: 300px;
+  height: 250px;
   width: 100%;
 }
 .div5{
@@ -98,6 +106,39 @@ export default {
   float: left;
   height: 100%;
   width: 50%;
+}
+.pre-img{
+    width: 200px;
+    height: 200px;
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+.crop-demo{
+    display: flex;
+    align-items: flex-end;
+}
+.crop-demo-btn{
+    position: relative;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    margin-left: 30px;
+    background-color: #409eff;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.crop-input{
+    position: absolute;
+    width: 100px;
+    height: 40px;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
 }
 </style>
 

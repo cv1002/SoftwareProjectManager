@@ -92,6 +92,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .editor-btn {
   margin-top: 230px;

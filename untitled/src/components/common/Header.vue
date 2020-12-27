@@ -15,7 +15,7 @@
                     </el-tooltip>
                 </div>
                 <!-- 消息中心 -->
-                <div class="btn-bell">
+                <div class="btn-bell" v-if="username!='teacher'">
                     <el-tooltip
                         effect="dark"
                         :content="message?`有${message}条未读消息`:`消息中心`"
@@ -29,7 +29,11 @@
                 </div>
                 <!-- 用户头像 -->
                 <div class="user-avator">
-                    <img src="../../statics/img/picture.jpg" />
+                        <router-link to="/person">
+                            <el-tooltip class="item" effect="dark" content="个人资料" placement="bottom">
+                                <img src="../../statics/img/picture.jpg" />
+                            </el-tooltip>
+                        </router-link>
                 </div>
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
@@ -38,9 +42,6 @@
                         <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
-                            <el-dropdown-item>项目仓库</el-dropdown-item>
-                        </a>
                         <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -185,7 +186,12 @@ export default {
     color: #fff;
     cursor: pointer;
 }
-.el-dropdown-menu__item {
-    text-align: center;
+.el-dropdown {
+    vertical-align: top;
 }
+.el-dropdown + .el-dropdown {
+    margin-left: 15px;
+}
+
+
 </style>

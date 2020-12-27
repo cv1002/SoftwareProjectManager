@@ -12,16 +12,21 @@
     </el-form-item>
     <el-form-item label="活动时间">
       <el-col :span="11">
-        <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-      </el-col>
-      <el-col class="line" :span="2">-</el-col>
-      <el-col :span="11">
-        <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+          <el-date-picker
+              v-model="value2"
+              type="daterange"
+              align="right"
+              unlink-panels
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd"
+              :picker-options="pickerOptions">
+          </el-date-picker>
       </el-col>
     </el-form-item>
-    <el-form-item label="即时配送">
-      <el-switch v-model="form.delivery"></el-switch>
-    </el-form-item>
+
     <el-form-item label="活动性质">
       <el-checkbox-group v-model="form.type">
         <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
@@ -29,12 +34,6 @@
         <el-checkbox label="线下主题活动" name="type"></el-checkbox>
         <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
       </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="特殊资源">
-      <el-radio-group v-model="form.resource">
-        <el-radio label="线上品牌商赞助"></el-radio>
-        <el-radio label="线下场地免费"></el-radio>
-      </el-radio-group>
     </el-form-item>
     <el-form-item label="自选题目">
       <el-input type="textarea" v-model="form.desc"></el-input>
@@ -60,7 +59,35 @@ export default {
         type: [],
         resource: '',
         desc: ''
-      }
+      },
+        pickerOptions: {
+            shortcuts: [{
+                text: '最近一周',
+                onClick(picker) {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                    picker.$emit('pick', [start, end]);
+                }
+            }, {
+                text: '最近一个月',
+                onClick(picker) {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                    picker.$emit('pick', [start, end]);
+                }
+            }, {
+                text: '最近三个月',
+                onClick(picker) {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                    picker.$emit('pick', [start, end]);
+                }
+            }]
+        },
+        value2: '',
     }
   },
   methods: {

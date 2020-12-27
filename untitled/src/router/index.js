@@ -26,14 +26,9 @@ export default new Router({
                     meta: { title: '自定义图标' }
                 },
                 {
-                    path: '/table',
-                    component: () => import(/* webpackChunkName: "table" */ '../components/page/BaseTable.vue'),
-                    meta: { title: '基础表格' }
-                },
-                {
                     path: '/tabs',
                     component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
-                    meta: { title: '教师反馈区域' }
+                    meta: { title: '公告' }
                 },
                 {
                     path: '/form',
@@ -119,6 +114,11 @@ export default new Router({
                     meta: { title:  '项目日志记录' }
                 },
                 {
+                    path:'/person',
+                    component: () => import('../components/subviews/Person'),
+                    meta: { title:  '个人资料'}
+                },
+                {
                     path: '/vueeditor',
                     component: () => import('../components/subviews/VueEditor'),
                     meta: { title:  '交流讨论区域' }
@@ -131,7 +131,7 @@ export default new Router({
                 {
                     path: '/groupsetup',
                     component: () => import('../components/leaderviews/GroupSetUp'),
-                    meta: { title:  '小组建立'}
+                    meta: { title:  '小组选题'}
                 },
                 {
                     path: '/missionset',
