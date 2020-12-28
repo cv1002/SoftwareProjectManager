@@ -3,25 +3,27 @@
     <el-row>
       <el-col :span="8">
         <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
-                     class="font1" style="color: darkblue">{{ groupname1 }}</router-link>
+                     class="font1" style="color: darkblue">{{ groupname1 }}
+        </router-link>
         <br>
-        <el-progress type="circle" :percentage="0"></el-progress>
+        <el-progress :percentage="0" type="circle"></el-progress>
         <br>
         评分:
         <el-rate v-model="value1"></el-rate>
       </el-col>
       <el-col :span="8">
         <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
-                     class="font1" style="color: darkblue">{{groupname2}}</router-link>
+                     class="font1" style="color: darkblue">{{ groupname2 }}
+        </router-link>
         <br>
-        <el-progress type="circle" :percentage="25"></el-progress>
+        <el-progress :percentage="25" type="circle"></el-progress>
         <br>
         评分:
         <el-rate v-model="value2"></el-rate>
       </el-col>
       <el-col :span="8">
         <p>group3</p>
-        <el-progress type="circle" :percentage="100" status="success"></el-progress>
+        <el-progress :percentage="100" status="success" type="circle"></el-progress>
         <br>
         评分:
         <el-rate v-model="value3"></el-rate>
@@ -30,21 +32,21 @@
     <el-row>
       <el-col :span="8">
         <p>group4</p>
-        <el-progress type="circle" :percentage="70" status="warning"></el-progress>
+        <el-progress :percentage="70" status="warning" type="circle"></el-progress>
         <br>
         评分:
         <el-rate v-model="value4"></el-rate>
       </el-col>
       <el-col :span="8">
         <p>group5</p>
-        <el-progress type="circle" :percentage="50" status="exception"></el-progress>
+        <el-progress :percentage="50" status="exception" type="circle"></el-progress>
         <br>
         评分:
         <el-rate v-model="value5"></el-rate>
       </el-col>
       <el-col :span="8">
         <p>group6</p>
-        <el-progress type="circle" :percentage="50" status="exception"></el-progress>
+        <el-progress :percentage="50" status="exception" type="circle"></el-progress>
         <br>
         评分:
         <el-rate v-model="value6"></el-rate>
@@ -59,10 +61,10 @@
 
 <script>
 export default {
-  data(){
-    return{
-      groupname1:'group1',
-      groupname2:'group2',
+  data() {
+    return {
+      groupname1: 'group1',
+      groupname2: 'group2',
       value1: null,
       value2: null,
       value3: null,
@@ -71,8 +73,8 @@ export default {
       value6: null,
     }
   },
-  methods:{
-    test:function (){
+  methods: {
+    test: function () {
       console.log(this.value1);
     },
 

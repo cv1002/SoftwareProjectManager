@@ -2,30 +2,34 @@
   <div>
     <div>
       <el-table
-        :default-sort = "{prop: 'date', order: 'descending'}"
-        :data="tableData"
-        height="400"
-        border
-        style="width: 100%">
+          :data="tableData"
+          :default-sort="{prop: 'date', order: 'descending'}"
+          border
+          height="400"
+          style="width: 100%">
         <el-table-column
-          prop="date"
-          label="日期"
-          width="250">
+            label="日期"
+            prop="date"
+            width="250">
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
+            label="姓名"
+            prop="name"
+            width="180">
         </el-table-column>
         <el-table-column
-          prop="comment"
-          label="评论">
+            label="评论"
+            prop="comment">
         </el-table-column>
       </el-table>
     </div>
     <div class="container">
-      <div><quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor></div>
-      <div><el-button class="editor-btn" type="primary" @click="submit">提交</el-button></div>
+      <div>
+        <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor>
+      </div>
+      <div>
+        <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +56,7 @@ export default {
         date: '2016-05-04',
         name: '王小虎',
         comment: '上海市普陀区金沙江路 1518 弄'
-      },  {
+      }, {
         date: '2016-05-07',
         name: '王小虎',
         comment: '上海市普陀区金沙江路 1518 弄'
@@ -76,14 +80,14 @@ export default {
     }
   },
   components: {
-      quillEditor
+    quillEditor
   },
   methods: {
     submit() {
       var now = new Date();
       var textcontent = this.content.replace(/<[^>]+>/g, "");  //消除标签
       var timenow = now.toLocaleString();
-      this.tableData.push({date:timenow,name:this.username,comment:textcontent});
+      this.tableData.push({date: timenow, name: this.username, comment: textcontent});
       console.log(now.toLocaleString());
       console.log(this.content);
       console.log(textcontent)
@@ -97,8 +101,9 @@ export default {
 .editor-btn {
   margin-top: 230px;
 }
-.areasize{
-    height: 230px;
+
+.areasize {
+  height: 230px;
 }
 
 </style>
