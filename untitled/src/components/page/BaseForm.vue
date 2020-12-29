@@ -24,24 +24,24 @@
                     <el-form-item label="日期时间">
                         <el-col :span="11">
                             <el-date-picker
-                                type="date"
-                                placeholder="选择日期"
                                 v-model="form.date1"
-                                value-format="yyyy-MM-dd"
+                                placeholder="选择日期"
                                 style="width: 100%;"
+                                type="date"
+                                value-format="yyyy-MM-dd"
                             ></el-date-picker>
                         </el-col>
-                        <el-col class="line" :span="2">-</el-col>
+                        <el-col :span="2" class="line">-</el-col>
                         <el-col :span="11">
                             <el-time-picker
-                                placeholder="选择时间"
                                 v-model="form.date2"
+                                placeholder="选择时间"
                                 style="width: 100%;"
                             ></el-time-picker>
                         </el-col>
                     </el-form-item>
                     <el-form-item label="城市级联">
-                        <el-cascader :options="options" v-model="form.options"></el-cascader>
+                        <el-cascader v-model="form.options" :options="options"></el-cascader>
                     </el-form-item>
                     <el-form-item label="选择开关">
                         <el-switch v-model="form.delivery"></el-switch>
@@ -61,7 +61,7 @@
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item label="文本框">
-                        <el-input type="textarea" rows="5" v-model="form.desc"></el-input>
+                        <el-input v-model="form.desc" rows="5" type="textarea"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">表单提交</el-button>

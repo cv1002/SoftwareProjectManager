@@ -18,19 +18,19 @@
             </div>
             <div class="schart-box">
                 <div class="content-title">柱状图</div>
-                <schart class="schart" canvasId="bar" :options="options1"></schart>
+                <schart :options="options1" canvasId="bar" class="schart"></schart>
             </div>
             <div class="schart-box">
                 <div class="content-title">折线图</div>
-                <schart class="schart" canvasId="line" :options="options2"></schart>
+                <schart :options="options2" canvasId="line" class="schart"></schart>
             </div>
             <div class="schart-box">
                 <div class="content-title">饼状图</div>
-                <schart class="schart" canvasId="pie" :options="options3"></schart>
+                <schart :options="options3" canvasId="pie" class="schart"></schart>
             </div>
             <div class="schart-box">
                 <div class="content-title">环形图</div>
-                <schart class="schart" canvasId="ring" :options="options4"></schart>
+                <schart :options="options4" canvasId="ring" class="schart"></schart>
             </div>
         </div>
     </div>
@@ -38,6 +38,7 @@
 
 <script>
 import Schart from 'vue-schart';
+
 export default {
     name: 'basecharts',
     components: {
@@ -134,10 +135,12 @@ export default {
     display: inline-block;
     margin: 20px;
 }
+
 .schart {
     width: 600px;
     height: 400px;
 }
+
 .content-title {
     clear: both;
     font-weight: 400;

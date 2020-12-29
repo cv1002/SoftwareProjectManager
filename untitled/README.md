@@ -48,7 +48,8 @@
 
 ## 前言
 
-该方案作为一套多功能的后台框架模板，适用于绝大部分的后台管理系统（Web Management System）开发。基于 vue.js，使用 vue-cli3 脚手架，引用 Element UI 组件库，方便开发快速简洁好看的组件。分离颜色样式，支持手动切换主题色，而且很方便使用自定义主题色。
+该方案作为一套多功能的后台框架模板，适用于绝大部分的后台管理系统（Web Management System）开发。基于 vue.js，使用 vue-cli3 脚手架，引用 Element UI
+组件库，方便开发快速简洁好看的组件。分离颜色样式，支持手动切换主题色，而且很方便使用自定义主题色。
 
 ## 功能
 
@@ -168,8 +169,7 @@ vue.js 封装 sChart.js 的图表组件。访问地址：[vue-schart](https://gi
 },
 ```
 
-第四步：卸载该组件。执行以下命令：
-npm un vue-quill-editor -S
+第四步：卸载该组件。执行以下命令： npm un vue-quill-editor -S
 
 完成。
 

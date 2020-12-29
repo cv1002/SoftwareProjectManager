@@ -1,33 +1,33 @@
 <template>
-<div>
-<el-form>
-  <el-input type="text" v-model="title"></el-input>
-  <el-button @click.native="submit">按钮</el-button>
-</el-form>
+    <div>
+        <el-form>
+            <el-input v-model="title" type="text"></el-input>
+            <el-button @click.native="submit">按钮</el-button>
+        </el-form>
 
-</div>
+    </div>
 </template>
 
 <script>
 export default {
-  data(){
-    return{
-      title:""
+    data() {
+        return {
+            title: ''
+        };
+    },
+    methods: {
+        submit() {
+            var now = new Date();
+            var textcontent = this.title.replace(/<[^>]+>/g, '');
+            var timenow = now.toLocaleString();
+            this.$cookie.set('messagetime', timenow, 1);
+            this.$cookie.set('message', textcontent, 1);
+            console.log(timenow);
+            console.log(textcontent);
+            this.$message.success('发布成功！');
+        }
     }
-  },
-  methods:{
-    submit() {
-      var now = new Date();
-      var textcontent = this.title.replace(/<[^>]+>/g, "");
-      var timenow = now.toLocaleString();
-      this.$cookie.set('messagetime',timenow,1);
-      this.$cookie.set('message',textcontent,1);
-      console.log(timenow);
-      console.log(textcontent)
-      this.$message.success('发布成功！');
-    }
-  }
-}
+};
 </script>
 
 <style scoped>

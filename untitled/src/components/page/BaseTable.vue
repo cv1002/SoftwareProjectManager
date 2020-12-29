@@ -10,81 +10,85 @@
         <div class="container">
             <div class="handle-box">
                 <el-button
-                    type="primary"
-                    icon="el-icon-delete"
                     class="handle-del mr10"
+                    icon="el-icon-delete"
+                    type="primary"
                     @click="delAllSelection"
-                >批量删除</el-button>
-                <el-select v-model="query.address" placeholder="地址" class="handle-select mr10">
+                >批量删除
+                </el-button>
+                <el-select v-model="query.address" class="handle-select mr10" placeholder="地址">
                     <el-option key="1" label="广东省" value="广东省"></el-option>
                     <el-option key="2" label="湖南省" value="湖南省"></el-option>
                 </el-select>
-                <el-input v-model="query.name" placeholder="用户名" class="handle-input mr10"></el-input>
-                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
+                <el-input v-model="query.name" class="handle-input mr10" placeholder="用户名"></el-input>
+                <el-button icon="el-icon-search" type="primary" @click="handleSearch">搜索</el-button>
             </div>
             <el-table
+                ref="multipleTable"
                 :data="tableData"
                 border
                 class="table"
-                ref="multipleTable"
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
-                <el-table-column prop="name" label="用户名"></el-table-column>
+                <el-table-column align="center" type="selection" width="55"></el-table-column>
+                <el-table-column align="center" label="ID" prop="id" width="55"></el-table-column>
+                <el-table-column label="用户名" prop="name"></el-table-column>
                 <el-table-column label="账户余额">
-                    <template slot-scope="scope">￥{{scope.row.money}}</template>
+                    <template slot-scope="scope">￥{{ scope.row.money }}</template>
                 </el-table-column>
-                <el-table-column label="头像(查看大图)" align="center">
+                <el-table-column align="center" label="头像(查看大图)">
                     <template slot-scope="scope">
                         <el-image
-                            class="table-td-thumb"
-                            :src="scope.row.thumb"
                             :preview-src-list="[scope.row.thumb]"
+                            :src="scope.row.thumb"
+                            class="table-td-thumb"
                         ></el-image>
                     </template>
                 </el-table-column>
-                <el-table-column prop="address" label="地址"></el-table-column>
-                <el-table-column label="状态" align="center">
+                <el-table-column label="地址" prop="address"></el-table-column>
+                <el-table-column align="center" label="状态">
                     <template slot-scope="scope">
                         <el-tag
                             :type="scope.row.state==='成功'?'success':(scope.row.state==='失败'?'danger':'')"
-                        >{{scope.row.state}}</el-tag>
+                        >{{ scope.row.state }}
+                        </el-tag>
                     </template>
                 </el-table-column>
 
-                <el-table-column prop="date" label="注册时间"></el-table-column>
-                <el-table-column label="操作" width="180" align="center">
+                <el-table-column label="注册时间" prop="date"></el-table-column>
+                <el-table-column align="center" label="操作" width="180">
                     <template slot-scope="scope">
                         <el-button
-                            type="text"
                             icon="el-icon-edit"
-                            @click="handleEdit(scope.$index, scope.row)"
-                        >编辑</el-button>
-                        <el-button
                             type="text"
-                            icon="el-icon-delete"
+                            @click="handleEdit(scope.$index, scope.row)"
+                        >编辑
+                        </el-button>
+                        <el-button
                             class="red"
+                            icon="el-icon-delete"
+                            type="text"
                             @click="handleDelete(scope.$index, scope.row)"
-                        >删除</el-button>
+                        >删除
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>
             <div class="pagination">
                 <el-pagination
-                    background
-                    layout="total, prev, pager, next"
                     :current-page="query.pageIndex"
                     :page-size="query.pageSize"
                     :total="pageTotal"
+                    background
+                    layout="total, prev, pager, next"
                     @current-change="handlePageChange"
                 ></el-pagination>
             </div>
         </div>
 
         <!-- 编辑弹出框 -->
-        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
+        <el-dialog :visible.sync="editVisible" title="编辑" width="30%">
             <el-form ref="form" :model="form" label-width="70px">
                 <el-form-item label="用户名">
                     <el-input v-model="form.name"></el-input>
@@ -103,6 +107,7 @@
 
 <script>
 import { fetchData } from '../../api/index';
+
 export default {
     name: 'basetable',
     data() {
@@ -150,7 +155,8 @@ export default {
                     this.$message.success('删除成功');
                     this.tableData.splice(index, 1);
                 })
-                .catch(() => {});
+                .catch(() => {
+                });
         },
         // 多选操作
         handleSelectionChange(val) {
@@ -200,16 +206,20 @@ export default {
     width: 300px;
     display: inline-block;
 }
+
 .table {
     width: 100%;
     font-size: 14px;
 }
+
 .red {
     color: #ff0000;
 }
+
 .mr10 {
     margin-right: 10px;
 }
+
 .table-td-thumb {
     display: block;
     margin: auto;
