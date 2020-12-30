@@ -79,42 +79,22 @@ export default {
         {
           icon: 'el-icon-lx-home',
           index: 'dashboard',
-          title: '系统首页'
-        },
-        // {
-        //   icon: 'el-icon-lx-copy',
-        //   index: 'tabs',
-        //   title: '公告'
-        // },
-        {
-          icon: 'el-icon-lx-warn',
-          index: '7',
-          title: '错误处理',
-          subs: [
-            {
-              index: 'permission',
-              title: '权限测试'
-            },
-            {
-              index: '404',
-              title: '404页面'
-            }
-          ]
+          title: '我的面板'
         },
         {
           icon: 'el-icon-ice-cream-round',
           index: 'entire',
-          title: '项目进度'
+          title: '项目可视化'
         },
         {
           icon: 'el-icon-lollipop',
           index: 'individual',
-          title: '个人任务'
+          title: '项目成员'
         },
         {
           icon: 'el-icon-upload',
           index: 'homework',
-          title: '作业提交'
+          title: '文件上传'
         },
         {
           icon: 'el-icon-pie-chart',
@@ -124,7 +104,7 @@ export default {
         {
           icon: 'el-icon-chat-line-round',
           index: 'vueeditor',
-          title: '交流讨论'
+          title: '交流互动'
         }
       ],
       items2: [
