@@ -13,17 +13,12 @@ export default new Router({
         {
             path: '/',
             component: () => import(/* webpackChunkName: "home" */ '../components/common/Home.vue'),
-            meta: { title: '自述文件' },
+            meta: {title: '自述文件'},
             children: [
                 {
                     path: '/dashboard',
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
-                    meta: { title: '系统首页' }
-                },
-                {
-                    path: '/icon',
-component: () => import(/* webpackChunkName: "icon" */'../components/page/Icon.vue'),
-                    meta: {title: '自定义图标'}
+                    meta: {title: '系统首页'}
                 },
                 {
                     path: '/tabs',
@@ -31,23 +26,17 @@ component: () => import(/* webpackChunkName: "icon" */'../components/page/Icon.v
                     meta: {title: '公告'}
                 },
                 {
-                    path: '/form',
-                    component: () => import(/* webpackChunkName: "form" */ '../components/page/BaseForm.vue'),
-                    meta: {title: '基本表单'}
+                    // 图片上传组件
+                    path: '/upload',
+                    component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
+                    meta: {title: '文件上传'}
                 },
                 {
-                    // 富文本编辑器组件
-                    path: '/editor',
-                    component: () => import(/* webpackChunkName: "editor" */ '../components/page/VueEditor.vue'),
-                    meta: {title: '富文本编辑器'}
+                    // vue-schart组件
+                    path: '/charts',
+                    component: () => import(/* webpackChunkName: "chart" */ '../components/page/BaseCharts.vue'),
+                    meta: {title: 'schart图表'}
                 },
-                {
-                    // markdown组件
-                    path: '/markdown',
-                    component: () => import(/* webpackChunkName: "markdown" */ '../components/page/Markdown.vue'),
-                    meta: {title: 'markdown编辑器'}
-                },
-
                 {
                     // 权限页面
                     path: '/permission',
@@ -56,17 +45,17 @@ component: () => import(/* webpackChunkName: "icon" */'../components/page/Icon.v
                 },
                 {
                     path: '/404',
-                    component: () => import(/* webpackChunkName: "404" */'../components/page/404.vue'),
+                    component: () => import(/* webpackChunkName: "404" */ '../components/page/404.vue'),
                     meta: {title: '404'}
                 },
                 {
-                path: '/403',
-                component: () => import(/* webpackChunkName: "403" */'../components/page/403.vue'),
+                    path: '/403',
+                    component: () => import(/* webpackChunkName: "403" */ '../components/page/403.vue'),
                     meta: {title: '403'}
                 },
                 {
-                path: '/entire',
-                component: () => import('../components/subviews/Entire'),
+                    path: '/entire',
+                    component: () => import('../components/subviews/Entire'),
                     meta: {title: '项目整体进度'}
                 },
                 {
@@ -138,7 +127,7 @@ component: () => import(/* webpackChunkName: "icon" */'../components/page/Icon.v
         },
         {
             path: '*',
-redirect: '/404'
-}
-]
+            redirect: '/404'
+        }
+    ]
 });

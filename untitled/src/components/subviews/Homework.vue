@@ -1,25 +1,15 @@
 <template>
-    <div class="div1">
-        <div class="div2">
-            <el-image :src="require('@/statics/img/music-theme.png')"></el-image>
-        </div>
-        <div class="div3">
-            <el-button size="small" type="primary" class="button1" round
-                       :before-upload="beforeUpload">点击上传
-                <br> 只能上传pdf/doc/docx文件，且不超过5M
-            </el-button>
-        </div>
-        <div class="div4">
-            <span>拖拽到此处也可上传</span>
-        </div>
-        <div class="div5">
-            <div slot="tip" class="el-upload-list__item-name">{{ fileName }}</div>
-            <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitUpload()" class="button2">
-            <icon class="el-icon-thumb"></icon> |&nbsp &nbsp确定</el-button>
-        </span>
-        </div>
-    </div>
+  <div>
+    <el-upload
+        action="https://jsonplaceholder.typicode.com/posts/"
+        class="upload-demo"
+        drag
+        multiple>
+      <i class="el-icon-upload"></i>
+      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+  </div>
 </template>
 
 <script>

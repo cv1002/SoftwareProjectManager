@@ -1,26 +1,26 @@
 <template>
-    <div>
-        <el-table
-            :data="tableData"
-            border
-            height="600"
-            style="width: 100%">
-            <el-table-column
-                label="日期"
-                prop="date"
-                width="180">
-            </el-table-column>
-            <el-table-column
-                label="姓名"
-                prop="name"
-                width="180">
-            </el-table-column>
-            <el-table-column
-                label="提交作业"
-                prop="address">
-            </el-table-column>
-        </el-table>
-    </div>
+  <div>
+    <el-table
+        :data="tableData"
+        border
+        height="600"
+        style="width: 100%">
+      <el-table-column
+          label="日期"
+          prop="date"
+          width="180">
+      </el-table-column>
+      <el-table-column
+          label="姓名"
+          prop="name"
+          width="180">
+      </el-table-column>
+      <el-table-column
+          label="提交作业"
+          prop="address">
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
