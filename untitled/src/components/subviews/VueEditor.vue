@@ -1,33 +1,34 @@
 <template>
-    <div>
-      <el-table
-          :data="tableData"
-          :default-sort="{prop: 'date', order: 'descending'}"
-          align="center"
-          height="200"
-          style="width: 100%">
-        <el-table-column
-            label="评论"
-            prop="comment"
-            width="400">
-        </el-table-column>
-        <el-table-column label="姓名" prop="name" width="80">
-        </el-table-column>
-        <el-table-column label="日期" prop="date" width="100">
-        </el-table-column>
-      </el-table>
-    </div>
-    <div slot="header" class="clearfix">
-      <el-tag><span class="tag">编辑器</span></el-tag>
-    </div>
-    <div class="container">
+  <div>
       <div>
-        <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor>
+          <el-table
+              :data="tableData"
+              :default-sort="{prop: 'date', order: 'descending'}"
+              align="center"
+              height="200"
+              style="width: 100%">
+              <el-table-column
+                  label="评论"
+                  prop="comment"
+                  width="400">
+              </el-table-column>
+              <el-table-column label="姓名" prop="name" width="80">
+              </el-table-column>
+              <el-table-column label="日期" prop="date" width="100">
+              </el-table-column>
+          </el-table>
       </div>
-      <div>
-        <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
+      <div slot="header" class="clearfix">
+          <el-tag><span class="tag">编辑器</span></el-tag>
       </div>
-    </div>
+      <div class="container">
+          <div>
+              <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor>
+          </div>
+          <div>
+              <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
+          </div>
+      </div>
   </div>
 </template>
 
