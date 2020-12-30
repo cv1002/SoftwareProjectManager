@@ -81,11 +81,11 @@ export default {
           index: 'dashboard',
           title: '系统首页'
         },
-        {
-          icon: 'el-icon-lx-copy',
-          index: 'tabs',
-          title: '公告'
-        },
+        // {
+        //   icon: 'el-icon-lx-copy',
+        //   index: 'tabs',
+        //   title: '公告'
+        // },
         {
           icon: 'el-icon-lx-warn',
           index: '7',

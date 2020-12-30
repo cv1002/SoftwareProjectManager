@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <el-card>
     <el-row :gutter="20">
       <el-col :span="8">
-        <el-card class="mgb20" shadow="hover" style="height:252px;">
+        <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/picture.jpg" />
+            <img alt class="user-avator" src="../../statics/img/g.jpg" />
             <div class="user-info-cont">
               <div class="user-info-name">{{ name }}</div>
               <div>{{ role }}</div>
@@ -12,64 +12,29 @@
           </div>
           <div class="user-info-list">
             上次登录时间：
-            <span>2019-11-01</span>
+            <span>2020-12-31</span>
           </div>
           <div class="user-info-list">
             上次登录地点：
-            <span>东莞</span>
+            <span>北京</span>
           </div>
         </el-card>
-        <el-card shadow="hover" style="height:252px;">
+        <el-card shadow="hover" style="height:250px;">
           <div slot="header" class="clearfix">
-            <span>语言详情</span>
+            <span>项目进展</span>
           </div>
-          Vue
+          时间
           <el-progress :percentage="71.3" color="#42b983"></el-progress>
-          JavaScript
-          <el-progress :percentage="24.1" color="#f1e05a"></el-progress>
-          CSS
-          <el-progress :percentage="13.7"></el-progress>
-          HTML
-          <el-progress :percentage="5.9" color="#f56c6c"></el-progress>
+          资金
+          <el-progress :percentage="64.1" color="#f1e05a"></el-progress>
+          人力成本
+          <el-progress :percentage="73.7"></el-progress>
+          预算
+          <el-progress :percentage="65.9" color="#f56c6c"></el-progress>
         </el-card>
       </el-col>
-      <el-col :span="16">
-        <el-row :gutter="20" class="mgb20">
-          <el-col :span="8">
-            <el-card :body-style="{padding: '0px'}" shadow="hover">
-              <div class="grid-content grid-con-1">
-                <i class="el-icon-lx-people grid-con-icon"></i>
-                <div class="grid-cont-right">
-                  <div class="grid-num">1234</div>
-                  <div>用户访问量</div>
-                </div>
-              </div>
-            </el-card>
-          </el-col>
-          <el-col :span="8">
-            <el-card :body-style="{padding: '0px'}" shadow="hover">
-              <div class="grid-content grid-con-2">
-                <i class="el-icon-lx-notice grid-con-icon"></i>
-                <div class="grid-cont-right">
-                  <div class="grid-num">321</div>
-                  <div>系统消息</div>
-                </div>
-              </div>
-            </el-card>
-          </el-col>
-          <el-col :span="8">
-            <el-card :body-style="{padding: '0px'}" shadow="hover">
-              <div class="grid-content grid-con-3">
-                <i class="el-icon-lx-goods grid-con-icon"></i>
-                <div class="grid-cont-right">
-                  <div class="grid-num">5000</div>
-                  <div>数量</div>
-                </div>
-              </div>
-            </el-card>
-          </el-col>
-        </el-row>
-        <el-card shadow="hover" style="height:403px;">
+      <el-col :span="8">
+        <el-card shadow="hover" style="height:512px;">
           <div slot="header" class="clearfix">
             <span>待办事项</span>
             <el-button style="float: right; padding: 3px 0" type="text">添加</el-button>
@@ -82,10 +47,7 @@
             </el-table-column>
             <el-table-column>
               <template slot-scope="scope">
-                <div
-                    :class="{'todo-item-del': scope.row.status}"
-                    class="todo-item"
-                >{{ scope.row.title }}
+                <div :class="{'todo-item-del': scope.row.status}" class="todo-item">{{ scope.row.title }}
                 </div>
               </template>
             </el-table-column>
@@ -98,20 +60,75 @@
           </el-table>
         </el-card>
       </el-col>
-    </el-row>
-    <el-row :gutter="20">
-      <el-col :span="12">
-        <el-card shadow="hover">
-          <schart ref="bar" :options="options" canvasId="bar" class="schart"></schart>
-        </el-card>
+      <el-col :span="8">
+            <el-card shadow="hover" style="height:512px;">
+              <div slot="header" class="clearfix">
+                <span>消息通知</span>
+              </div>
+              <el-tabs v-model="message">
+                <el-tab-pane :label="`未读消息(${unread.length})`" name="first">
+                  <el-table :data="unread" :show-header="false" style="width: 100%">
+                    <el-table-column>
+                      <template slot-scope="scope">
+                        <span class="message-title">{{ scope.row.title }}</span>
+                      </template>
+                    </el-table-column>
+                    <el-table-column prop="date" width="100"></el-table-column>
+                    <el-table-column width="100">
+                      <template slot-scope="scope">
+                        <el-button size="small" @click="handleRead(scope.$index)">标为已读</el-button>
+                      </template>
+                    </el-table-column>
+                  </el-table>
+                  <div class="handle-row">
+                    <el-button type="primary">全部标为已读</el-button>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane :label="`已读消息(${read.length})`" name="second">
+                  <template v-if="message === 'second'">
+                    <el-table :data="read" :show-header="false" style="width: 100%">
+                      <el-table-column>
+                        <template slot-scope="scope">
+                          <span class="message-title">{{ scope.row.title }}</span>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="date" width="100"></el-table-column>
+                      <el-table-column width="100">
+                        <template slot-scope="scope">
+                          <el-button type="danger" @click="handleDel(scope.$index)">删除</el-button>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                    <div class="handle-row">
+                      <el-button type="danger">删除全部</el-button>
+                    </div>
+                  </template>
+                </el-tab-pane>
+                <el-tab-pane :label="`回收站(${recycle.length})`" name="third">
+                  <template v-if="message === 'third'">
+                    <el-table :data="recycle" :show-header="false" style="width: 100%">
+                      <el-table-column>
+                        <template slot-scope="scope">
+                          <span class="message-title">{{ scope.row.title }}</span>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="date" width="100"></el-table-column>
+                      <el-table-column width="100">
+                        <template slot-scope="scope">
+                          <el-button @click="handleRestore(scope.$index)">还原</el-button>
+                        </template>
+                      </el-table-column>
+                    </el-table>
+                    <div class="handle-row">
+                      <el-button type="danger">清空回收站</el-button>
+                    </div>
+                  </template>
+                </el-tab-pane>
+              </el-tabs>
+            </el-card>
       </el-col>
-      <el-col :span="12">
-        <el-card shadow="hover">
-          <schart ref="line" :options="options2" canvasId="line" class="schart"></schart>
-        </el-card>
-      </el-col>
     </el-row>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -122,29 +139,46 @@ export default {
   data() {
     return {
       name: localStorage.getItem('ms_username'),
+      message: 'first',
+      showHeader: false,
+      unread: [{
+      date: '2018-04-19 20:00:00',
+      title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护',
+      }, {
+      date: '2018-04-19 21:00:00',
+      title: '今晚12点整发大红包，先到先得',
+      }],
+      read: [{
+      date: '2018-04-19 20:00:00',
+      title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
+      }],
+      recycle: [{
+      date: '2018-04-19 20:00:00',
+      title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
+      }],
       todoList: [
         {
-          title: '今天要修复100个bug',
+          title: '同事A请假',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '领导B迟到',
           status: false
         },
         {
-          title: '今天要写100行代码加几个bug吧',
+          title: '复习考试',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '修车',
           status: false
         },
         {
-          title: '今天要修复100个bug',
+          title: '吃午饭',
           status: true
         },
         {
-          title: '今天要写100行代码加几个bug吧',
+          title: '玩逃生',
           status: true
         }
       ],
@@ -178,49 +212,6 @@ export default {
           value: 1065
         }
       ],
-      options: {
-        type: 'bar',
-        title: {
-          text: '最近一周各品类销售图'
-        },
-        xRorate: 25,
-        labels: ['周一', '周二', '周三', '周四', '周五'],
-        datasets: [
-          {
-            label: '家电',
-            data: [234, 278, 270, 190, 230]
-          },
-          {
-            label: '百货',
-            data: [164, 178, 190, 135, 160]
-          },
-          {
-            label: '食品',
-            data: [144, 198, 150, 235, 120]
-          }
-        ]
-      },
-      options2: {
-        type: 'line',
-        title: {
-          text: '最近几个月各品类销售趋势图'
-        },
-        labels: ['6月', '7月', '8月', '9月', '10月'],
-        datasets: [
-          {
-            label: '家电',
-            data: [234, 278, 270, 190, 230]
-          },
-          {
-            label: '百货',
-            data: [164, 178, 150, 135, 160]
-          },
-          {
-            label: '食品',
-            data: [74, 118, 200, 235, 90]
-          }
-        ]
-      }
     };
   },
   components: {
@@ -235,6 +226,9 @@ export default {
       } else {
         return '普通用户';
       }
+    },
+    unreadNum() {
+    return this.unread.length;
     }
   },
   // created() {
@@ -255,6 +249,19 @@ export default {
         const date = new Date(now - (6 - index) * 86400000);
         item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
       });
+    },
+    handleRead(index) {
+    const item = this.unread.splice(index, 1);
+    console.log(item);
+    this.read = item.concat(this.read);
+    },
+    handleDel(index) {
+    const item = this.read.splice(index, 1);
+    this.recycle = item.concat(this.recycle);
+    },
+    handleRestore(index) {
+    const item = this.recycle.splice(index, 1);
+    this.read = item.concat(this.read);
     }
     // handleListener() {
     //     bus.$on('collapse', this.handleBus);
@@ -383,5 +390,13 @@ export default {
 .schart {
   width: 100%;
   height: 300px;
+}
+
+.message-title {
+cursor: pointer;
+}
+
+.handle-row {
+margin-top: 30px;
 }
 </style>

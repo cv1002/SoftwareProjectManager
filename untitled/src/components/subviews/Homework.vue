@@ -1,14 +1,24 @@
 <template>
-  <div>
-    <el-upload
-        action="https://jsonplaceholder.typicode.com/posts/"
-        class="upload-demo"
-        drag
-        multiple>
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-    </el-upload>
+  <div class="div1">
+    <div class="div2">
+      <el-image :src="require('@/statics/img/music-theme.png')"></el-image>
+    </div>
+    <div class="div3">
+      <el-button class="button1">
+        <span>点击上传</span>
+        <br>
+        <span>只能上传doc/docx/pdf文件，且不超过5M</span>
+      </el-button>
+    </div>
+    <div class="div4">
+      <span>拖到此处也可上传</span>
+    </div>
+    <div class="div5">
+      <el-button class="button2" @click="submitUpload" style="color: white">
+        <icon class="el-icon-upload"></icon>
+        |&nbsp 确认上传
+      </el-button>
+    </div>
   </div>
 </template>
 
@@ -79,6 +89,8 @@ export default {
   margin-left: 580px;
   margin-top: 20px;
   border-radius: 45px;
+  background-color: lightskyblue;
+  color: white;
 }
 
 .div1 {
