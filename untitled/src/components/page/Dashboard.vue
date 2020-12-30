@@ -86,10 +86,10 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column width="60">
+            <el-table-column width="80">
               <template>
-                <i class="el-icon-edit"></i>
-                <i class="el-icon-delete"></i>
+                <el-button type="primary" class="el-icon-edit" style="padding:2px;font-size:13px;"></el-button>
+                <el-button type="danger" class="el-icon-delete" style="padding:2px;font-size:13px;"></el-button>
               </template>
             </el-table-column>
           </el-table>
