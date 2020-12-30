@@ -6,8 +6,8 @@ import VueI18n from 'vue-i18n';
 import VueCookie from 'vue-cookie';
 import { messages } from './components/common/i18n';
 import VueResource from 'vue-resource';
-import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
-// import './assets/css/theme-green/index.css'; // 浅绿色主题
+// import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
+import './assets/css/theme-green/index.css'; // 浅绿色主题
 import './assets/css/icon.css';
 import './components/common/directives';
 import 'babel-polyfill';
