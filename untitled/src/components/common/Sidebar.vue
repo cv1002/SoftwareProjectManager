@@ -97,6 +97,11 @@ export default {
           title: '文件上传'
         },
         {
+        icon: 'el-icon-upload',
+        index: 'pdfView',
+        title: 'PDF预览'
+        },
+        {
           icon: 'el-icon-pie-chart',
           index: 'journal',
           title: '项目日志'
