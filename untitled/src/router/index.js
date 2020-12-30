@@ -20,11 +20,11 @@ export default new Router({
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
                     meta: { title: '系统首页' }
                 },
-                {
-                    path: '/tabs',
-                    component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
-                    meta: { title: '公告' }
-                },
+                // {
+                //     path: '/tabs',
+                //     component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
+                //     meta: { title: '公告' }
+                // },
                 {
                     // 图片上传组件
                     path: '/upload',
