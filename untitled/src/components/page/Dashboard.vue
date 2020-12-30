@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:252px;">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/picture.jpg"/>
+            <img alt class="user-avator" src="../../statics/img/picture.jpg" />
             <div class="user-info-cont">
               <div class="user-info-name">{{ name }}</div>
               <div>{{ role }}</div>
@@ -270,8 +270,8 @@ export default {
     //     this.$refs.bar.renderChart();
     //     this.$refs.line.renderChart();
     // }
-    }
-  };
+  }
+};
 </script>
 
 

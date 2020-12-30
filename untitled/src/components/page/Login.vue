@@ -30,16 +30,16 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       param: {
         username: 'admin',
-        password: '123123',
+        password: '123123'
       },
       rules: {
-        username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
-        password: [{required: true, message: '请输入密码', trigger: 'blur'}],
-      },
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+      }
     };
   },
   methods: {
@@ -55,8 +55,8 @@ export default {
           return false;
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

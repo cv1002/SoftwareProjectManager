@@ -87,27 +87,27 @@ export default {
           }
         }]
       },
-      value2: '',
-    }
+      value2: ''
+    };
   },
   methods: {
     onSubmit() {
-      this.$cookie.set("groupsetenable", false);
+      this.$cookie.set('groupsetenable', false);
       this.$router.push('/groupinfo');
       this.$router.go(0);
       console.log('submit!');
     },
     methods: {
-        onSubmit() {
-            this.$cookie.set('groupsetenable', false);
-            this.$router.push('/groupinfo');
-            this.$router.go(0);
-            console.log('submit!');
-        }
+      onSubmit() {
+        this.$cookie.set('groupsetenable', false);
+        this.$router.push('/groupinfo');
+        this.$router.go(0);
+        console.log('submit!');
+      }
 
     }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -29,7 +29,7 @@
       <div class="crop-demo">
         <img :src="cropImg" class="pre-img">
         <div class="crop-demo-btn">选择图片
-          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage"/>
+          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage" />
         </div>
       </div>
       <el-dialog :visible.sync="dialogVisible" title="裁剪图片" width="30%">
@@ -49,14 +49,14 @@ import VueCropper from 'vue-cropperjs';
 
 export default {
   name: 'upload',
-  data: function () {
+  data: function() {
     return {
       defaultSrc: require('../../assets/img/img.jpg'),
       fileList: [],
       imgSrc: '',
       cropImg: '',
-      dialogVisible: false,
-    }
+      dialogVisible: false
+    };
   },
   components: {
     VueCropper
@@ -83,7 +83,7 @@ export default {
       this.cropImg = this.defaultSrc;
     },
     imageuploaded(res) {
-      console.log(res)
+      console.log(res);
     },
     handleError() {
       this.$notify.error({
@@ -95,7 +95,7 @@ export default {
   created() {
     this.cropImg = this.defaultSrc;
   }
-}
+};
 </script>
 
 <style scoped>

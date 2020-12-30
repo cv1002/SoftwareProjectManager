@@ -109,7 +109,8 @@
 </template>
 
 <script>
-import {fetchData} from '../../api/index';
+import { fetchData } from '../../api/index';
+
 export default {
   name: 'basetable',
   data() {
@@ -192,12 +193,12 @@ export default {
       this.getData();
     },
     Cancel() {
-      this.$cookie.delete("groupsetenable");
-      this.$router.push("/groupsetup");
+      this.$cookie.delete('groupsetenable');
+      this.$router.push('/groupsetup');
       this.$router.go(0);
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -222,9 +223,11 @@ export default {
 .red {
   color: #ff0000;
 }
+
 .mr10 {
   margin-right: 10px;
 }
+
 .table-td-thumb {
   display: block;
   margin: auto;

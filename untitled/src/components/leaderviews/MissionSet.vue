@@ -130,25 +130,25 @@ export default {
         label: '晏礼鹏'
       }],
       value: '',
-      value2: '',
-    }
+      value2: ''
+    };
   },
   components: {
     quillEditor
   },
   methods: {
     submit() {
-      var textcontent = this.content.replace(/<[^>]+>/g, "");  //消除标签
+      var textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
       var starttime = this.value2[0];
       var endtime = this.value2[1];
       var name = this.value;
       this.tableData.push({ starttime: starttime, endtime: endtime, name: name, comment: textcontent });
       console.log(this.content);
-      console.log(textcontent)
+      console.log(textcontent);
       this.$message.success('发布成功！');
     }
   }
-}
+};
 </script>
 <style scoped>
 .editor-btn {

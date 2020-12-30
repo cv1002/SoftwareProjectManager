@@ -21,23 +21,23 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import {quillEditor} from 'vue-quill-editor';
+import { quillEditor } from 'vue-quill-editor';
 
 export default {
   name: 'editor',
-  data: function () {
+  data: function() {
     return {
       content: '',
       editorOption: {
         placeholder: 'Hello World'
       }
-    }
+    };
   },
   components: {
     quillEditor
   },
   methods: {
-    onEditorChange({editor, html, text}) {
+    onEditorChange({ editor, html, text }) {
       this.content = html;
     },
     submit() {
@@ -45,7 +45,7 @@ export default {
       this.$message.success('提交成功！');
     }
   }
-}
+};
 </script>
 <style scoped>
 .editor-btn {

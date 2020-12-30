@@ -14,7 +14,7 @@ export default {
     return {
       progress: 0,
       visible: true
-    }
+    };
   },
   methods: {
     changepercent: function() {
@@ -28,7 +28,7 @@ export default {
       this.visible = true;
     }
   }
-}
+};
 
 </script>
 

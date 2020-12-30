@@ -5,7 +5,7 @@
       <div class="crop-demo">
         <img :src="cropImg" class="pre-img">
         <div class="crop-demo-btn">更换头像
-          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage"/>
+          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage" />
         </div>
       </div>
 
@@ -34,7 +34,7 @@ import VueCropper from 'vue-cropperjs';
 
 export default {
   name: 'upload',
-  data: function () {
+  data: function() {
     return {
       defaultSrc: require('../../statics/img/picture.jpg'),
       fileList: [],
@@ -42,10 +42,10 @@ export default {
       cropImg: '',
       dialogVisible: false,
       imageUrl: '',
-      teacher: "老师",
-      group: "小组",
-      leader: "组长",
-    }
+      teacher: '老师',
+      group: '小组',
+      leader: '组长'
+    };
   },
   components: {
     VueCropper
@@ -72,25 +72,25 @@ export default {
       this.cropImg = this.defaultSrc;
     },
     imageuploaded(res) {
-      console.log(res)
+      console.log(res);
     },
     handleError() {
       this.$notify.error({
         title: '上传失败',
         message: '图片上传接口上传失败，可更改为自己的服务器接口'
       });
-    },
+    }
   },
   created() {
     this.cropImg = this.defaultSrc;
   }
-}
+};
 
 </script>
 
 <style scoped>
 .avatar-uploader :hover {
-    border-color: #409EFF;
+  border-color: #409EFF;
 }
 
 .div4 {

@@ -66,8 +66,8 @@ export default {
       value3: null,
       value4: null,
       value5: null,
-      value6: null,
-    }
+      value6: null
+    };
   },
   methods: {
     test: function() {
@@ -79,12 +79,12 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
 .font1 {
-    font-size: 20px;
-    text-decoration: none;
+  font-size: 20px;
+  text-decoration: none;
 }
 </style>

@@ -11,22 +11,22 @@
 export default {
   data() {
     return {
-      title: ""
-    }
+      title: ''
+    };
   },
   methods: {
     submit() {
       var now = new Date();
-      var textcontent = this.title.replace(/<[^>]+>/g, "");
+      var textcontent = this.title.replace(/<[^>]+>/g, '');
       var timenow = now.toLocaleString();
       this.$cookie.set('messagetime', timenow, 1);
       this.$cookie.set('message', textcontent, 1);
       console.log(timenow);
-      console.log(textcontent)
+      console.log(textcontent);
       this.$message.success('发布成功！');
     }
   }
-}
+};
 </script>
 
 <style scoped>

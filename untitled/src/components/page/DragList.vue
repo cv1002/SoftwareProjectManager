@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable';
 
 export default {
   name: 'draglist',
@@ -102,7 +102,7 @@ export default {
           content: '开发项目整体框架'
         }
       ]
-    }
+    };
   },
   components: {
     draggable
@@ -113,7 +113,7 @@ export default {
       this.$message.success(`从 ${event.from.id} 移动到 ${event.to.id} `);
     }
   }
-}
+};
 
 </script>
 

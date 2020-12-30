@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       keyword: '',
       iconList: [
@@ -171,16 +171,16 @@ export default {
         'search',
         'edit'
       ]
-    }
+    };
   },
   computed: {
     list() {
       return this.iconList.filter((item) => {
         return item.indexOf(this.keyword) !== -1;
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
