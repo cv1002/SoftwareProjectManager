@@ -33,8 +33,43 @@
           <el-progress :percentage="65.9" color="#f56c6c"></el-progress>
         </el-card>
       </el-col>
-      <el-col :span="8">
-        <el-card shadow="hover" style="height:512px;">
+      <el-col :span="16">
+        <el-row :gutter="20" class="mgb20">
+          <el-col :span="8">
+            <el-card :body-style="{padding: '0px'}" shadow="hover">
+              <div class="grid-content grid-con-1">
+                <i class="el-icon-lx-people grid-con-icon"></i>
+                <div class="grid-cont-right">
+                  <div class="grid-num">{{numberofmembers}}</div>
+                  <div>小组成员数</div>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
+          <el-col :span="8">
+            <el-card :body-style="{padding: '0px'}" shadow="hover">
+              <div class="grid-content grid-con-2">
+                <i class="el-icon-lx-notice grid-con-icon"></i>
+                <div class="grid-cont-right">
+                  <div class="grid-num">{{finishedtask}}</div>
+                  <div>已完成任务数</div>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
+          <el-col :span="8">
+            <el-card :body-style="{padding: '0px'}" shadow="hover">
+              <div class="grid-content grid-con-3">
+                <i class="el-icon-lx-goods grid-con-icon"></i>
+                <div class="grid-cont-right">
+                  <div class="grid-num">{{unfinishedtask}}</div>
+                  <div>未完成任务数</div>
+                </div>
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
+        <el-card shadow="hover" style="height:403px;">
           <div slot="header" class="clearfix">
             <span>待办事项</span>
             <el-button style="float: right; padding: 3px 0" type="text">添加</el-button>
@@ -60,73 +95,6 @@
           </el-table>
         </el-card>
       </el-col>
-      <el-col :span="8">
-            <el-card shadow="hover" style="height:512px;">
-              <div slot="header" class="clearfix">
-                <span>消息通知</span>
-              </div>
-              <el-tabs v-model="message">
-                <el-tab-pane :label="`未读消息(${unread.length})`" name="first">
-                  <el-table :data="unread" :show-header="false" style="width: 100%">
-                    <el-table-column>
-                      <template slot-scope="scope">
-                        <span class="message-title">{{ scope.row.title }}</span>
-                      </template>
-                    </el-table-column>
-                    <el-table-column prop="date" width="100"></el-table-column>
-                    <el-table-column width="100">
-                      <template slot-scope="scope">
-                        <el-button size="small" @click="handleRead(scope.$index)">标为已读</el-button>
-                      </template>
-                    </el-table-column>
-                  </el-table>
-                  <div class="handle-row">
-                    <el-button type="primary">全部标为已读</el-button>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane :label="`已读消息(${read.length})`" name="second">
-                  <template v-if="message === 'second'">
-                    <el-table :data="read" :show-header="false" style="width: 100%">
-                      <el-table-column>
-                        <template slot-scope="scope">
-                          <span class="message-title">{{ scope.row.title }}</span>
-                        </template>
-                      </el-table-column>
-                      <el-table-column prop="date" width="100"></el-table-column>
-                      <el-table-column width="100">
-                        <template slot-scope="scope">
-                          <el-button type="danger" @click="handleDel(scope.$index)">删除</el-button>
-                        </template>
-                      </el-table-column>
-                    </el-table>
-                    <div class="handle-row">
-                      <el-button type="danger">删除全部</el-button>
-                    </div>
-                  </template>
-                </el-tab-pane>
-                <el-tab-pane :label="`回收站(${recycle.length})`" name="third">
-                  <template v-if="message === 'third'">
-                    <el-table :data="recycle" :show-header="false" style="width: 100%">
-                      <el-table-column>
-                        <template slot-scope="scope">
-                          <span class="message-title">{{ scope.row.title }}</span>
-                        </template>
-                      </el-table-column>
-                      <el-table-column prop="date" width="100"></el-table-column>
-                      <el-table-column width="100">
-                        <template slot-scope="scope">
-                          <el-button @click="handleRestore(scope.$index)">还原</el-button>
-                        </template>
-                      </el-table-column>
-                    </el-table>
-                    <div class="handle-row">
-                      <el-button type="danger">清空回收站</el-button>
-                    </div>
-                  </template>
-                </el-tab-pane>
-              </el-tabs>
-            </el-card>
-      </el-col>
     </el-row>
   </el-card>
 </template>
@@ -138,6 +106,9 @@ export default {
   name: 'dashboard',
   data() {
     return {
+      numberofmembers:7,
+      finishedtask:12,
+      unfinishedtask:18,
       name: localStorage.getItem('ms_username'),
       message: 'first',
       showHeader: false,

@@ -30,7 +30,7 @@ export default new Router({
                     path: '/upload',
                     component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
                     meta: { title: '文件上传' }
-                },
+                },             
                 {
                     // vue-schart组件
                     path: '/charts',
@@ -63,6 +63,11 @@ export default new Router({
                     component: () => import('../components/subviews/Homework'),
                     meta: { title: '作业提交区域' }
                 },
+                {
+                    path: '/pdfview',
+                    component: () => import('../components/subviews/pdfView'),
+                    meta: { title: 'PDF预览' }
+                },             
                 {
                     path: '/individual',
                     component: () => import('../components/subviews/Individual'),
