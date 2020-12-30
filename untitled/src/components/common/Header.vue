@@ -1,53 +1,53 @@
 <template>
-    <div class="header">
-        <!-- 折叠按钮 -->
-        <div class="collapse-btn" @click="collapseChage">
-            <i v-if="!collapse" class="el-icon-s-fold"></i>
-            <i v-else class="el-icon-s-unfold"></i>
-        </div>
-        <div class="logo">后台管理系统</div>
-        <div class="header-right">
-            <div class="header-user-con">
-                <!-- 全屏显示 -->
-                <div class="btn-fullscreen" @click="handleFullScreen">
-                    <el-tooltip :content="fullscreen?`取消全屏`:`全屏`" effect="dark" placement="bottom">
-                        <i class="el-icon-rank"></i>
-                    </el-tooltip>
-                </div>
-                <!-- 消息中心 -->
-                <div v-if="username!=='teacher'" class="btn-bell">
-                    <el-tooltip
-                        :content="message?`有${message}条未读消息`:`消息中心`"
-                        effect="dark"
-                        placement="bottom"
-                    >
-                        <router-link to="/tabs">
-                            <i class="el-icon-bell"></i>
-                        </router-link>
-                    </el-tooltip>
-                    <span v-if="message" class="btn-bell-badge"></span>
-                </div>
-                <!-- 用户头像 -->
-                <div class="user-avator">
-                    <router-link to="/person">
-                        <el-tooltip class="item" content="个人资料" effect="dark" placement="bottom">
-                            <img src="../../statics/img/picture.jpg" />
-                        </el-tooltip>
-                    </router-link>
-                </div>
-                <!-- 用户名下拉菜单 -->
-                <el-dropdown class="user-name" trigger="click" @command="handleCommand">
-          <span class="el-dropdown-link">
-              {{ username }}
-              <i class="el-icon-caret-bottom"></i>
-          </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item command="loginout" divided>退出登录</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </div>
-        </div>
+  <div class="header">
+    <!-- 折叠按钮 -->
+    <div class="collapse-btn" @click="collapseChage">
+      <i v-if="!collapse" class="el-icon-s-fold"></i>
+      <i v-else class="el-icon-s-unfold"></i>
     </div>
+    <div class="logo">项目管理系统</div>
+    <div class="header-right">
+      <div class="header-user-con">
+        <!-- 消息中心 -->
+        <!-- <div v-if="username!='teacher'" class="btn-bell">
+          <el-tooltip
+              :content="message?`有${message}条未读消息`:`消息中心`"
+              effect="dark"
+              placement="bottom"
+          >
+            <router-link to="/tabs">
+              <i class="el-icon-bell"></i>
+            </router-link>
+          </el-tooltip>
+          <span v-if="message" class="btn-bell-badge"></span>
+        </div> -->
+        <!-- 用户头像 -->
+        <div class="user-avator">
+          <router-link to="/person">
+            <el-tooltip class="item" content="个人资料" effect="dark" placement="bottom">
+              <img src="../../statics/img/g.jpg"/>
+            </el-tooltip>
+          </router-link>
+        </div>
+        <!-- 用户名下拉菜单 -->
+        <el-dropdown class="user-name" trigger="click" @command="handleCommand">
+                    <span class="el-dropdown-link">
+                        <span style="color:#CCFFFF">当前用户为：</span>{{ username }}
+                        <i class="el-icon-caret-bottom"></i>
+                    </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="loginout" divided>退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <!-- 全屏显示 -->
+        <div class="btn-fullscreen" @click="handleFullScreen">
+          <el-tooltip :content="fullscreen?`取消全屏`:`全屏`" effect="dark" placement="bottom">
+            <i class="el-icon-rank"></i>
+          </el-tooltip>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import bus from '../common/bus';
@@ -166,14 +166,14 @@ export default {
 }
 
 .btn-bell-badge {
-    position: absolute;
-    right: 0;
-    top: -2px;
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
-    background: #f56c6c;
-    color: #fff;
+  position: absolute;
+  right: 0;
+  top: -2px;
+  /* width: 8px;
+  height: 8px; */
+  border-radius: 4px;
+  background: #f56c6c;
+  color: #fff;
 }
 
 .btn-bell .el-icon-bell {

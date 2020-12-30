@@ -71,126 +71,109 @@
 import bus from '../common/bus';
 
 export default {
-    data() {
-        return {
-            username: localStorage.getItem('ms_username'),
-            collapse: false,
-            items: [
-                {
-                    icon: 'el-icon-lx-home',
-                    index: 'dashboard',
-                    title: '系统首页'
-                },
-                {
-                    icon: 'el-icon-lx-copy',
-                    index: 'tabs',
-                    title: '公告'
-                },
-                {
-                    icon: 'el-icon-lx-warn',
-                    index: '7',
-                    title: '错误处理',
-                    subs: [
-                        {
-                            index: 'permission',
-                            title: '权限测试'
-                        },
-                        {
-                            index: '404',
-                            title: '404页面'
-                        }
-                    ]
-                },
-                {
-                    icon: 'el-icon-ice-cream-round',
-                    index: 'entire',
-                    title: '项目进度'
-                },
-                {
-                    icon: 'el-icon-lollipop',
-                    index: 'individual',
-                    title: '个人任务'
-                },
-                {
-                    icon: 'el-icon-upload',
-                    index: 'homework',
-                    title: '作业提交'
-                },
-                {
-                    icon: 'el-icon-pie-chart',
-                    index: 'journal',
-                    title: '项目日志'
-                },
-                {
-                    icon: 'el-icon-chat-line-round',
-                    index: 'vueeditor',
-                    title: '交流讨论'
-                }
-            ],
-            items2: [
-                {
-                    icon: 'el-icon-lx-home',
-                    index: 'dashboard',
-                    title: '系统首页'
-                },
-                {
-                    icon: 'el-icon-lx-group',
-                    index: 'groupinfo',
-                    title: '小组信息'
-                },
-                {
-                    icon: 'el-icon-document-checked',
-                    index: 'groupsetup',
-                    title: '小组选题'
-                },
-                {
-                    icon: 'el-icon-lx-copy',
-                    index: 'tabs',
-                    title: '公告'
-                },
-                {
-                    icon: 'el-icon-document',
-                    index: 'missionset',
-                    title: '任务发布'
-                },
-                {
-                    icon: 'el-icon-upload2',
-                    index: 'progressset',
-                    title: '进度上传'
-                },
-                {
-                    icon: 'el-icon-chat-line-round',
-                    index: 'vueeditor',
-                    title: '交流讨论'
-                },
-                {
-                    icon: 'el-icon-pie-chart',
-                    index: 'journal',
-                    title: '项目日志'
-                }
-            ],
-            items3:
-                [
-                    {
-                        icon: 'el-icon-lx-home',
-                        index: 'dashboard',
-                        title: '系统首页'
-                    },
-                    {
-                        icon: 'el-icon-s-custom',
-                        index: 'groupprogress',
-                        title: '项目各小组进度'
-                    },
-                    {
-                        icon: 'el-icon-tickets',
-                        index: 'messagesend',
-                        title: '公告发布'
-                    }
-                ]
-        };
-    }
-    ,
-
+  data() {
+    return {
+      username: localStorage.getItem('ms_username'),
+      collapse: false,
+      items: [
+        {
+          icon: 'el-icon-lx-home',
+          index: 'dashboard',
+          title: '我的面板'
+        },
+        {
+          icon: 'el-icon-ice-cream-round',
+          index: 'entire',
+          title: '项目可视化'
+        },
+        {
+          icon: 'el-icon-lollipop',
+          index: 'individual',
+          title: '项目成员'
+        },
+        {
+          icon: 'el-icon-upload',
+          index: 'homework',
+          title: '文件上传'
+        },
+        {
+        icon: 'el-icon-upload',
+        index: 'pdfView',
+        title: 'PDF预览'
+        },
+        {
+          icon: 'el-icon-pie-chart',
+          index: 'journal',
+          title: '项目日志'
+        },
+        {
+          icon: 'el-icon-chat-line-round',
+          index: 'vueeditor',
+          title: '交流互动'
+        }
+      ],
+      items2: [
+        {
+          icon: 'el-icon-lx-home',
+          index: 'dashboard',
+          title: '系统首页'
+        },
+        {
+          icon: 'el-icon-lx-group',
+          index: 'groupinfo',
+          title: '小组信息'
+        },
+        {
+          icon: 'el-icon-document-checked',
+          index: 'groupsetup',
+          title: '小组选题'
+        },
+        {
+          icon: 'el-icon-lx-copy',
+          index: 'tabs',
+          title: '公告'
+        },
+        {
+          icon: 'el-icon-document',
+          index: 'missionset',
+          title: '任务发布'
+        },
+        {
+          icon: 'el-icon-upload2',
+          index: 'progressset',
+          title: '进度上传'
+        },
+        {
+          icon: 'el-icon-chat-line-round',
+          index: 'vueeditor',
+          title: '交流讨论'
+        },
+        {
+          icon: 'el-icon-pie-chart',
+          index: 'journal',
+          title: '项目日志'
+        }
+      ],
+      items3:
+          [
+            {
+              icon: 'el-icon-lx-home',
+              index: 'dashboard',
+              title: '系统首页'
+            },
+            {
+              icon: 'el-icon-s-custom',
+              index: 'groupprogress',
+              title: '项目各小组进度'
+            },
+            {
+              icon: 'el-icon-tickets',
+              index: 'messagesend',
+              title: '公告发布'
+            }
+          ]
+    };
+  },
     computed: {
         onRoutes() {
             return this.$route.path.replace('/', '');
