@@ -234,7 +234,7 @@ export default {
     handleRestore(index) {
     const item = this.recycle.splice(index, 1);
     this.read = item.concat(this.read);
-    }
+    },
     // handleListener() {
     //     bus.$on('collapse', this.handleBus);
     //     // 调用renderChart方法对图表进行重新渲染
@@ -270,7 +270,8 @@ export default {
         //     this.$refs.line.renderChart();
         // }
     }
-};
+  }
+}
 </script>
 
 

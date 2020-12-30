@@ -78,7 +78,8 @@ export default {
       console.log(textcontent);
       this.$message.success('提交成功！');
     }
-};
+  }
+}
 </script>
 
 <style scoped>
