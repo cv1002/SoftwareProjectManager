@@ -110,7 +110,7 @@
 
 <script>
 export default {
-  name: 'basetable',
+  name: 'BaseTable',
   data() {
     return {
       query: {
