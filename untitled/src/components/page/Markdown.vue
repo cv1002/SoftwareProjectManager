@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mavonEditor } from 'mavon-editor';
+import {mavonEditor} from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
 
 export default {
@@ -43,7 +43,7 @@ export default {
         url: '/common/upload',
         method: 'post',
         data: formdata,
-        headers: { 'Content-Type': 'multipart/form-data' }
+        headers: {'Content-Type': 'multipart/form-data'}
       }).then((url) => {
         this.$refs.md.$img2Url(pos, url);
       });

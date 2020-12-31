@@ -115,10 +115,17 @@ export default {
       showHeader: false,
       unread: [{
         date: '2018-04-19 20:00:00',
+<<<<<<< HEAD
         title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
       }, {
         date: '2018-04-19 21:00:00',
         title: '今晚12点整发大红包，先到先得'
+=======
+        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护',
+      }, {
+        date: '2018-04-19 21:00:00',
+        title: '今晚12点整发大红包，先到先得',
+>>>>>>> pr/4
       }],
       read: [{
         date: '2018-04-19 20:00:00',
@@ -223,9 +230,47 @@ export default {
     handleRestore(index) {
       const item = this.recycle.splice(index, 1);
       this.read = item.concat(this.read);
+<<<<<<< HEAD
+=======
+    },
+    // handleListener() {
+    //     bus.$on('collapse', this.handleBus);
+    //     // 调用renderChart方法对图表进行重新渲染
+    //     window.addEventListener('resize', this.renderChart);
+    // },
+    // activated() {
+    //     this.handleListener();
+    // },
+    // deactivated() {
+    //     window.removeEventListener('resize', this.renderChart);
+    //     bus.$off('collapse', this.handleBus);
+    // },
+    methods: {
+      changeDate() {
+        const now = new Date().getTime();
+        this.data.forEach((item, index) => {
+          const date = new Date(now - (6 - index) * 86400000);
+          item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        });
+      }
+      // handleListener() {
+      //     bus.$on('collapse', this.handleBus);
+      //     // 调用renderChart方法对图表进行重新渲染
+      //     window.addEventListener('resize', this.renderChart);
+      // },
+      // handleBus(msg) {
+      //     setTimeout(() => {
+      //         this.renderChart();
+      //     }, 200);
+      // },
+      // renderChart() {
+      //     this.$refs.bar.renderChart();
+      //     this.$refs.line.renderChart();
+      // }
+>>>>>>> pr/4
     }
   }
-};
+}
 </script>
 
 
