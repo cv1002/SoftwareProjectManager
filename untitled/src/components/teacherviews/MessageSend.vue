@@ -16,9 +16,9 @@ export default {
   },
   methods: {
     submit() {
-      var now = new Date();
-      var textcontent = this.title.replace(/<[^>]+>/g, '');
-      var timenow = now.toLocaleString();
+      let now = new Date();
+      let textcontent = this.title.replace(/<[^>]+>/g, '');
+      let timenow = now.toLocaleString();
       this.$cookie.set('messagetime', timenow, 1);
       this.$cookie.set('message', textcontent, 1);
       console.log(timenow);

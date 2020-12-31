@@ -1,21 +1,19 @@
 <template>
   <div class="div4">
     <div class="div5">
-      <p>头像大图</p>
       <div class="crop-demo">
-        <img :src="cropImg" class="pre-img">
+        <img :src="cropImg" class="pre-img" alt="这里是头像">
         <div class="crop-demo-btn">更换头像
-          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage" />
+          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage"/>
         </div>
       </div>
-
       <el-dialog :visible.sync="dialogVisible" title="裁剪图片" width="30%">
         <vue-cropper ref='cropper' :cropmove="cropImage" :ready="cropImage" :src="imgSrc" :zoom="cropImage"
                      style="width:100%;height:300px;"></vue-cropper>
         <span slot="footer" class="dialog-footer">
-                    <el-button @click="cancelCrop">取 消</el-button>
-                    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-                </span>
+            <el-button @click="cancelCrop">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
       </el-dialog>
     </div>
     <div class="div6">
@@ -34,7 +32,7 @@ import VueCropper from 'vue-cropperjs';
 
 export default {
   name: 'upload',
-  data: function() {
+  data: function () {
     return {
       defaultSrc: require('../../statics/img/picture.jpg'),
       fileList: [],
@@ -112,11 +110,11 @@ export default {
 }
 
 .pre-img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   background: #f8f8f8;
   border: 1px solid #eee;
-  border-radius: 5px;
+  border-radius: 100%;
 }
 
 .crop-demo {

@@ -10,7 +10,7 @@
         text-color="#bfcbd9"
         unique-opened
     >
-      <template v-for="item in items" v-if="username=='admin'">
+      <template v-for="item in items" v-if="username==='admin'">
         <template v-if="item.subs">
           <el-submenu :key="item.index" :index="item.index">
             <template slot="title">
@@ -47,7 +47,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items2" v-if="username=='tang'">
+      <template v-for="i in items2" v-if="username==='tang'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -55,7 +55,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items3" v-if="username=='teacher'">
+      <template v-for="i in items3" v-if="username==='teacher'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -97,7 +97,7 @@ export default {
           title: '文件上传'
         },
         {
-        icon: 'el-icon-upload',
+        icon: 'el-icon-view',
         index: 'pdfView',
         title: 'PDF预览'
         },
@@ -173,9 +173,7 @@ export default {
             }
           ]
     };
-  }
-  ,
-
+  },
   computed: {
     onRoutes() {
       return this.$route.path.replace('/', '');

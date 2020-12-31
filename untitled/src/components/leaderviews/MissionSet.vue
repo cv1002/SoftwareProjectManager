@@ -63,10 +63,10 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import { quillEditor } from 'vue-quill-editor';
+import {quillEditor} from 'vue-quill-editor';
 
 export default {
-  data: function() {
+  data: function () {
     return {
       tableData: [
         {
@@ -138,11 +138,11 @@ export default {
   },
   methods: {
     submit() {
-      var textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
-      var starttime = this.value2[0];
-      var endtime = this.value2[1];
-      var name = this.value;
-      this.tableData.push({ starttime: starttime, endtime: endtime, name: name, comment: textcontent });
+      let textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
+      let starttime = this.value2[0];
+      let endtime = this.value2[1];
+      let name = this.value;
+      this.tableData.push({starttime: starttime, endtime: endtime, name: name, comment: textcontent});
       console.log(this.content);
       console.log(textcontent);
       this.$message.success('发布成功！');

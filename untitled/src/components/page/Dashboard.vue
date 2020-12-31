@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg" />
+            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
             <div class="user-info-cont">
               <div class="user-info-name">{{ name }}</div>
               <div>{{ role }}</div>
@@ -40,7 +40,7 @@
               <div class="grid-content grid-con-1">
                 <i class="el-icon-lx-people grid-con-icon"></i>
                 <div class="grid-cont-right">
-                  <div class="grid-num">{{numberofmembers}}</div>
+                  <div class="grid-num">{{ numberofmembers }}</div>
                   <div>小组成员数</div>
                 </div>
               </div>
@@ -51,7 +51,7 @@
               <div class="grid-content grid-con-2">
                 <i class="el-icon-lx-notice grid-con-icon"></i>
                 <div class="grid-cont-right">
-                  <div class="grid-num">{{finishedtask}}</div>
+                  <div class="grid-num">{{ finishedtask }}</div>
                   <div>已完成任务数</div>
                 </div>
               </div>
@@ -62,7 +62,7 @@
               <div class="grid-content grid-con-3">
                 <i class="el-icon-lx-goods grid-con-icon"></i>
                 <div class="grid-cont-right">
-                  <div class="grid-num">{{unfinishedtask}}</div>
+                  <div class="grid-num">{{ unfinishedtask }}</div>
                   <div>未完成任务数</div>
                 </div>
               </div>
@@ -86,10 +86,10 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column width="60">
+            <el-table-column width="80">
               <template>
-                <i class="el-icon-edit"></i>
-                <i class="el-icon-delete"></i>
+                <el-button class="el-icon-edit" style="padding:2px;font-size:13px;" type="primary"></el-button>
+                <el-button class="el-icon-delete" style="padding:2px;font-size:13px;" type="danger"></el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -97,6 +97,7 @@
       </el-col>
     </el-row>
   </el-card>
+
 </template>
 
 <script>
@@ -106,26 +107,26 @@ export default {
   name: 'dashboard',
   data() {
     return {
-      numberofmembers:7,
-      finishedtask:12,
-      unfinishedtask:18,
+      numberofmembers: 7,
+      finishedtask: 12,
+      unfinishedtask: 18,
       name: localStorage.getItem('ms_username'),
       message: 'first',
       showHeader: false,
       unread: [{
-      date: '2018-04-19 20:00:00',
-      title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护',
+        date: '2018-04-19 20:00:00',
+        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护',
       }, {
-      date: '2018-04-19 21:00:00',
-      title: '今晚12点整发大红包，先到先得',
+        date: '2018-04-19 21:00:00',
+        title: '今晚12点整发大红包，先到先得',
       }],
       read: [{
-      date: '2018-04-19 20:00:00',
-      title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
+        date: '2018-04-19 20:00:00',
+        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
       }],
       recycle: [{
-      date: '2018-04-19 20:00:00',
-      title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
+        date: '2018-04-19 20:00:00',
+        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
       }],
       todoList: [
         {
@@ -199,7 +200,7 @@ export default {
       }
     },
     unreadNum() {
-    return this.unread.length;
+      return this.unread.length;
     }
   },
   // created() {
@@ -222,34 +223,55 @@ export default {
       });
     },
     handleRead(index) {
-    const item = this.unread.splice(index, 1);
-    console.log(item);
-    this.read = item.concat(this.read);
+      const item = this.unread.splice(index, 1);
+      console.log(item);
+      this.read = item.concat(this.read);
     },
     handleDel(index) {
-    const item = this.read.splice(index, 1);
-    this.recycle = item.concat(this.recycle);
+      const item = this.read.splice(index, 1);
+      this.recycle = item.concat(this.recycle);
     },
     handleRestore(index) {
-    const item = this.recycle.splice(index, 1);
-    this.read = item.concat(this.read);
-    }
+      const item = this.recycle.splice(index, 1);
+      this.read = item.concat(this.read);
+    },
     // handleListener() {
     //     bus.$on('collapse', this.handleBus);
     //     // 调用renderChart方法对图表进行重新渲染
     //     window.addEventListener('resize', this.renderChart);
     // },
-    // handleBus(msg) {
-    //     setTimeout(() => {
-    //         this.renderChart();
-    //     }, 200);
+    // activated() {
+    //     this.handleListener();
     // },
-    // renderChart() {
-    //     this.$refs.bar.renderChart();
-    //     this.$refs.line.renderChart();
-    // }
+    // deactivated() {
+    //     window.removeEventListener('resize', this.renderChart);
+    //     bus.$off('collapse', this.handleBus);
+    // },
+    methods: {
+      changeDate() {
+        const now = new Date().getTime();
+        this.data.forEach((item, index) => {
+          const date = new Date(now - (6 - index) * 86400000);
+          item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        });
+      }
+      // handleListener() {
+      //     bus.$on('collapse', this.handleBus);
+      //     // 调用renderChart方法对图表进行重新渲染
+      //     window.addEventListener('resize', this.renderChart);
+      // },
+      // handleBus(msg) {
+      //     setTimeout(() => {
+      //         this.renderChart();
+      //     }, 200);
+      // },
+      // renderChart() {
+      //     this.$refs.bar.renderChart();
+      //     this.$refs.line.renderChart();
+      // }
+    }
   }
-};
+}
 </script>
 
 
@@ -364,10 +386,10 @@ export default {
 }
 
 .message-title {
-cursor: pointer;
+  cursor: pointer;
 }
 
 .handle-row {
-margin-top: 30px;
+  margin-top: 30px;
 }
 </style>

@@ -25,7 +25,7 @@
         <div class="user-avator">
           <router-link to="/person">
             <el-tooltip class="item" content="个人资料" effect="dark" placement="bottom">
-              <img src="../../statics/img/g.jpg"/>
+              <img src="../../statics/img/g.jpg" alt=""/>
             </el-tooltip>
           </router-link>
         </div>
@@ -70,7 +70,7 @@ export default {
   methods: {
     // 用户名下拉菜单选择事件
     handleCommand(command) {
-      if (command == 'loginout') {
+      if (command === 'loginout') {
         localStorage.removeItem('ms_username');
         this.$router.push('/login');
       }
