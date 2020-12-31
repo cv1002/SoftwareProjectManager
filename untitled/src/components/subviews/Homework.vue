@@ -58,12 +58,62 @@ export default {
       this.fileName = file.name;
       return false; // 返回false不会自动上传
     },
+<<<<<<< Updated upstream
     submitUpload() {
       if (this.fileName === '') {
         this.$message.warning('请选择要上传的文件！');
         return false;
       }
       console.log('上传' + this.files.name);
+=======
+    methods: {
+        beforeUpload(file) {
+            console.log(file, '文件');
+            this.files = file;
+            const extension = file.name.split('.')[1] === 'pdf';
+            const isLt2M = file.size / 1024 / 1024 < 5;
+            if (!extension) {
+                this.$message.warning('上传文件只能是pdf格式!');
+                return;
+            }
+            if (!isLt2M) {
+                this.$message.warning('上传文件大小不能超过 5MB!');
+                return;
+            }
+            this.fileName = file.name;
+            return false; // 返回false不会自动上传
+        },
+        submitUpload() {
+            if (this.fileName === '') {
+                this.$message.warning('请选择要上传的文件！');
+                return false;
+            }
+            console.log('上传' + this.files.name);
+            // let fileFormData = new FormData();
+            // fileFormData.append('file', this.files, this.fileName);//filename是键，file是值，就是要传的文件，test.zip是要传的文件名
+            // let requestConfig = {
+            //   headers: {
+            //     'Content-Type': 'multipart/form-data'
+            //   }
+            // };
+            // this.$http.post('http://127.0.0.1:8080/homework?' + this.files.name, fileFormData, requestConfig).then((res) => {
+            //   debugger
+            //   if (data && data.code === 0) {
+            //     this.$message({
+            //       message: '操作成功',
+            //       type: 'success',
+            //       duration: 1500,
+            //       onClose: () => {
+            //         this.visible = false;
+            //         this.$emit('refreshDataList');
+            //       }
+            //     });
+            //   } else {
+            //     this.$message.error(data.msg);
+            //   }
+            // });
+        }
+>>>>>>> Stashed changes
     }
   }
 };

@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
+            <img alt class="user-avator" src="../../statics/img/g.jpg" />
             <div class="user-info-cont">
               <div class="user-info-name">{{ name }}</div>
               <div>{{ role }}</div>
@@ -115,10 +115,10 @@ export default {
       showHeader: false,
       unread: [{
         date: '2018-04-19 20:00:00',
-        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护',
+        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
       }, {
         date: '2018-04-19 21:00:00',
-        title: '今晚12点整发大红包，先到先得',
+        title: '今晚12点整发大红包，先到先得'
       }],
       read: [{
         date: '2018-04-19 20:00:00',
@@ -183,7 +183,7 @@ export default {
           name: '2018/09/10',
           value: 1065
         }
-      ],
+      ]
     };
   },
   components: {
@@ -271,7 +271,7 @@ export default {
       // }
     }
   }
-}
+};
 </script>
 
 

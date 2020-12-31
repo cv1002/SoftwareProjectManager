@@ -4,7 +4,7 @@
       <div class="crop-demo">
         <img :src="cropImg" class="pre-img" alt="这里是头像">
         <div class="crop-demo-btn">更换头像
-          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage"/>
+          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage" />
         </div>
       </div>
       <el-dialog :visible.sync="dialogVisible" title="裁剪图片" width="30%">
@@ -32,7 +32,7 @@ import VueCropper from 'vue-cropperjs';
 
 export default {
   name: 'upload',
-  data: function () {
+  data: function() {
     return {
       defaultSrc: require('../../statics/img/picture.jpg'),
       fileList: [],

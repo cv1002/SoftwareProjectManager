@@ -21,11 +21,11 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import {quillEditor} from 'vue-quill-editor';
+import { quillEditor } from 'vue-quill-editor';
 
 export default {
   name: 'editor',
-  data: function () {
+  data: function() {
     return {
       content: '',
       editorOption: {
@@ -37,7 +37,7 @@ export default {
     quillEditor
   },
   methods: {
-    onEditorChange({editor, html, text}) {
+    onEditorChange({ editor, html, text }) {
       this.content = html;
     },
     submit() {

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import pdf from 'vue-pdf'
+import pdf from 'vue-pdf';
 
 export default {
   name: 'Home',
@@ -28,48 +28,48 @@ export default {
   },
   data() {
     return {
-      url: "http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf",
+      url: 'http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf',
       pageNum: 1,
       pageTotalNum: 1,
       pageRotate: 0,
       // 加载进度
       loadedRatio: 0,
-      curPageNum: 0,
-    }
+      curPageNum: 0
+    };
   },
-  mounted: function () {
+  mounted: function() {
   },
   methods: {
     // 上一页函数，
     prePage() {
-      var page = this.pageNum
-      page = page > 1 ? page - 1 : this.pageTotalNum
-      this.pageNum = page
+      var page = this.pageNum;
+      page = page > 1 ? page - 1 : this.pageTotalNum;
+      this.pageNum = page;
     },
     // 下一页函数
     nextPage() {
-      var page = this.pageNum
-      page = page < this.pageTotalNum ? page + 1 : 1
-      this.pageNum = page
+      var page = this.pageNum;
+      page = page < this.pageTotalNum ? page + 1 : 1;
+      this.pageNum = page;
     },
     // 页面顺时针翻转90度。
     clock() {
-      this.pageRotate += 90
+      this.pageRotate += 90;
     },
     // 页面逆时针翻转90度。
     counterClock() {
-      this.pageRotate -= 90
+      this.pageRotate -= 90;
     },
     // 页面加载回调函数，其中e为当前页数
     pageLoaded(e) {
-      this.curPageNum = e
+      this.curPageNum = e;
     },
     // 其他的一些回调函数。
     pdfError(error) {
-      console.error(error)
-    },
+      console.error(error);
+    }
   }
-}
+};
 </script>
 
 <style scoped>
