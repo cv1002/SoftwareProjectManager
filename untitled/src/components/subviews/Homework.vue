@@ -66,7 +66,7 @@ export default {
       console.log('上传' + this.files.name);
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -81,7 +81,7 @@ export default {
 }
 
 .div1 {
-  background-image: url("../../statics/img/bg.png");
+  background-image: url("../../statics/img/bg_homework.png");
   background-repeat: no-repeat;
   background-position: center;
   height: 500px;

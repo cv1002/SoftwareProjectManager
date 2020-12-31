@@ -25,7 +25,7 @@
         <div class="user-avator">
           <router-link to="/person">
             <el-tooltip class="item" content="个人资料" effect="dark" placement="bottom">
-              <img alt="" src="../../statics/img/g.jpg"/>
+              <img alt="" src="../../statics/img/g.jpg" />
             </el-tooltip>
           </router-link>
         </div>

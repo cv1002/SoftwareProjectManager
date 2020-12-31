@@ -1,10 +1,12 @@
 <template>
-  <div class="div4">
-    <div class="div5">
+  <div class="div1">
+    <div class="div2">
+    </div>
+    <div class="div3">
       <div class="crop-demo">
         <img :src="cropImg" alt="这里是头像" class="pre-img">
         <div class="crop-demo-btn">更换头像
-          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage"/>
+          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage" />
         </div>
       </div>
       <el-dialog :visible.sync="dialogVisible" title="裁剪图片" width="30%">
@@ -15,24 +17,59 @@
             <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </span>
       </el-dialog>
-    </div>
-    <div class="div6">
-      <div>
-        <p>
-          老师：{{ teacher }}
-        </p>
-        <p>所属小组：{{ group }}</p>
-        <p>组长：{{ leader }}</p>
+      <div class="spanstyle">
+        <span>{{ username }}</span>
       </div>
+      <div class="weather">
+        <weather></weather>
+      </div>
+      <div class="div3-1">
+        <div class="div3-1-1">
+          <el-card class="box-card box-card-1">
+            <span>未完成任务</span>
+          </el-card>
+        </div>
+      </div>
+      <div class="div3-2">
+        <div class="div3-2-1">
+          <el-card class="box-card box-card-2">
+            <div>
+              <router-link style="color: white" to="/vueeditor">评论</router-link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <router-link style="color: white" to="/journal">日志</router-link>
+            </div>
+          </el-card>
+        </div>
+        <div class="div3-2-2">
+          <el-card class="box-card box-card-3">
+            <div slot="header">
+              个人档案
+            </div>
+            <div class="div-card">
+              职务:
+            </div>
+            <div class="div-card">
+              组长:
+            </div>
+            <div class="div-card">
+              老师:
+            </div>
+          </el-card>
+        </div>
+      </div>
+    </div>
+    <div class="div4">
+
     </div>
   </div>
 </template>
 <script>
 import VueCropper from 'vue-cropperjs';
+import Weather from '@/components/subviews/Weather';
 
 export default {
   name: 'upload',
-  data: function () {
+  data: function() {
     return {
       defaultSrc: require('../../statics/img/picture.jpg'),
       fileList: [],
@@ -46,6 +83,7 @@ export default {
     };
   },
   components: {
+    Weather,
     VueCropper
   },
   methods: {
@@ -81,6 +119,12 @@ export default {
   },
   created() {
     this.cropImg = this.defaultSrc;
+  },
+  computed: {
+    username() {
+      let username = localStorage.getItem('ms_username');
+      return username ? username : this.name;
+    }
   }
 };
 
@@ -91,22 +135,31 @@ export default {
   border-color: #409EFF;
 }
 
-.div4 {
-  float: left;
-  height: 250px;
+.div1 {
+  background-image: url("../../statics/img/bg_person.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
   width: 100%;
+  position: absolute;
 }
 
-.div5 {
+.div2 {
+  width: 20%;
+  margin-top: 5%;
   float: left;
-  height: 100%;
-  width: 50%;
 }
 
-.div6 {
+.div3 {
+  width: 60%;
+  margin-top: 5%;
   float: left;
-  height: 100%;
-  width: 50%;
+}
+
+.div4 {
+  width: 20%;
+  margin-top: 5%;
+  float: left;
 }
 
 .pre-img {
@@ -120,6 +173,14 @@ export default {
 .crop-demo {
   display: flex;
   align-items: flex-end;
+  width: 70%;
+  float: left;
+}
+
+.weather {
+  float: left;
+  margin-top: 10px;
+  width: 30%;
 }
 
 .crop-demo-btn {
@@ -144,6 +205,56 @@ export default {
   top: 0;
   opacity: 0;
   cursor: pointer;
+}
+
+.spanstyle {
+  position: absolute;
+  margin-left: 14%;
+  margin-top: 3%;
+  font-size: 20px;
+  color: #2d8cf0;
+  opacity: 0.6;
+}
+
+.div3-1 {
+  margin-top: 20px;
+  float: right;
+  width: 65%;
+}
+
+.div3-2 {
+  margin-top: 20px;
+  float: left;
+  width: 30%;
+}
+
+.div3-2-2 {
+  margin-top: 40px;
+}
+
+.box-card {
+  background-color: #473C8B;
+  color: white;
+}
+
+.box-card-1 {
+  height: 392px;
+}
+
+.box-card-2 {
+  height: 70px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.box-card-3 {
+  height: 280px;
+  font-size: 20px;
+}
+
+.div-card {
+  margin-bottom: 30px;
+  font-size: 17px;
 }
 </style>
 
