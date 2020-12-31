@@ -97,15 +97,9 @@ export default {
           title: '文件上传'
         },
         {
-<<<<<<< HEAD
           icon: 'el-icon-upload',
           index: 'pdfView',
           title: 'PDF预览'
-=======
-        icon: 'el-icon-view',
-        index: 'pdfView',
-        title: 'PDF预览'
->>>>>>> pr/4
         },
         {
           icon: 'el-icon-pie-chart',

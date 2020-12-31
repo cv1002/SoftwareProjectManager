@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-<<<<<<< HEAD
       <el-table
           :align="'center'"
           :data="tableData"
@@ -18,30 +17,6 @@
         <el-table-column label="日期" prop="date" width="100">
         </el-table-column>
       </el-table>
-=======
-      <el-row :gutter="20">
-        <el-col :span="8" v-for="items in tableData">
-          <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>卡片名称</span>
-              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-            </div>
-            <div class="user-info-list">
-              日期：
-              <span>{{items.date}}</span>
-            </div>
-            <div class="user-info-list">
-              姓名：
-              <span>{{items.name}}</span>
-            </div>
-            <div class="user-info-list">
-              作业：
-              <span>{{items.comment}}</span>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
->>>>>>> pr/4
     </div>
     <div slot="header" class="clearfix">
       <el-tag><span class="tag">编辑器</span></el-tag>
@@ -61,7 +36,7 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import {quillEditor} from 'vue-quill-editor';
+import { quillEditor } from 'vue-quill-editor';
 
 export default {
   data: function () {
@@ -98,18 +73,14 @@ export default {
       let now = new Date();
       let textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
       let timenow = now.toLocaleString();
-<<<<<<< HEAD
       this.tableData.push({ date: timenow, name: this.username, comment: textcontent });
-=======
-      this.tableData.push({date: timenow, name: this.username, comment: textcontent});
->>>>>>> pr/4
       console.log(now.toLocaleString());
       console.log(this.content);
       console.log(textcontent);
       this.$message.success('提交成功！');
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -125,25 +96,4 @@ export default {
 .tag {
   font-size: 20px;
 }
-
-  .text {
-  font-size: 14px;
-  }
-
-  .item {
-  margin-bottom: 4px;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-  display: table;
-  content: "";
-  }
-  .clearfix:after {
-  clear: both
-  }
-
-  .box-card {
-  height: 300px;
-  }
 </style>
