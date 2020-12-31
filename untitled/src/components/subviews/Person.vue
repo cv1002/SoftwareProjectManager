@@ -2,11 +2,7 @@
   <div class="div4">
     <div class="div5">
       <div class="crop-demo">
-<<<<<<< HEAD
         <img :src="cropImg" alt="这里是头像" class="pre-img">
-=======
-        <img :src="cropImg" class="pre-img" alt="这里是头像">
->>>>>>> pr/4
         <div class="crop-demo-btn">更换头像
           <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage"/>
         </div>

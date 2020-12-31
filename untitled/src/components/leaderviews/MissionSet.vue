@@ -142,11 +142,7 @@ export default {
       let starttime = this.value2[0];
       let endtime = this.value2[1];
       let name = this.value;
-<<<<<<< HEAD
       this.tableData.push({ starttime: starttime, endtime: endtime, name: name, comment: textcontent });
-=======
-      this.tableData.push({starttime: starttime, endtime: endtime, name: name, comment: textcontent});
->>>>>>> pr/4
       console.log(this.content);
       console.log(textcontent);
       this.$message.success('发布成功！');

@@ -1,24 +1,6 @@
 <template>
   <div>
     <div>
-<<<<<<< HEAD
-      <el-table
-          :align="'center'"
-          :data="tableData"
-          :default-sort="{prop: 'date', order: 'descending'}"
-          height="200"
-          style="width: 100%">
-        <el-table-column
-            label="评论"
-            prop="comment"
-            width="400">
-        </el-table-column>
-        <el-table-column label="姓名" prop="name" width="80">
-        </el-table-column>
-        <el-table-column label="日期" prop="date" width="100">
-        </el-table-column>
-      </el-table>
-=======
       <el-row :gutter="20">
         <el-col :span="8" v-for="items in tableData">
           <el-card class="box-card">
@@ -41,7 +23,6 @@
           </el-card>
         </el-col>
       </el-row>
->>>>>>> pr/4
     </div>
     <div slot="header" class="clearfix">
       <el-tag><span class="tag">编辑器</span></el-tag>
