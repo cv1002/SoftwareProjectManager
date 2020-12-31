@@ -16,6 +16,7 @@ import 'babel-polyfill';
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = '/api';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.delete['Content-Type'] = 'application/json';
 Vue.prototype["$axios"] = axios;
 
 Vue.use(VueResource);
