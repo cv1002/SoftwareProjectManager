@@ -79,11 +79,7 @@ export default {
       let now = new Date();
       let textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
       let timenow = now.toLocaleString();
-<<<<<<< HEAD
       this.tableData.push({ date: timenow, name: this.username, comment: textcontent });
-=======
-      this.tableData.push({date: timenow, name: this.username, comment: textcontent});
->>>>>>> pr/4
       console.log(now.toLocaleString());
       console.log(this.content);
       console.log(textcontent);

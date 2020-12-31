@@ -223,21 +223,7 @@ export default {
     handleRestore(index) {
       const item = this.recycle.splice(index, 1);
       this.read = item.concat(this.read);
-<<<<<<< HEAD
-=======
     },
-    // handleListener() {
-    //     bus.$on('collapse', this.handleBus);
-    //     // 调用renderChart方法对图表进行重新渲染
-    //     window.addEventListener('resize', this.renderChart);
-    // },
-    // activated() {
-    //     this.handleListener();
-    // },
-    // deactivated() {
-    //     window.removeEventListener('resize', this.renderChart);
-    //     bus.$off('collapse', this.handleBus);
-    // },
     methods: {
       changeDate() {
         const now = new Date().getTime();
@@ -246,21 +232,6 @@ export default {
           item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
         });
       }
-      // handleListener() {
-      //     bus.$on('collapse', this.handleBus);
-      //     // 调用renderChart方法对图表进行重新渲染
-      //     window.addEventListener('resize', this.renderChart);
-      // },
-      // handleBus(msg) {
-      //     setTimeout(() => {
-      //         this.renderChart();
-      //     }, 200);
-      // },
-      // renderChart() {
-      //     this.$refs.bar.renderChart();
-      //     this.$refs.line.renderChart();
-      // }
->>>>>>> pr/4
     }
   }
 }
