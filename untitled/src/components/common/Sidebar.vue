@@ -47,7 +47,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items2" v-if="username=='tang'">
+      <template v-for="i in items2" v-if="username==='tang'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -55,7 +55,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items3" v-if="username=='teacher'">
+      <template v-for="i in items3" v-if="username==='teacher'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -89,7 +89,7 @@ export default {
         {
           icon: 'el-icon-lollipop',
           index: 'individual',
-          title: '项目成员'
+          title: '未完成的任务'
         },
         {
           icon: 'el-icon-upload',
