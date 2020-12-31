@@ -40,168 +40,198 @@ function getDate(hours) {
 
 let tasks = [{
   id: 1,
-  label: '确定项目',
+  label: "确定项目",
   user: '<a href="" target="_blank" style="color:#0077c0;">项目负责人</a>',
   start: getDate(-24 * 5),
   duration: 24 * 60 * 60 * 1000,
-  percent: 85,
-  type: 'project'
-  //collapsed: true,
+  percent: 100,
+  type: "project",
+  collapsed: true,
+  style: {
+    base: {
+      fill: "#00FFFF",
+      stroke: "#7E349D",
+    },
+  },
 },
   {
     id: 2,
-    label: '编写需求说明书',
+    label: "编写需求说明书",
     user: '<a href=""" target=" _blank" style="color:#0077c0;">文档设计者</a>',
     start: getDate(-24 * 4),
     duration: 24 * 60 * 60 * 1000,
     percent: 50,
-    type: 'milestone',
+    type: "milestone",
     collapsed: true,
     style: {
       base: {
-        fill: '#1EBC61',
-        stroke: '#0EAC51'
-      }
-    }
+        fill: "#1EBC61",
+        stroke: "#0EAC51",
+      },
+    },
   },
   {
     id: 3,
-    label: '数据库设计',
+    label: "数据库设计",
     user: '<a href="" target="_blank" style="color:#0077c0;">后端人员</a>',
     start: getDate(-24 * 3),
     duration: 2 * 24 * 60 * 60 * 1000,
     percent: 100,
-    type: 'task'
+    type: "task",
+    style: {
+      base: {
+        fill: "#FF00FF",
+        stroke: "#0EAC51",
+      },
+    },
   },
   {
     id: 4,
-    label: '前端页面设计',
+    label: "前端页面设计",
     user: '<a href="" target="_blank" style="color:#0077c0;">设计人员</a>',
     start: getDate(-24 * 2),
     duration: 2 * 24 * 60 * 60 * 1000,
     percent: 50,
-    type: 'task'
+    type: "task",
     // dependentOn: [3],
   },
   {
     id: 5,
-    label: '后端接口设计',
+    label: "后端接口设计",
     user: '<a href="" target="_blank" style="color:#0077c0;">后端人员</a>',
     start: getDate(0),
     duration: 2 * 24 * 60 * 60 * 1000,
     percent: 10,
-    type: 'milestone',
+    type: "milestone",
     style: {
       base: {
-        fill: '#0287D0',
-        stroke: '#0077C0'
-      }
-    }
+        fill: "#336666",
+        stroke: "#0077C0",
+      },
+    },
   },
   {
     id: 6,
-    label: '前端页面实现',
+    label: "前端页面实现",
     user: '<a href="" target="_blank" style="color:#0077c0;">前端设计者</a>',
     start: getDate(24),
     duration: 24 * 60 * 60 * 1000,
     percent: 50,
-    type: 'task',
+    type: "task",
     collapsed: true,
     style: {
       base: {
-        fill: '#8E44AD',
-        stroke: '#7E349D'
-      }
-    }
+        fill: "#8E44AD",
+        stroke: "#7E349D",
+      },
+    },
   },
   {
     id: 7,
-    label: '后端人员培训',
+    label: "后端人员培训",
     user: '<a href="" target="_blank" style="color:#0077c0;">后端人员</a>',
     // dependentOn: [6],
     start: getDate(24 * 2),
     duration: 4 * 24 * 60 * 60 * 1000,
     percent: 20,
-    type: 'task',
-    collapsed: true
+    type: "task",
+    collapsed: true,
+    style: {
+      base: {
+        fill: "#99FF66",
+        stroke: "#7E349D",
+      },
+    },
   },
   {
     id: 8,
-    label: '后端接口开发',
+    label: "后端接口开发",
     user: '<a href="" target="_blank" style="color:#0077c0;">后端组长</a>',
     // dependentOn: [7],
     start: getDate(24 * 3),
     duration: 7 * 24 * 60 * 60 * 1000,
     percent: 0,
-    type: 'task'
+    type: "task",
+    style: {
+      base: {
+        fill: "#FFFFCC",
+        stroke: "#7E349D",
+      },
+    },
   },
   {
     id: 9,
-    label: '软件测试',
+    label: "软件测试",
     user: '<a href="" target=" _blank" style="color:#0077c0;">测试人员</a>',
     // parentId: 8,
     // dependentOn: [8, 7],
     start: getDate(24 * 4),
     duration: 3 * 24 * 60 * 60 * 1000,
     percent: 20,
-    type: 'task',
+    type: "task",
     style: {
       base: {
-        fill: '#8E44AD',
-        stroke: '#7E349D'
-      }
-    }
+        fill: "#FF0099",
+        stroke: "#7E349D",
+      },
+    },
   },
   {
     id: 10,
-    label: '编写各种文档',
+    label: "编写各种文档",
     user: '<a href="" target="_blank" style="color:#0077c0;">所有成员</a>',
     start: getDate(24 * 5),
     duration: 3 * 24 * 60 * 60 * 1000,
     percent: 0,
-    type: 'task'
-  }
+    type: "task",
+    style: {
+      base: {
+        fill: "#993366",
+        stroke: "#7E349D",
+      },
+    },
+  },
 ];
 let options = {
   taskMapping: {
-    progress: 'percent'
+    progress: "percent",
   },
   maxRows: 100,
   maxHeight: 500,
   title: {
-    label: '项目',
-    html: false
+    label: "项目",
+    html: false,
   },
   row: {
-    height: 24
+    height: 24,
   },
   calendar: {
     hour: {
-      display: true
-    }
+      display: true,
+    },
   },
   chart: {
     progress: {
-      bar: false
+      bar: false,
     },
     expander: {
-      display: true
-    }
+      display: true,
+    },
   },
   taskList: {
     expander: {
-      straight: false
+      straight: false,
     },
     columns: [{
       id: 1,
-      label: '任务编号',
-      value: 'id',
-      width: 50
+      label: "任务编号",
+      value: "id",
+      width: 50,
     },
       {
         id: 2,
-        label: '具体描述',
-        value: 'label',
+        label: "具体描述",
+        value: "label",
         width: 200,
         expander: true,
         html: true,
@@ -210,80 +240,80 @@ let options = {
                   data,
                   column
                 }) {
-            alert('description clicked!\n' + data.label);
-          }
-        }
+            alert("description clicked!\n" + data.label);
+          },
+        },
       },
       {
         id: 3,
-        label: '负责人',
-        value: 'user',
+        label: "负责人",
+        value: "user",
         width: 80,
-        html: true
+        html: true,
       },
       {
         id: 3,
-        label: '开始日期',
-        value: (task) => dayjs(task.start).format('YYYY-MM-DD'),
-        width: 78
+        label: "开始日期",
+        value: (task) => dayjs(task.start).format("YYYY-MM-DD"),
+        width: 78,
       },
       {
         id: 4,
-        label: '任务类型',
-        value: 'type',
-        width: 68
+        label: "任务类型",
+        value: "type",
+        width: 68,
       },
       {
         id: 5,
-        label: '完成度 /%',
-        value: 'progress',
+        label: "完成度 /%",
+        value: "progress",
         width: 50,
         style: {
-          'task-list-header-label': {
-            'text-align': 'center',
-            width: '100%'
+          "task-list-header-label": {
+            "text-align": "center",
+            width: "100%",
           },
-          'task-list-item-value-container': {
-            'text-align': 'center',
-            width: '100%'
-          }
-        }
-      }
-    ]
+          "task-list-item-value-container": {
+            "text-align": "center",
+            width: "100%",
+          },
+        },
+      },
+    ],
   },
   locale: {
-    name: 'zh',
-    Now: 'Now',
-    weekdays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+    name: "zh",
+    Now: "Now",
+    weekdays: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
     months: [
-      '一月',
-      '二月',
-      '三月',
-      '四月',
-      '五月',
-      '六月',
-      '七月',
-      '八月',
-      '九月',
-      '十月',
-      '十一月',
-      '十二月'
-    ]
-  }
+      "一月",
+      "二月",
+      "三月",
+      "四月",
+      "五月",
+      "六月",
+      "七月",
+      "八月",
+      "九月",
+      "十月",
+      "十一月",
+      "十二月",
+    ],
+  },
 };
 
 export default {
-  name: 'Gantt',
+  name: "Gantt",
   components: {
     GanttElastic,
-    GanttHeader
+    GanttHeader,
   },
   data() {
     return {
       tasks,
       options,
       dynamicStyle: {},
-      lastId: 16
+      lastId: 16,
     };
   },
   methods: {
@@ -295,7 +325,7 @@ export default {
         start: getDate(24 * 3),
         duration: 24 * 60 * 60 * 1000,
         percent: 50,
-        type: 'project'
+        type: "project",
       });
     },
     tasksUpdate(tasks) {
@@ -306,7 +336,7 @@ export default {
     },
     styleUpdate(style) {
       this.dynamicStyle = style;
-    }
-  }
+    },
+  },
 };
 </script>

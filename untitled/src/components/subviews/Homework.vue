@@ -59,10 +59,23 @@ export default {
       return false; // 返回false不会自动上传
     },
     submitUpload() {
+      let formData = new FormData();
+      formData.append('UserID', '1');
+      formData.append('UserPassword', '114514')
+      formData.append('files', this.files);
+
       if (this.fileName === '') {
         this.$message.warning('请选择要上传的文件！');
         return false;
       }
+      this.$axios({
+        url: '/file',
+        method: 'post',
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log('上传' + this.files.name);
     }
   }

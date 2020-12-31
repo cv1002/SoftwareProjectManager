@@ -223,9 +223,18 @@ export default {
     handleRestore(index) {
       const item = this.recycle.splice(index, 1);
       this.read = item.concat(this.read);
+    },
+    methods: {
+      changeDate() {
+        const now = new Date().getTime();
+        this.data.forEach((item, index) => {
+          const date = new Date(now - (6 - index) * 86400000);
+          item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        });
+      }
     }
   }
-};
+}
 </script>
 
 
