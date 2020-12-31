@@ -36,7 +36,7 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import {quillEditor} from 'vue-quill-editor';
+import { quillEditor } from 'vue-quill-editor';
 
 export default {
   data: function () {
@@ -73,7 +73,7 @@ export default {
       let now = new Date();
       let textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
       let timenow = now.toLocaleString();
-      this.tableData.push({date: timenow, name: this.username, comment: textcontent});
+      this.tableData.push({ date: timenow, name: this.username, comment: textcontent });
       console.log(now.toLocaleString());
       console.log(this.content);
       console.log(textcontent);

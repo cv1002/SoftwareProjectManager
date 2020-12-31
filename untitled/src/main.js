@@ -5,7 +5,7 @@ import router from './router';
 import ElementUI from 'element-ui';
 import VueI18n from 'vue-i18n';
 import VueCookie from 'vue-cookie';
-import {messages} from './components/common/i18n';
+import { messages } from './components/common/i18n';
 import VueResource from 'vue-resource';
 // import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 import './assets/css/theme-green/index.css'; // 浅绿色主题
@@ -14,8 +14,9 @@ import './components/common/directives';
 import 'babel-polyfill';
 
 axios.defaults.withCredentials = true;
-Vue.prototype.$backLocation = 'http://39.99.195.120:18080/';
-Vue.prototype.$axios = axios;
+axios.defaults.baseURL = '/api';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+Vue.prototype["$axios"] = axios;
 
 Vue.use(VueResource);
 Vue.config.productionTip = false;
