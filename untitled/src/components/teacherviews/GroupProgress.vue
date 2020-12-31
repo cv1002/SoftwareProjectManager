@@ -70,11 +70,11 @@ export default {
     };
   },
   methods: {
-    test: function() {
+    test: function () {
       console.log(this.value1);
     },
     methods: {
-      test: function() {
+      test: function () {
         console.log(this.value1);
       }
     }

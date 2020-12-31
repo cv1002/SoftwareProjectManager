@@ -145,8 +145,11 @@ The first step to remove the component of the routing. Enter 'src/router/index.j
 ```JavaScript
 {
     path: '/editor',
-    component: resolve => require(['../components/page/VueEditor.vue'], resolve)
-},
+        component
+:
+    resolve => require(['../components/page/VueEditor.vue'], resolve)
+}
+,
 ```
 
 Second,delete the component files. Enter 'src/components/page/' and delete 'VueEditor.vue' file.

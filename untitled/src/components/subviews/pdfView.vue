@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="tools">
-      <bk-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="prePage"> 上一页
-      </bk-button>
-      <bk-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="nextPage"> 下一页
-      </bk-button>
+      <el-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="prePage"> 上一页
+      </el-button>
+      <el-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="nextPage"> 下一页
+      </el-button>
       <div class="page">{{ pageNum }}/{{ pageTotalNum }}</div>
-      <bk-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="clock"> 顺时针
-      </bk-button>
-      <bk-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="counterClock"> 逆时针
-      </bk-button>
+      <el-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="clock"> 顺时针
+      </el-button>
+      <el-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="counterClock"> 逆时针
+      </el-button>
     </div>
     <pdf ref="pdf" :page="pageNum" :rotate="pageRotate" :src="url" @error="pdfError($event)"
          @progress="loadedRatio = $event" @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event"
@@ -37,18 +37,18 @@ export default {
       curPageNum: 0
     };
   },
-  mounted: function() {
+  mounted: function () {
   },
   methods: {
     // 上一页函数，
     prePage() {
-      var page = this.pageNum;
+      let page = this.pageNum;
       page = page > 1 ? page - 1 : this.pageTotalNum;
       this.pageNum = page;
     },
     // 下一页函数
     nextPage() {
-      var page = this.pageNum;
+      let page = this.pageNum;
       page = page < this.pageTotalNum ? page + 1 : 1;
       this.pageNum = page;
     },
