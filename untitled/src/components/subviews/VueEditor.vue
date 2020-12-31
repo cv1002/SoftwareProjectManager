@@ -1,34 +1,34 @@
 <template>
   <div>
+    <div>
+      <el-table
+          :data="tableData"
+          :default-sort="{prop: 'date', order: 'descending'}"
+          :align="'center'"
+          height="200"
+          style="width: 100%">
+        <el-table-column
+            label="评论"
+            prop="comment"
+            width="400">
+        </el-table-column>
+        <el-table-column label="姓名" prop="name" width="80">
+        </el-table-column>
+        <el-table-column label="日期" prop="date" width="100">
+        </el-table-column>
+      </el-table>
+    </div>
+    <div slot="header" class="clearfix">
+      <el-tag><span class="tag">编辑器</span></el-tag>
+    </div>
+    <div class="container">
       <div>
-          <el-table
-              :data="tableData"
-              :default-sort="{prop: 'date', order: 'descending'}"
-              align="center"
-              height="200"
-              style="width: 100%">
-              <el-table-column
-                  label="评论"
-                  prop="comment"
-                  width="400">
-              </el-table-column>
-              <el-table-column label="姓名" prop="name" width="80">
-              </el-table-column>
-              <el-table-column label="日期" prop="date" width="100">
-              </el-table-column>
-          </el-table>
+        <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor>
       </div>
-      <div slot="header" class="clearfix">
-          <el-tag><span class="tag">编辑器</span></el-tag>
+      <div>
+        <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
       </div>
-      <div class="container">
-          <div>
-              <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor>
-          </div>
-          <div>
-              <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
-          </div>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -36,10 +36,10 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import { quillEditor } from 'vue-quill-editor';
+import {quillEditor} from 'vue-quill-editor';
 
 export default {
-  data: function() {
+  data: function () {
     return {
       username: localStorage.getItem('ms_username'),
       tableData: [{
@@ -70,10 +70,10 @@ export default {
   },
   methods: {
     submit() {
-      var now = new Date();
-      var textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
-      var timenow = now.toLocaleString();
-      this.tableData.push({ date: timenow, name: this.username, comment: textcontent });
+      let now = new Date();
+      let textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
+      let timenow = now.toLocaleString();
+      this.tableData.push({date: timenow, name: this.username, comment: textcontent});
       console.log(now.toLocaleString());
       console.log(this.content);
       console.log(textcontent);
@@ -85,12 +85,12 @@ export default {
 
 <style scoped>
 .editor-btn {
-    margin-top: 230px;
+  margin-top: 230px;
 }
 
 .areasize {
 
-    height: 230px;
+  height: 230px;
 }
 
 .tag {

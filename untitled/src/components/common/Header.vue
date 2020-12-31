@@ -25,7 +25,7 @@
         <div class="user-avator">
           <router-link to="/person">
             <el-tooltip class="item" content="个人资料" effect="dark" placement="bottom">
-              <img src="../../statics/img/g.jpg"/>
+              <img src="../../statics/img/g.jpg" alt=""/>
             </el-tooltip>
           </router-link>
         </div>
@@ -53,116 +53,116 @@
 import bus from '../common/bus';
 
 export default {
-    data() {
-        return {
-            collapse: false,
-            fullscreen: false,
-            name: 'linxin',
-            message: 2
-        };
-    },
-    computed: {
-        username() {
-            let username = localStorage.getItem('ms_username');
-            return username ? username : this.name;
-        }
-    },
-    methods: {
-        // 用户名下拉菜单选择事件
-        handleCommand(command) {
-            if (command == 'loginout') {
-                localStorage.removeItem('ms_username');
-                this.$router.push('/login');
-            }
-        },
-        // 侧边栏折叠
-        collapseChage() {
-            this.collapse = !this.collapse;
-            bus.$emit('collapse', this.collapse);
-        },
-        // 全屏事件
-        handleFullScreen() {
-            let element = document.documentElement;
-            if (this.fullscreen) {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitCancelFullScreen) {
-                    document.webkitCancelFullScreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            } else {
-                if (element.requestFullscreen) {
-                    element.requestFullscreen();
-                } else if (element.webkitRequestFullScreen) {
-                    element.webkitRequestFullScreen();
-                } else if (element.mozRequestFullScreen) {
-                    element.mozRequestFullScreen();
-                } else if (element.msRequestFullscreen) {
-                    // IE11
-                    element.msRequestFullscreen();
-                }
-            }
-            this.fullscreen = !this.fullscreen;
-        }
-    },
-    mounted() {
-        if (document.body.clientWidth < 1500) {
-            this.collapseChage();
-        }
+  data() {
+    return {
+      collapse: false,
+      fullscreen: false,
+      name: 'linxin',
+      message: 2
+    };
+  },
+  computed: {
+    username() {
+      let username = localStorage.getItem('ms_username');
+      return username ? username : this.name;
     }
+  },
+  methods: {
+    // 用户名下拉菜单选择事件
+    handleCommand(command) {
+      if (command === 'loginout') {
+        localStorage.removeItem('ms_username');
+        this.$router.push('/login');
+      }
+    },
+    // 侧边栏折叠
+    collapseChage() {
+      this.collapse = !this.collapse;
+      bus.$emit('collapse', this.collapse);
+    },
+    // 全屏事件
+    handleFullScreen() {
+      let element = document.documentElement;
+      if (this.fullscreen) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      } else {
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        } else if (element.webkitRequestFullScreen) {
+          element.webkitRequestFullScreen();
+        } else if (element.mozRequestFullScreen) {
+          element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) {
+          // IE11
+          element.msRequestFullscreen();
+        }
+      }
+      this.fullscreen = !this.fullscreen;
+    }
+  },
+  mounted() {
+    if (document.body.clientWidth < 1500) {
+      this.collapseChage();
+    }
+  }
 };
 </script>
 <style scoped>
 .header {
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-    height: 70px;
-    font-size: 22px;
-    color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 70px;
+  font-size: 22px;
+  color: #fff;
 }
 
 .collapse-btn {
-    float: left;
-    padding: 0 21px;
-    cursor: pointer;
-    line-height: 70px;
+  float: left;
+  padding: 0 21px;
+  cursor: pointer;
+  line-height: 70px;
 }
 
 .header .logo {
-    float: left;
-    width: 250px;
-    line-height: 70px;
+  float: left;
+  width: 250px;
+  line-height: 70px;
 }
 
 .header-right {
-    float: right;
-    padding-right: 50px;
+  float: right;
+  padding-right: 50px;
 }
 
 .header-user-con {
-    display: flex;
-    height: 70px;
-    align-items: center;
+  display: flex;
+  height: 70px;
+  align-items: center;
 }
 
 .btn-fullscreen {
-    transform: rotate(45deg);
-    margin-right: 5px;
-    font-size: 24px;
+  transform: rotate(45deg);
+  margin-right: 5px;
+  font-size: 24px;
 }
 
 .btn-bell,
 .btn-fullscreen {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    border-radius: 15px;
-    cursor: pointer;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
 }
 
 .btn-bell-badge {
@@ -177,35 +177,35 @@ export default {
 }
 
 .btn-bell .el-icon-bell {
-    color: #fff;
+  color: #fff;
 }
 
 .user-name {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .user-avator {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .user-avator img {
-    display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .el-dropdown-link {
-    color: #fff;
-    cursor: pointer;
+  color: #fff;
+  cursor: pointer;
 }
 
 .el-dropdown {
-    vertical-align: top;
+  vertical-align: top;
 }
 
 .el-dropdown + .el-dropdown {
-    margin-left: 15px;
+  margin-left: 15px;
 }
 
 

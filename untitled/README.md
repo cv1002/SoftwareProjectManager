@@ -154,8 +154,11 @@ vue.js 封装 sChart.js 的图表组件。访问地址：[vue-schart](https://gi
 {
     // 富文本编辑器组件
     path: '/editor',
-    component: resolve => require(['../components/page/VueEditor.vue'], resolve)
-},
+        component
+:
+    resolve => require(['../components/page/VueEditor.vue'], resolve)
+}
+,
 ```
 
 第二步：删除引入该组件的文件。在目录 src/components/page/ 删除 VueEditor.vue 文件。
