@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import axios from 'axios';
 import App from './App.vue';
 import router from './router';
 import ElementUI from 'element-ui';
@@ -11,6 +12,10 @@ import './assets/css/theme-green/index.css'; // 浅绿色主题
 import './assets/css/icon.css';
 import './components/common/directives';
 import 'babel-polyfill';
+
+axios.defaults.withCredentials = true;
+Vue.prototype.$backLocation = 'http://39.99.195.120:18080/';
+Vue.prototype.$axios = axios;
 
 Vue.use(VueResource);
 Vue.config.productionTip = false;
@@ -39,7 +44,7 @@ router.beforeEach((to, from, next) => {
         if (navigator.userAgent.indexOf('MSIE') > -1 && to.path === '/editor') {
             Vue.prototype.$alert('vue-quill-editor组件不兼容IE10及以下浏览器，请使用更高版本的浏览器查看', '浏览器不兼容通知', {
                 confirmButtonText: '确定'
-            });
+            }).then(r => 0);
         } else {
             next();
         }
