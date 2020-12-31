@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :span="8" v-for="items in tableData">
+      <el-col v-for="items in tableData" :span="8">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>卡片名称</span>
@@ -9,15 +9,15 @@
           </div>
           <div class="user-info-list">
             日期：
-            <span>{{items.date}}</span>
+            <span>{{ items.date }}</span>
           </div>
           <div class="user-info-list">
             姓名：
-            <span>{{items.name}}</span>
+            <span>{{ items.name }}</span>
           </div>
           <div class="user-info-list">
             作业：
-            <span>{{items.address}}</span>
+            <span>{{ items.address }}</span>
           </div>
         </el-card>
       </el-col>
@@ -76,24 +76,25 @@ export default {
 </script>
 
 <style scoped>
-  .text {
+.text {
   font-size: 14px;
-  }
+}
 
-  .item {
+.item {
   margin-bottom: 4px;
-  }
+}
 
-  .clearfix:before,
-  .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   display: table;
   content: "";
-  }
-  .clearfix:after {
-  clear: both
-  }
+}
 
-  .box-card {
+.clearfix:after {
+  clear: both
+}
+
+.box-card {
   height: 300px;
-  }
+}
 </style>

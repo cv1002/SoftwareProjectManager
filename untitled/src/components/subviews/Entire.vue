@@ -48,10 +48,10 @@ let tasks = [{
   type: "project",
   collapsed: true,
   style: {
-  base: {
-  fill: "#00FFFF",
-  stroke: "#7E349D",
-  },
+    base: {
+      fill: "#00FFFF",
+      stroke: "#7E349D",
+    },
   },
 },
   {
@@ -79,10 +79,10 @@ let tasks = [{
     percent: 100,
     type: "task",
     style: {
-    base: {
-    fill: "#FF00FF",
-    stroke: "#0EAC51",
-    },
+      base: {
+        fill: "#FF00FF",
+        stroke: "#0EAC51",
+      },
     },
   },
   {
@@ -137,10 +137,10 @@ let tasks = [{
     type: "task",
     collapsed: true,
     style: {
-    base: {
-    fill: "#99FF66",
-    stroke: "#7E349D",
-    },
+      base: {
+        fill: "#99FF66",
+        stroke: "#7E349D",
+      },
     },
   },
   {
@@ -153,10 +153,10 @@ let tasks = [{
     percent: 0,
     type: "task",
     style: {
-    base: {
-    fill: "#FFFFCC",
-    stroke: "#7E349D",
-    },
+      base: {
+        fill: "#FFFFCC",
+        stroke: "#7E349D",
+      },
     },
   },
   {
@@ -185,10 +185,10 @@ let tasks = [{
     percent: 0,
     type: "task",
     style: {
-    base: {
-    fill: "#993366",
-    stroke: "#7E349D",
-    },
+      base: {
+        fill: "#993366",
+        stroke: "#7E349D",
+      },
     },
   },
 ];

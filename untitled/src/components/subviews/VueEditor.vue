@@ -2,7 +2,7 @@
   <div>
     <div>
       <el-row :gutter="20">
-        <el-col :span="8" v-for="items in tableData">
+        <el-col v-for="items in tableData" :span="8">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>卡片名称</span>
@@ -10,15 +10,15 @@
             </div>
             <div class="user-info-list">
               日期：
-              <span>{{items.date}}</span>
+              <span>{{ items.date }}</span>
             </div>
             <div class="user-info-list">
               姓名：
-              <span>{{items.name}}</span>
+              <span>{{ items.name }}</span>
             </div>
             <div class="user-info-list">
               作业：
-              <span>{{items.comment}}</span>
+              <span>{{ items.comment }}</span>
             </div>
           </el-card>
         </el-col>
@@ -42,7 +42,7 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import {quillEditor} from 'vue-quill-editor';
+import { quillEditor } from 'vue-quill-editor';
 
 export default {
   data: function () {
@@ -103,24 +103,25 @@ export default {
   font-size: 20px;
 }
 
-  .text {
+.text {
   font-size: 14px;
-  }
+}
 
-  .item {
+.item {
   margin-bottom: 4px;
-  }
+}
 
-  .clearfix:before,
-  .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   display: table;
   content: "";
-  }
-  .clearfix:after {
-  clear: both
-  }
+}
 
-  .box-card {
+.clearfix:after {
+  clear: both
+}
+
+.box-card {
   height: 300px;
-  }
+}
 </style>
