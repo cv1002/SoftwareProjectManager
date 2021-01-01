@@ -25,7 +25,7 @@ import { quillEditor } from 'vue-quill-editor';
 
 export default {
   name: 'editor',
-  data: function() {
+  data: function () {
     return {
       content: '',
       editorOption: {

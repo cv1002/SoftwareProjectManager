@@ -11,7 +11,7 @@
         mavonEditor：基于Vue的markdown编辑器。
         访问地址：<a href="https://github.com/hinesboy/mavonEditor" target="_blank">mavonEditor</a>
       </div>
-      <mavon-editor ref="md" v-model="content" style="min-height: 600px" @change="change" @imgAdd="$imgAdd" />
+      <mavon-editor ref="md" v-model="content" style="min-height: 600px" @change="change" @imgAdd="$imgAdd"/>
       <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
     </div>
   </div>
@@ -23,7 +23,7 @@ import 'mavon-editor/dist/css/index.css';
 
 export default {
   name: 'markdown',
-  data: function() {
+  data: function () {
     return {
       content: '',
       html: '',

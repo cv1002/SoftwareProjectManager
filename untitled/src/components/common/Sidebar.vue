@@ -10,7 +10,7 @@
         text-color="#bfcbd9"
         unique-opened
     >
-      <template v-for="item in items" v-if="username==='admin'">
+      <template v-for="item in items" v-if="roleName==='Student'">
         <template v-if="item.subs">
           <el-submenu :key="item.index" :index="item.index">
             <template slot="title">
@@ -47,7 +47,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items2" v-if="username==='tang'">
+      <template v-for="i in items2" v-if="roleName==='Leader'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -55,7 +55,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items3" v-if="username==='teacher'">
+      <template v-for="i in items3" v-if="roleName==='Teacher'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -73,7 +73,7 @@ import bus from '../common/bus';
 export default {
   data() {
     return {
-      username: localStorage.getItem('ms_username'),
+      roleName: this.$cookie.get('RoleName'),
       collapse: false,
       items: [
         {

@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg" />
+            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
             <div class="user-info-cont">
               <div class="user-info-name">{{ name }}</div>
               <div>{{ role }}</div>
@@ -72,24 +72,28 @@
         <el-card shadow="hover" style="height:403px;">
           <div slot="header" class="clearfix">
             <span>待办事项</span>
-            <el-button style="float: right; padding: 3px 0" type="text">添加</el-button>
+            <el-button style="float: right; padding: 3px 0" type="text" @click="addTodoListItem">添加</el-button>
           </div>
           <el-table :data="todoList" :show-header="false" style="width:100%;">
             <el-table-column width="40">
               <template slot-scope="scope">
-                <el-checkbox v-model="scope.row.status"></el-checkbox>
+                <el-checkbox v-model="scope.row['FinishState'] === 0" @change="finishTodoListItem(scope.$index)"></el-checkbox>
               </template>
             </el-table-column>
             <el-table-column>
               <template slot-scope="scope">
-                <div :class="{'todo-item-del': scope.row.status}" class="todo-item">{{ scope.row.title }}
+                <div :class="{'todo-item-del': scope.row['FinishState'] === 0}"
+                     class="todo-item">
+                  {{ scope.row['TodoThings'] }}
                 </div>
               </template>
             </el-table-column>
             <el-table-column width="80">
-              <template>
-                <el-button class="el-icon-edit" style="padding:2px;font-size:13px;" type="primary"></el-button>
-                <el-button class="el-icon-delete" style="padding:2px;font-size:13px;" type="danger"></el-button>
+              <template slot-scope="scope">
+                <el-button class="el-icon-edit" style="padding:2px;font-size:13px;"
+                           type="primary" @click.native.prevent="updateTodoListItem(scope.$index)"></el-button>
+                <el-button class="el-icon-delete" style="padding:2px;font-size:13px;"
+                           type="danger" @click.native.prevent="deleteTodoListItem(scope.$index)"></el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -107,103 +111,71 @@ export default {
   name: 'dashboard',
   data() {
     return {
-      numberofmembers: 7,
       finishedtask: 12,
       unfinishedtask: 18,
-      name: localStorage.getItem('ms_username'),
       message: 'first',
       showHeader: false,
-      unread: [{
-        date: '2018-04-19 20:00:00',
-        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
-      }, {
-        date: '2018-04-19 21:00:00',
-        title: '今晚12点整发大红包，先到先得'
-      }],
-      read: [{
-        date: '2018-04-19 20:00:00',
-        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
-      }],
-      recycle: [{
-        date: '2018-04-19 20:00:00',
-        title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护'
-      }],
-      todoList: [
-        {
-          title: '同事A请假',
-          status: false
-        },
-        {
-          title: '领导B迟到',
-          status: false
-        },
-        {
-          title: '复习考试',
-          status: false
-        },
-        {
-          title: '修车',
-          status: false
-        },
-        {
-          title: '吃午饭',
-          status: true
-        },
-        {
-          title: '玩逃生',
-          status: true
-        }
-      ],
-      data: [
-        {
-          name: '2018/09/04',
-          value: 1083
-        },
-        {
-          name: '2018/09/05',
-          value: 941
-        },
-        {
-          name: '2018/09/06',
-          value: 1139
-        },
-        {
-          name: '2018/09/07',
-          value: 816
-        },
-        {
-          name: '2018/09/08',
-          value: 327
-        },
-        {
-          name: '2018/09/09',
-          value: 228
-        },
-        {
-          name: '2018/09/10',
-          value: 1065
-        }
-      ]
+      numberofmembers: this.fetchNumberOfMembers(),
+      todoList: this.fetchTodoListItems()
     };
   },
   components: {
     Schart
   },
   computed: {
+    name() {
+      return this.$cookie.get('UserName');
+    },
     role() {
-      if (this.name === 'teacher') {
+      if (this.$cookie.get('RoleName') === 'Teacher') {
         return '老师';
-      } else if (this.name === 'tang') {
+      } else if (this.$cookie.get('RoleName') === 'Leader') {
         return '组长';
       } else {
         return '普通用户';
       }
-    },
-    unreadNum() {
-      return this.unread.length;
     }
   },
   methods: {
+    fetchNumberOfMembers() {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      this.$axios({
+        url: '/get/TeamMemberCount',
+        method: 'POST',
+        data: formData
+      }).then(
+          response => {
+            if (response.data['resultInfo'] !== undefined) {
+              this.$message.error(response.data['resultInfo']);
+              this.numberofmembers = '无权访问';
+            } else {
+              this.numberofmembers = response.data['Count'];
+            }
+          }
+      );
+    },
+    fetchTodoListItems() {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      this.$axios({
+        url: '/get/todoList',
+        method: 'POST',
+        data: formData
+      }).then(
+          resolve => {
+            this.todoList = resolve.data;
+            this.todoList.sort((lhs, rhs) => {
+              return lhs['FinishState'] < rhs['FinishState'];
+            })
+          },
+          reject => {
+            this.$message.error(reject);
+          }
+      );
+    },
     changeDate() {
       const now = new Date().getTime();
       this.data.forEach((item, index) => {
@@ -211,27 +183,60 @@ export default {
         item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
       });
     },
-    handleRead(index) {
-      const item = this.unread.splice(index, 1);
-      console.log(item);
-      this.read = item.concat(this.read);
+    finishTodoListItem(index) {
+      console.log(index);
+      this.todoList[index]['FinishState'] = this.todoList[index]['FinishState'] === 0 ? 1 : 0;
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      formData.append('TodoThings', this.todoList[index]['TodoThings']);
+      formData.append('TodoListID', this.todoList[index]['TodoListID']);
+      formData.append('FinishState', this.todoList[index]['FinishState']);
+      this.$axios({
+        url:'/todoList',
+        method:'PUT',
+        data: formData
+      }).then(
+          resolve => {
+            this.$message.success(resolve.data['resultInfo']);
+            console.log(resolve.data)
+          },
+          reject => {
+            this.todoList[index]['status'] = this.todoList[index].status !== true;
+            this.todoList[index]['FinishState'] = this.todoList[index]['FinishState'] === 0 ? 0 : 1;
+            this.$message.error(reject);
+          }
+      );
     },
-    handleDel(index) {
-      const item = this.read.splice(index, 1);
-      this.recycle = item.concat(this.recycle);
+    updateTodoListItem(index) {
+
     },
-    handleRestore(index) {
-      const item = this.recycle.splice(index, 1);
-      this.read = item.concat(this.read);
+    addTodoListItem() {
+
     },
-    methods: {
-      changeDate() {
-        const now = new Date().getTime();
-        this.data.forEach((item, index) => {
-          const date = new Date(now - (6 - index) * 86400000);
-          item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-        });
-      }
+    deleteTodoListItem(index) {
+      console.log(this.todoList)
+      console.log(index)
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      formData.append('TodoListID', this.todoList[index]['TodoListID']);
+      this.$axios({
+        url:'/todoList',
+        method: 'DELETE',
+        data: formData
+      }).then(
+          resolve => {
+            if (resolve.data['resultInfo'] === '成功！！') {
+              this.todoList.splice(index, 1);
+            } else {
+              this.$message.error(resolve.data['resultInfo']);
+            }
+          },
+          reject => {
+            this.$message.error(reject)
+          }
+      )
     }
   }
 }

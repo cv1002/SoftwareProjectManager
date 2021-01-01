@@ -15,13 +15,16 @@
         <el-button class="button1" @click="">
           点击上传
           <br>
-          只能上传pdf文件，且不超过5M
+          只能上传pdf文件，且不超过50M
         </el-button>
       </div>
     </div>
     <div class="div4">
       <div slot="tip" class="el-upload-list__item-name">文件拖到此处也可上传</div>
-      <div slot="tip" class="el-upload-list__item-name">&nbsp;&nbsp;&nbsp;{{ fileName }}</div>
+      <div slot="tip" class="el-upload-list__item-name">&nbsp;&nbsp;&nbsp;{{
+          this.files === null ? "" : this.files.name
+        }}
+      </div>
     </div>
     <div class="div5">
       <el-button class="button2" style="color: white" @click="submitUpload">
@@ -37,7 +40,7 @@
 export default {
   data() {
     return {
-      fileName: ''
+      files: null
     };
   },
   methods: {
@@ -55,28 +58,41 @@ export default {
         this.$message.warning('上传文件大小不能超过 50MB!');
         return false;
       }
-      this.fileName = file.name;
       return false; // 返回false不会自动上传
     },
     submitUpload() {
       let formData = new FormData();
-      formData.append('UserID', '1');
-      formData.append('UserPassword', '114514')
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
       formData.append('files', this.files);
 
-      if (this.fileName === '') {
+      if (this.files.name === '') {
         this.$message.warning('请选择要上传的文件！');
         return false;
       }
+
       this.$axios({
         url: '/file',
-        method: 'post',
+        method: 'POST',
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data'
         }
+      }).then(
+          resolve => {
+            if (resolve.data["resultInfo"] !== undefined) {
+              this.$message.success(resolve.data["resultInfo"]);
+            }
+          },
+          reject => {
+            this.$message.error(reject);
+          }
+      ).catch(result => {
+        this.$message(result);
       });
-      console.log('上传' + this.files.name);
+      if (this.$DEVTYPE === 'DEV') {
+        console.log('上传了' + this.files.name);
+      }
     }
   }
 };

@@ -37,7 +37,7 @@ export default {
       curPageNum: 0
     };
   },
-  mounted: function() {
+  mounted: function () {
   },
   methods: {
     // 上一页函数，
