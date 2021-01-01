@@ -12,11 +12,11 @@
           </div>
           <div class="user-info-list">
             上次登录时间：
-            <span>2020-12-31</span>
+            <span>{{ lastLogin.time }}</span>
           </div>
           <div class="user-info-list">
             上次登录地点：
-            <span>北京</span>
+            <span> {{ lastLogin.place }}</span>
           </div>
         </el-card>
         <el-card shadow="hover" style="height:250px;">
@@ -110,12 +110,17 @@ export default {
   name: 'dashboard',
   data() {
     return {
-      finishedtask: 12,
-      unfinishedtask: 18,
+      finishedtask: undefined,
+      unfinishedtask: undefined,
+      tasks: undefined,
       message: 'first',
       showHeader: false,
-      numberofmembers: this.fetchNumberOfMembers(),
-      todoList: this.fetchTodoListItems()
+      lastLogin: {
+        time: '2020-01-01',
+        place: '西安'
+      },
+      numberofmembers: undefined,
+      todoList: undefined
     };
   },
   components: {
@@ -147,10 +152,36 @@ export default {
       }).then(
           response => {
             if (response.data['resultInfo'] !== undefined) {
-              this.$message.error(response.data['resultInfo']);
-              this.numberofmembers = '无权访问';
+              this.numberofmembers = response.data['resultInfo'];
             } else {
               this.numberofmembers = response.data['Count'];
+            }
+          }
+      );
+    },
+    fetchTasks() {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      this.$axios({
+        url: '/get/task/ByHandlerID',
+        method: 'POST',
+        data: formData
+      }).then(
+          response => {
+            if (response.data['resultInfo'] !== undefined) {
+              this.unfinishedtask = response.data['resultInfo'];
+              this.finishedtask = this.unfinishedtask;
+            } else {
+              this.tasks = response.data['Tasks'];
+              let unfinishedCount = 0;
+              for (let task of this.tasks) {
+                if (task['TaskFinishType'] === 0) {
+                  unfinishedCount++;
+                }
+              }
+              this.finishedtask = this.tasks.length - unfinishedCount;
+              this.unfinishedtask = unfinishedCount;
             }
           }
       );
@@ -255,28 +286,37 @@ export default {
       }).catch(() => this.$message('取消输入'));
     },
     deleteTodoListItem(index) {
-      let formData = new FormData();
-      formData.append('UserID', this.$cookie.get('UserID'));
-      formData.append('UserPassword', this.$cookie.get('UserPassword'));
-      formData.append('TodoListID', this.todoList[index]['TodoListID']);
-      this.$axios({
-        url:'/todoList',
-        method: 'DELETE',
-        data: formData
-      }).then(
-          resolve => {
-            if (resolve.data['resultInfo'] === '成功！！') {
-              this.todoList.splice(index, 1);
-            } else {
-              this.$message.error(resolve.data['resultInfo']);
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let formData = new FormData();
+        formData.append('UserID', this.$cookie.get('UserID'));
+        formData.append('UserPassword', this.$cookie.get('UserPassword'));
+        formData.append('TodoListID', this.todoList[index]['TodoListID']);
+        this.$axios({
+          url:'/todoList',
+          method: 'DELETE',
+          data: formData
+        }).then(
+            resolve => {
+              if (resolve.data['resultInfo'] === '成功！！') {
+                this.todoList.splice(index, 1);
+              } else {
+                this.$message.error(resolve.data['resultInfo']);
+              }
+            },
+            reject => {
+              this.$message.error(reject)
             }
-          },
-          reject => {
-            this.$message.error(reject)
-          }
-      );
-      this.sortTodoListItems();
+        );
+        this.sortTodoListItems();
+      }).catch(() => this.$message('已取消删除'));
     }
+  },
+  created() {
+    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col v-for="items in tableData" :span="8">
+      <el-col v-for="items in tableData" :span="8" :key="items">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>卡片名称</span>
