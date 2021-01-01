@@ -16,9 +16,9 @@
             @click="delAllSelection"
         >批量删除
         </el-button>
-        <el-select v-model="query.address" class="handle-select mr10" placeholder="地址">
-          <el-option key="1" label="广东省" value="广东省"></el-option>
-          <el-option key="2" label="湖南省" value="湖南省"></el-option>
+        <el-select v-model="query.class" class="handle-select mr10" placeholder="班级">
+          <el-option key="1" label="软件81班" value="软件81班"></el-option>
+          <el-option key="2" label="软件82班" value="软件82班"></el-option>
         </el-select>
         <el-input v-model="query.name" class="handle-input mr10" placeholder="用户名"></el-input>
         <el-button icon="el-icon-search" type="primary" @click="handleSearch">搜索</el-button>
@@ -34,9 +34,6 @@
         <el-table-column align="center" type="selection" width="55"></el-table-column>
         <el-table-column align="center" label="ID" prop="id" width="55"></el-table-column>
         <el-table-column label="用户名" prop="name"></el-table-column>
-        <el-table-column label="账户余额">
-          <template slot-scope="scope">￥{{ scope.row.money }}</template>
-        </el-table-column>
         <el-table-column align="center" label="头像(查看大图)">
           <template slot-scope="scope">
             <el-image
@@ -46,7 +43,7 @@
             ></el-image>
           </template>
         </el-table-column>
-        <el-table-column label="地址" prop="address"></el-table-column>
+        <el-table-column label="班级" prop="class"></el-table-column>
         <el-table-column align="center" label="状态">
           <template slot-scope="scope">
             <el-tag
@@ -55,8 +52,6 @@
             </el-tag>
           </template>
         </el-table-column>
-
-        <el-table-column label="注册时间" prop="date"></el-table-column>
         <el-table-column align="center" label="操作" width="180">
           <template slot-scope="scope">
             <el-button
@@ -93,8 +88,8 @@
         <el-form-item label="用户名">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="地址">
-          <el-input v-model="form.address"></el-input>
+        <el-form-item label="身份">
+          <el-input v-model="form.identity"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -114,7 +109,7 @@ export default {
   data() {
     return {
       query: {
-        address: '',
+        class: '',
         name: '',
         pageIndex: 1,
         pageSize: 10
@@ -129,17 +124,20 @@ export default {
       id: -1
     };
   },
-  created() {
+  mounted() {
     this.getData();
   },
   methods: {
-    // 获取 easy-mock 的模拟数据
     getData() {
-      fetchData(this.query).then(res => {
-        console.log(res);
-        this.tableData = res.list;
-        this.pageTotal = res.pageTotal || 50;
-      });
+      this.$axios({
+        method: 'get',
+        url: '/table.json'
+      }).then((response) => {
+        console.log(response.data);
+        this.tableData = response.data.list;
+      },response =>{
+        console.log('error');
+      })
     },
     // 触发搜索按钮
     handleSearch() {
