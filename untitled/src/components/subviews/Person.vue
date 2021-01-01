@@ -6,7 +6,7 @@
       <div class="crop-demo">
         <img :src="cropImg" alt="这里是头像" class="pre-img">
         <div class="crop-demo-btn">更换头像
-          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage" />
+          <input accept="image/*" class="crop-input" name="image" type="file" @change="setImage"/>
         </div>
       </div>
       <el-dialog :visible.sync="dialogVisible" title="裁剪图片" width="30%">
@@ -69,7 +69,7 @@ import Weather from '@/components/subviews/Weather';
 
 export default {
   name: 'upload',
-  data: function() {
+  data: function () {
     return {
       defaultSrc: require('../../statics/img/picture.jpg'),
       fileList: [],

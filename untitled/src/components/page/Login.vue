@@ -30,11 +30,11 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
       param: {
-        username: 'admin',
-        password: '123123'
+        username: this.$cookie.get('UserID'),
+        password: this.$cookie.get('UserPassword')
       },
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -46,12 +46,34 @@ export default {
     submitForm() {
       this.$refs.login.validate(valid => {
         if (valid) {
-          this.$message.success('登录成功');
-          localStorage.setItem('ms_username', this.param.username);
-          this.$router.push('/');
+          this.$cookie.set('UserID', this.param.username);
+          this.$cookie.set('UserPassword', this.param.password);
+          let formData = new FormData();
+          formData.append('UserID', this.$cookie.get('UserID'));
+          formData.append('UserPassword', this.$cookie.get('UserPassword'));
+          this.$axios({
+            url: '/login',
+            method: 'POST',
+            data: formData
+          }).then(
+              resolve => {
+                console.log(resolve.data)
+                this.$message.success(resolve.data['finish']);
+                this.$cookie.set('LoginType', resolve.data['loginType']);
+                this.$cookie.set('TeamID', resolve.data['teamID']);
+                this.$cookie.set('UserName', resolve.data['userName']);
+                this.$cookie.set('TeamName', resolve.data['teamName']);
+                this.$cookie.set('RoleName', resolve.data['roleName'])
+                this.$router.push('/');
+              },
+              reject => {
+                this.$message.error(reject);
+              }
+          ).catch(err => {
+            console.log(err);
+          });
         } else {
-          this.$message.error('请输入账号和密码');
-          console.log('error submit!!');
+          this.$message.error('请输入账号和密码！！');
           return false;
         }
       });

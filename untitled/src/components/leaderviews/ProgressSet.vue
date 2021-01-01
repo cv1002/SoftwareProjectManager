@@ -25,13 +25,13 @@ export default {
     };
   },
   methods: {
-    changepercent: function() {
+    changepercent: function () {
       this.progress = this.progress + 10;
       if (this.progress >= 100) {
         this.visible = false;
       }
     },
-    reset: function() {
+    reset: function () {
       this.progress = 0;
       this.visible = true;
     }

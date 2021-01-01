@@ -48,7 +48,7 @@ export default {
       pdfsize:70
     };
   },
-  mounted: function() {
+  mounted: function () {
   },
   methods: {
     // 上一页函数，
