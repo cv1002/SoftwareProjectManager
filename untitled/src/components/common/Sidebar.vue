@@ -129,11 +129,6 @@ export default {
           title: '小组选题'
         },
         {
-          icon: 'el-icon-lx-copy',
-          index: 'tabs',
-          title: '公告'
-        },
-        {
           icon: 'el-icon-document',
           index: 'missionset',
           title: '任务发布'
@@ -166,11 +161,6 @@ export default {
               index: 'groupprogress',
               title: '项目各小组进度'
             },
-            {
-              icon: 'el-icon-tickets',
-              index: 'messagesend',
-              title: '公告发布'
-            }
           ]
     };
   },

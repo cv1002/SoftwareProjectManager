@@ -1,170 +1,94 @@
 <template>
   <div>
-    <el-row :gutter="20">
+    <div>
+      <div v-on:click="addNode()">
+        <div data-repeater-create="" style="text-align: center"
+             class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+            <span>
+                <span> 添加 </span>
+            </span>
+        </div>
+      </div>
+    </div>
+    <div v-for="(v,i) in list">
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
             <img alt class="user-avator" src="../../statics/img/g.jpg"/>
             <div class="user-info-cont">
-              <div class="user-info-name">任务1</div>
-              <div>开发者1</div>
+              <div class="user-info-name">{{ v.mission }}</div>
+              <div>{{v.person}}</div>
             </div>
           </div>
           <div class="user-info-list">
             任务内容：
-            <span>完成任务1</span>
+            <span>{{v.content}}</span>
           </div>
           <div class="user-info-list">
-            任务时间：
-            <span>2020-12-31</span>
+            截止时间：
+            <span>{{v.time}}</span>
           </div>
-        </el-card>
-      </el-col>
-      <el-col :span="8">
-        <el-card class="mgb20" shadow="hover" style="height:240px;">
-          <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
-            <div class="user-info-cont">
-              <div class="user-info-name">任务1</div>
-              <div>开发者1</div>
+          <div>
+            <div data-repeater-delete="" v-on:click="deleteNode(i)" class="button1">
+              <span> 删除 </span>
             </div>
           </div>
-          <div class="user-info-list">
-            任务内容：
-            <span>完成任务1</span>
-          </div>
-          <div class="user-info-list">
-            任务时间：
-            <span>2020-12-31</span>
-          </div>
         </el-card>
       </el-col>
-      <el-col :span="8">
-        <el-card class="mgb20" shadow="hover" style="height:240px;">
-          <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
-            <div class="user-info-cont">
-              <div class="user-info-name">任务1</div>
-              <div>开发者1</div>
-            </div>
-          </div>
-          <div class="user-info-list">
-            任务内容：
-            <span>完成任务1</span>
-          </div>
-          <div class="user-info-list">
-            任务时间：
-            <span>2020-12-31</span>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="8">
-        <el-card class="mgb20" shadow="hover" style="height:240px;">
-          <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
-            <div class="user-info-cont">
-              <div class="user-info-name">任务1</div>
-              <div>开发者1</div>
-            </div>
-          </div>
-          <div class="user-info-list">
-            任务内容：
-            <span>完成任务1</span>
-          </div>
-          <div class="user-info-list">
-            任务时间：
-            <span>2020-12-31</span>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-    <el-table
-        :data="tableData"
-        border
-        height="600"
-        style="width: 100%">
-      <el-table-column
-          label="规定完成日期"
-          prop="date"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          label="姓名"
-          prop="name"
-          width="180">
-      </el-table-column>
-      <el-table-column
-          label="规定任务"
-          prop="address">
-      </el-table-column>
-      <el-table-column label="状态" width="120">
-        <template slot-scope="scope">
-          <el-button type="info" @click="handleDel(scope.$index)">未完成</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    </div>
   </div>
 </template>
 
-
 <script>
-export default {
+export default{
   data() {
-    return {
-      tableData: [{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-08',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }],
-      visible: true
-    };
+   return{
+     list:[
+       {
+         mission:'任务1',
+         person:'开发者1',
+         content:'完成任务1',
+         time:'2020-12-31'
+       },
+       {
+         mission:'任务2',
+         person:'开发者2',
+         content:'完成任务2',
+         time:'2021-1-1'
+       },
+       {
+         mission:'任务3',
+         person:'开发者3',
+         content:'完成任务3',
+         time:'2021-1-2'
+       }
+     ],
+   }
+  },
+  //初始化方法
+  mounted:function () {
+
   },
   methods: {
-    handleDel(index) {
-      this.tableData.splice(index, 1);
-      this.$message.success('已完成！请再接再厉');
+
+    //添加标本div
+    addNode:function() {
+      this.list.push({
+        mission:'任务4',
+        person:'开发者4',
+        content:'完成任务4',
+        time:'2021-1-3'
+      });
+    },
+    //删除样本div
+    deleteNode:function(i) {
+      this.list.splice(i,1);  //删除index为i,位置的数组元素
     }
   }
-};
+}
 </script>
 
 <style scoped>
-.el-row {
-  margin-bottom: 20px;
-}
-
 .user-info {
   display: flex;
   align-items: center;
@@ -203,5 +127,11 @@ export default {
 
 .mgb20 {
   margin-bottom: 20px;
+}
+
+.button1{
+  position: absolute;
+  margin-top: -230px;
+  margin-left: 27%;
 }
 </style>

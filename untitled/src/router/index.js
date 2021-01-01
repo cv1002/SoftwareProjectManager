@@ -20,11 +20,6 @@ export default new Router({
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
                     meta: { title: '系统首页' }
                 },
-                // {
-                //     path: '/tabs',
-                //     component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
-                //     meta: { title: '公告' }
-                // },
                 {
                     // 图片上传组件
                     path: '/upload',
@@ -112,11 +107,6 @@ export default new Router({
                     path: '/groupprogress',
                     component: () => import('../components/teacherviews/GroupProgress'),
                     meta: { title: '项目各小组进度' }
-                },
-                {
-                    path: '/messagesend',
-                    component: () => import('../components/teacherviews/MessageSend'),
-                    meta: { title: '发布公告' }
                 },
                 {
                     path: '/ogp',
