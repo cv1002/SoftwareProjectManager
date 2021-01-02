@@ -12,11 +12,11 @@
           </div>
           <div class="user-info-list">
             上次登录时间：
-            <span>2020-12-31</span>
+            <span>{{ lastLogin.time }}</span>
           </div>
           <div class="user-info-list">
             上次登录地点：
-            <span>北京</span>
+            <span> {{ lastLogin.place }}</span>
           </div>
         </el-card>
         <el-card shadow="hover" style="height:250px;">
@@ -79,13 +79,12 @@
           <el-table :data="todoList" :show-header="false" style="width:100%;">
             <el-table-column width="40">
               <template slot-scope="scope">
-                <el-checkbox v-model="scope.row['FinishState'] === 0" @change="finishTodoListItem(scope.$index)"></el-checkbox>
+                <el-checkbox v-model="scope.row['FinishState'] === 0" @change="finishTodoListItem(scope.$index)" />
               </template>
             </el-table-column>
             <el-table-column>
               <template slot-scope="scope">
-                <div :class="{'todo-item-del': scope.row['FinishState'] === 0}"
-                     class="todo-item">
+                <div :class="{'todo-item-del': scope.row['FinishState'] === 0}" class="todo-item">
                   {{ scope.row['TodoThings'] }}
                 </div>
               </template>
@@ -113,12 +112,17 @@ export default {
   name: 'dashboard',
   data() {
     return {
-      finishedtask: 12,
-      unfinishedtask: 18,
+      finishedtask: undefined,
+      unfinishedtask: undefined,
+      tasks: undefined,
       message: 'first',
       showHeader: false,
-      numberofmembers: this.fetchNumberOfMembers(),
-      todoList: this.fetchTodoListItems()
+      lastLogin: {
+        time: '2020-01-01',
+        place: '西安'
+      },
+      numberofmembers: undefined,
+      todoList: undefined
     };
   },
   components: {
@@ -150,10 +154,36 @@ export default {
       }).then(
           response => {
             if (response.data['resultInfo'] !== undefined) {
-              this.$message.error(response.data['resultInfo']);
-              this.numberofmembers = '无权访问';
+              this.numberofmembers = response.data['resultInfo'];
             } else {
               this.numberofmembers = response.data['Count'];
+            }
+          }
+      );
+    },
+    fetchTasks() {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      this.$axios({
+        url: '/get/task/ByHandlerID',
+        method: 'POST',
+        data: formData
+      }).then(
+          response => {
+            if (response.data['resultInfo'] !== undefined) {
+              this.unfinishedtask = response.data['resultInfo'];
+              this.finishedtask = this.unfinishedtask;
+            } else {
+              this.tasks = response.data['Tasks'];
+              let unfinishedCount = 0;
+              for (let task of this.tasks) {
+                if (task['TaskFinishType'] === 0) {
+                  unfinishedCount++;
+                }
+              }
+              this.finishedtask = this.tasks.length - unfinishedCount;
+              this.unfinishedtask = unfinishedCount;
             }
           }
       );
@@ -169,20 +199,16 @@ export default {
       }).then(
           resolve => {
             this.todoList = resolve.data;
-            this.todoList.sort((lhs, rhs) => {
-              return lhs['FinishState'] < rhs['FinishState'];
-            })
+            this.sortTodoListItems();
           },
           reject => {
             this.$message.error(reject);
           }
       );
     },
-    changeDate() {
-      const now = new Date().getTime();
-      this.data.forEach((item, index) => {
-        const date = new Date(now - (6 - index) * 86400000);
-        item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    sortTodoListItems() {
+      this.todoList.sort((lhs, rhs) => {
+        return rhs['FinishState'] - lhs['FinishState'];
       });
     },
     finishTodoListItem(index) {
@@ -209,37 +235,90 @@ export default {
             this.$message.error(reject);
           }
       );
+      this.sortTodoListItems();
     },
     updateTodoListItem(index) {
-
+      this.$prompt('请输入更新的待办事项描述：', '更新待办事项', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then(({ value }) => {
+        let formData = new FormData();
+        formData.append('UserID', this.$cookie.get('UserID'));
+        formData.append('UserPassword', this.$cookie.get('UserPassword'));
+        formData.append('TodoThings', value);
+        formData.append('TodoListID', this.todoList[index]['TodoListID']);
+        formData.append('FinishState', this.todoList[index]['FinishState']);
+        this.$axios({
+          url:'/todoList',
+          method: 'PUT',
+          data: formData
+        }).then(
+            resolve => {
+              this.$message.success(resolve.data['resultInfo']);
+              this.fetchTodoListItems();
+            },
+            reject => {
+              this.$message.error(reject);
+            }
+        )
+      }).catch(() => this.$message('取消输入'));
     },
     addTodoListItem() {
-
+      this.$prompt('请输入新建的待办事项描述：', '增加待办事项', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then(({ value }) => {
+        let formData = new FormData();
+        formData.append('UserID', this.$cookie.get('UserID'));
+        formData.append('UserPassword', this.$cookie.get('UserPassword'));
+        formData.append('TodoThings', value);
+        this.$axios({
+          url:'/todoList',
+          method: 'POST',
+          data: formData
+        }).then(
+            resolve => {
+              this.$message.success(resolve.data['resultInfo']);
+              this.fetchTodoListItems();
+            },
+            reject => {
+              this.$message.error(reject);
+            }
+        )
+      }).catch(() => this.$message('取消输入'));
     },
     deleteTodoListItem(index) {
-      console.log(this.todoList)
-      console.log(index)
-      let formData = new FormData();
-      formData.append('UserID', this.$cookie.get('UserID'));
-      formData.append('UserPassword', this.$cookie.get('UserPassword'));
-      formData.append('TodoListID', this.todoList[index]['TodoListID']);
-      this.$axios({
-        url:'/todoList',
-        method: 'DELETE',
-        data: formData
-      }).then(
-          resolve => {
-            if (resolve.data['resultInfo'] === '成功！！') {
-              this.todoList.splice(index, 1);
-            } else {
-              this.$message.error(resolve.data['resultInfo']);
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let formData = new FormData();
+        formData.append('UserID', this.$cookie.get('UserID'));
+        formData.append('UserPassword', this.$cookie.get('UserPassword'));
+        formData.append('TodoListID', this.todoList[index]['TodoListID']);
+        this.$axios({
+          url:'/todoList',
+          method: 'DELETE',
+          data: formData
+        }).then(
+            resolve => {
+              if (resolve.data['resultInfo'] === '成功！！') {
+                this.todoList.splice(index, 1);
+              } else {
+                this.$message.error(resolve.data['resultInfo']);
+              }
+            },
+            reject => {
+              this.$message.error(reject)
             }
-          },
-          reject => {
-            this.$message.error(reject)
-          }
-      )
+        );
+        this.sortTodoListItems();
+      }).catch(() => this.$message('已取消删除'));
     }
+  },
+  created() {
+    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
   }
 }
 </script>
