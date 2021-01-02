@@ -2,7 +2,7 @@
   <div>
     <div class="block">
       <el-timeline>
-        <el-timeline-item v-for="item in tableData" placement="top">
+        <el-timeline-item v-for="item in tableData" placement="top" :key='item'>
           <el-card>
             <h4>{{item.content}}</h4>
             <p>{{item.name}} 提交于 {{item.date}}</p>

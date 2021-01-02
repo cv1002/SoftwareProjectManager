@@ -11,26 +11,24 @@
             </div>
           </div>
           <div class="user-info-list">
-            上次登录时间：
-            <span>{{ lastLogin.time }}</span>
+            本次登录时间：
+            <span>{{ login.date }}</span>
           </div>
           <div class="user-info-list">
-            上次登录地点：
-            <span> {{ lastLogin.place }}</span>
+            本次登录地点：
+            <span> {{ login.location }}</span>
           </div>
         </el-card>
         <el-card shadow="hover" style="height:250px;">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
-          时间
-          <el-progress :percentage="71.3" color="#42b983"></el-progress>
-          资金
-          <el-progress :percentage="64.1" color="#f1e05a"></el-progress>
-          人力成本
-          <el-progress :percentage="73.7"></el-progress>
-          预算
-          <el-progress :percentage="65.9" color="#f56c6c"></el-progress>
+          <el-card shadow="hover">
+            进展阶段: {{ milestone }}
+          </el-card>
+          <el-card shadow="hover">
+            最新上传的文件: {{ upToDateFile }}
+          </el-card>
         </el-card>
       </el-col>
       <el-col :span="16">
@@ -111,21 +109,21 @@ import Schart from 'vue-schart';
 export default {
   name: 'dashboard',
   created() {
-    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
+    this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
   },
   data() {
     return {
       finishedtask: undefined,
       unfinishedtask: undefined,
       tasks: undefined,
-      message: 'first',
-      showHeader: false,
-      lastLogin: {
-        time: '2020-01-01',
-        place: '西安'
+      login: {
+        date: '2020-01-01',
+        location: '西安'
       },
       numberofmembers: undefined,
-      todoList: undefined
+      todoList: undefined,
+      milestone: '收尾',
+      upToDateFile: '项目总结报告.pdf'
     };
   },
   components: {
@@ -146,6 +144,10 @@ export default {
     }
   },
   methods: {
+    fetchLocationAndDate() {
+      this.login.date = new Date().toLocaleDateString();
+      this.login.location = '西安';
+    },
     fetchNumberOfMembers() {
       let formData = new FormData();
       formData.append('UserID', this.$cookie.get('UserID'));

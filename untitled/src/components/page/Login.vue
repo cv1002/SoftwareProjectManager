@@ -51,9 +51,6 @@ export default {
           let formData = new FormData();
           formData.append('UserID', this.$cookie.get('UserID'));
           formData.append('UserPassword', this.$cookie.get('UserPassword'));
-          formData.append('LastLoginDate', (new Date().toLocaleDateString()));
-          // formData.append('LastLogin')
-          
           this.$axios({
             url: '/login',
             method: 'POST',

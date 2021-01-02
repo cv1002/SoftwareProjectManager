@@ -29,7 +29,6 @@
             <el-date-picker
                 v-model="value2"
                 :picker-options="pickerOptions"
-                align="right"
                 end-placeholder="结束日期"
                 format="yyyy 年 MM 月 dd 日"
                 range-separator="至"
