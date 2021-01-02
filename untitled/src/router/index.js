@@ -105,7 +105,7 @@ export default new Router({
                 },
                 {
                     path: '/progressset',
-                    component: () => import('../components/leaderviews/ProgressSet'),
+                    component: () => import('../components/subviews/Homework'),
                     meta: { title: '进度上传' }
                 },
                 {

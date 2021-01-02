@@ -20,10 +20,8 @@
       </div>
     </div>
     <div class="div4">
-      <div slot="tip" class="el-upload-list__item-name">文件拖到此处也可上传</div>
-      <div slot="tip" class="el-upload-list__item-name">&nbsp;&nbsp;&nbsp;{{
-          this.files === null ? '' : this.files.name
-        }}
+      <div slot="tip" class="el-upload-list__item-name">&nbsp;&nbsp;&nbsp;
+        {{ this.files === null ? '' : this.files.name }}
       </div>
     </div>
     <div class="div5">
@@ -32,7 +30,6 @@
         |&nbsp;确认上传
       </el-button>
     </div>
-
   </div>
 </template>
 <script>
@@ -97,10 +94,15 @@ export default {
 }
 </script>
 <style scoped>
-.dashboard-container {
-margin: 30px;
+.button1 {
+  height: 70px;
+  width: 20%;
+  margin-left: 39%;
+  margin-top: 20px;
+  border-radius: 45px;
+  background-color: lightskyblue;
+  color: white;
 }
-
 .div1 {
   background-image: url("../../statics/img/bg_homework.png");
   background-repeat: no-repeat;
@@ -122,11 +124,32 @@ margin: 30px;
   margin-top: 135px;
   margin-left: 40px;
 }
+.div4 {
+  margin-left: 44%;
+  margin-top: 50px;
+}
 
-.el-upload__tip {
-display: flex;
-justify-content: center;
-font-size: 20px;
-color:rebeccapurple;
+.div5 {
+  margin-left: 44%;
+  margin-top: 80px;
+}
+
+.button2 {
+  background-color: hotpink;
+  height: 60px;
+  width: 180px;
+  border-radius: 45px;
+  font-size: 20px;
+}
+.crop-input {
+  position: absolute;
+  margin-left: 450px;
+  margin-top: 140px;
+  width: 10%;
+  height: 20px;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 </style>
