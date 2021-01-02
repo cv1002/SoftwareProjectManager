@@ -2,7 +2,7 @@
   <div>
     <div>
       <el-row :gutter="20">
-        <el-col v-for="(items,i) in tableData" :span="8">
+        <el-col v-for="(items,i) in tableData" :key="items" :span="8">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>交流讨论</span>
