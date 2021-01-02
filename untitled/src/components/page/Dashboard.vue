@@ -37,15 +37,15 @@
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
             <el-card :body-style="{padding: '0px'}" shadow="hover">
-              <div class="grid-content grid-con-1">
-                <i class="el-icon-lx-people grid-con-icon"></i>
-                <div class="grid-cont-right">
-                  <div class="grid-num">{{ numberofmembers }}</div>
-                  <div>
-                    <router-link to="/individual">小组成员数</router-link>
+              <router-link to="/groupinfo">
+                <div class="grid-content grid-con-1" >
+                  <i class="el-icon-lx-people grid-con-icon"></i>
+                  <div class="grid-cont-right">
+                    <div class="grid-num">{{ numberofmembers }}</div>
+                    <div>小组成员数</div>
                   </div>
                 </div>
-              </div>
+              </router-link>
             </el-card>
           </el-col>
           <el-col :span="8">
@@ -124,6 +124,9 @@ export default {
       numberofmembers: undefined,
       todoList: undefined
     };
+  },
+  created() {
+    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
   },
   components: {
     Schart
@@ -316,9 +319,6 @@ export default {
         this.sortTodoListItems();
       }).catch(() => this.$message('已取消删除'));
     }
-  },
-  created() {
-    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
   }
 }
 </script>
