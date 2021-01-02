@@ -32,20 +32,27 @@
 import pdf from 'vue-pdf';
 
 export default {
-  name: 'Home',
+  props:{
+    url:{
+      type:String,
+      default: ()=>{
+        return require("../../statics/pdf/test.pdf")
+      }
+    }
+  },
+  name: 'PdfView',
   components: {
     pdf
   },
   data() {
     return {
-      url: 'http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf',
       pageNum: 1,
       pageTotalNum: 1,
       pageRotate: 0,
       // 加载进度
       loadedRatio: 0,
       curPageNum: 0,
-      pdfsize:70
+      pdfsize:60
     };
   },
   mounted: function () {

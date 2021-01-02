@@ -2,11 +2,12 @@
   <div>
     <div>
       <el-row :gutter="20">
-        <el-col v-for="items in tableData" :span="8">
+        <el-col v-for="(items,i) in tableData" :span="8">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>卡片名称</span>
-              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+              <span>交流讨论</span>
+              <el-button style="float: right; padding: 3px 0" type="text"
+                         v-if="rolename==='Teacher'" @click="cancel(i)">删除</el-button>
             </div>
             <div class="user-info-list">
               日期：
@@ -17,7 +18,7 @@
               <span>{{ items.name }}</span>
             </div>
             <div class="user-info-list">
-              作业：
+              评论：
               <span>{{ items.comment }}</span>
             </div>
           </el-card>
@@ -47,7 +48,8 @@ import { quillEditor } from 'vue-quill-editor';
 export default {
   data: function () {
     return {
-      username: localStorage.getItem('ms_username'),
+      username: this.$cookie.get('UserName'),
+      rolename: this.$cookie.get('RoleName'),
       tableData: [{
         date: '2020-12-21',
         name: 'A',
@@ -60,10 +62,6 @@ export default {
         date: '2020-12-24',
         name: '老师',
         comment: '页面布局还是有问题'
-      }, {
-        date: '2020-12-26',
-        name: 'C',
-        comment: '知道问题了'
       }],
       content: '',
       editorOption: {
@@ -84,6 +82,9 @@ export default {
       console.log(this.content);
       console.log(textcontent);
       this.$message.success('提交成功！');
+    },
+    cancel(i){
+      this.tableData.splice(i,1);
     }
   }
 }
