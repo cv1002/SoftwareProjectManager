@@ -1,7 +1,6 @@
 <template>
   <div class="div1">
     <div class="div2" style="margin-top: 5px">
-
     </div>
     <div class="div3">
       <el-form ref="form" :model="form" label-width="80px">
@@ -19,7 +18,6 @@
             <el-date-picker
                 v-model="form.value2"
                 :picker-options="pickerOptions"
-                align="right"
                 end-placeholder="结束日期"
                 format="yyyy 年 MM 月 dd 日"
                 range-separator="至"
@@ -40,7 +38,7 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="自拟题目" style="width: 80%">
-          <el-input v-model="form.desc" type="textarea" ></el-input>
+          <el-input v-model="form.desc" type="textarea"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -127,7 +125,7 @@ export default {
       this.activities[0].color = 'white';
       this.activities[1].color = 'lightskyblue';
       console.log('submit!');
-    },
+    }
   }
 };
 </script>

@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       param: {
         username: this.$cookie.get('UserID'),
@@ -57,13 +57,13 @@ export default {
             data: formData
           }).then(
               resolve => {
-                console.log(resolve.data)
+                console.log(resolve.data);
                 this.$message.success(resolve.data['finish']);
                 this.$cookie.set('LoginType', resolve.data['loginType']);
                 this.$cookie.set('TeamID', resolve.data['teamID']);
                 this.$cookie.set('UserName', resolve.data['userName']);
                 this.$cookie.set('TeamName', resolve.data['teamName']);
-                this.$cookie.set('RoleName', resolve.data['roleName'])
+                this.$cookie.set('RoleName', resolve.data['roleName']);
                 this.$router.push('/');
               },
               reject => {

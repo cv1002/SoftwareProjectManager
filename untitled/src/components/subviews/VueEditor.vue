@@ -46,7 +46,7 @@ import 'quill/dist/quill.bubble.css';
 import { quillEditor } from 'vue-quill-editor';
 
 export default {
-  data: function () {
+  data: function() {
     return {
       username: this.$cookie.get('UserName'),
       rolename: this.$cookie.get('RoleName'),
@@ -87,7 +87,7 @@ export default {
       this.tableData.splice(i,1);
     }
   }
-}
+};
 </script>
 
 <style scoped>

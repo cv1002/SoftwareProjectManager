@@ -22,7 +22,7 @@
     <div class="div4">
       <div slot="tip" class="el-upload-list__item-name">文件拖到此处也可上传</div>
       <div slot="tip" class="el-upload-list__item-name">&nbsp;&nbsp;&nbsp;{{
-          this.files === null ? "" : this.files.name
+          this.files === null ? '' : this.files.name
         }}
       </div>
     </div>
@@ -80,8 +80,8 @@ export default {
         }
       }).then(
           resolve => {
-            if (resolve.data["resultInfo"] !== undefined) {
-              this.$message.success(resolve.data["resultInfo"]);
+            if (resolve.data['resultInfo'] !== undefined) {
+              this.$message.success(resolve.data['resultInfo']);
             }
           },
           reject => {

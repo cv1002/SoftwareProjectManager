@@ -68,7 +68,7 @@ import 'quill/dist/quill.bubble.css';
 import { quillEditor } from 'vue-quill-editor';
 
 export default {
-  data: function () {
+  data: function() {
     return {
       tableData: [
         {
@@ -141,13 +141,13 @@ export default {
   methods: {
     submit() {
       let textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
-      if(this.value===''){
+      if (this.value === '') {
         this.$message.warning('请指定成员');
-      }else if(this.value2[0]===''||this.value2[1]===''){
+      } else if (this.value2[0] === '' || this.value2[1] === '') {
         this.$message.warning('请指定成员完成任务的时间');
-      }else if(textcontent===''){
+      } else if (textcontent === '') {
         this.$message.warning('请输入指定的任务');
-      }else {
+      } else {
         let starttime = this.value2[0];
         let endtime = this.value2[1];
         let name = this.value;
@@ -168,7 +168,8 @@ export default {
 .areasize {
   height: 230px;
 }
-.fontstyle{
+
+.fontstyle {
   opacity: 0.7;
 }
 </style>

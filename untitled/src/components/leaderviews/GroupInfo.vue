@@ -135,9 +135,9 @@ export default {
       }).then((response) => {
         console.log(response.data);
         this.tableData = response.data.list;
-      },response =>{
+      }, response => {
         console.log('error');
-      })
+      });
     },
     // 触发搜索按钮
     handleSearch() {
