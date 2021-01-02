@@ -110,6 +110,9 @@ import Schart from 'vue-schart';
 
 export default {
   name: 'dashboard',
+  created() {
+    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
+  },
   data() {
     return {
       finishedtask: undefined,
@@ -124,9 +127,6 @@ export default {
       numberofmembers: undefined,
       todoList: undefined
     };
-  },
-  created() {
-    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
   },
   components: {
     Schart
