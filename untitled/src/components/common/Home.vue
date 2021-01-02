@@ -3,7 +3,7 @@
     <v-head></v-head>
     <v-sidebar></v-sidebar>
     <div :class="{'content-collapse':collapse}" class="content-box">
-      <!-- <v-tags></v-tags> -->
+       <v-tags></v-tags>
       <div class="content">
         <transition mode="out-in" name="move">
           <keep-alive :include="tagsList">

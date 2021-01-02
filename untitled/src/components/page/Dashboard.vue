@@ -41,7 +41,9 @@
                 <i class="el-icon-lx-people grid-con-icon"></i>
                 <div class="grid-cont-right">
                   <div class="grid-num">{{ numberofmembers }}</div>
-                  <div>小组成员数</div>
+                  <div>
+                    <router-link to="/individual">小组成员数</router-link>
+                  </div>
                 </div>
               </div>
             </el-card>

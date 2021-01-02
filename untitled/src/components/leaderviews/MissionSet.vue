@@ -170,6 +170,5 @@ export default {
 }
 .fontstyle{
   opacity: 0.7;
-  color: gray;
 }
 </style>
