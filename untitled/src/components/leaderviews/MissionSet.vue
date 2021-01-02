@@ -43,7 +43,7 @@
           value-format="yyyy-MM-dd">
       </el-date-picker>
     </div>
-    <div style="float: left; margin-left: 100px">
+    <div style="float: left; margin-left: 30px">
       <span class="fontstyle">指定完成任务的成员：</span>
       <el-select v-model="value" placeholder="指定成员">
         <el-option

@@ -1,17 +1,6 @@
 <template>
   <div class="div1">
-    <div class="div2">
-      <div class="block">
-        <el-timeline>
-          <el-timeline-item
-              v-for="(activity, index) in activities"
-              :key="index"
-              :color="activity.color"
-              :timestamp="activity.timestamp">
-            {{ activity.content }}
-          </el-timeline-item>
-        </el-timeline>
-      </div>
+    <div class="div2" style="margin-top: 5px">
     </div>
     <div class="div3">
       <el-form ref="form" :model="form" label-width="80px">
@@ -20,14 +9,14 @@
         </el-form-item>
         <el-form-item label="选题">
           <el-select v-model="form.region" placeholder="请选择题目" style="width: 30%">
-            <el-option label="题一" value="shanghai"></el-option>
-            <el-option label="其他" value="beijing"></el-option>
+            <el-option label="题一" value="题目1"></el-option>
+            <el-option label="其他" value="其他"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="项目时间">
           <el-col :span="11">
             <el-date-picker
-                v-model="value2"
+                v-model="form.value2"
                 :picker-options="pickerOptions"
                 align="right"
                 end-placeholder="结束日期"
@@ -57,7 +46,17 @@
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
-
+      <div class="block" style="margin-left: 50px;margin-top: 50px">
+        <el-timeline>
+          <el-timeline-item
+              v-for="(activity, index) in activities"
+              :color="activity.color"
+              :key="index"
+              :timestamp="activity.timestamp">
+            {{activity.content}}
+          </el-timeline-item>
+        </el-timeline>
+      </div>
     </div>
   </div>
 </template>
@@ -69,12 +68,9 @@ export default {
       form: {
         name: '',
         region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
         type: [],
-        resource: '',
-        desc: ''
+        desc: '',
+        value2:''
       },
       pickerOptions: {
         shortcuts: [{
@@ -103,27 +99,32 @@ export default {
           }
         }]
       },
-      value2: '',
       activities: [{
-        content: '小组审题',
+        content: '小组选题',
         timestamp: '2018-04-11',
-        color: 'red'
+        color: 'lightskyblue',
       }, {
         content: '审核中',
         timestamp: '2018-04-13',
-        color: 'blue'
+        color: 'white',
       }, {
         content: '创建成功',
         timestamp: '2018-04-15',
-        color: 'yellow'
+        color: 'white'
       }]
     };
   },
   methods: {
     onSubmit() {
+      console.log(this.form.name);
+      console.log(this.form.region);
+      console.log(this.form.value2[0]);
+      console.log(this.form.value2[1]);
+      console.log(this.form.type[0]);
+      console.log(this.form.desc);
       this.$cookie.set('groupsetenable', false);
-      this.$router.push('/groupinfo');
-      this.$router.go(0);
+      this.activities[0].color = 'white';
+      this.activities[1].color = 'lightskyblue';
       console.log('submit!');
     }
   }
@@ -132,9 +133,10 @@ export default {
 
 <style scoped>
 .div1 {
-  /*background-image: url("../../statics/img/bg_person.jpg");*/
+  background-image: url("../../statics/img/true.jpg");
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 100%;
   height: 100%;
   width: 100%;
   position: absolute;
