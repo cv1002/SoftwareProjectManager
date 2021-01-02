@@ -1,25 +1,16 @@
 <template>
   <div>
-    <div class="tools">
-      <bk-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="prePage"> 上一页
-      </bk-button>
-      <bk-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="nextPage"> 下一页
-      </bk-button>
-      <div class="page">{{ pageNum }}/{{ pageTotalNum }}</div>
-      <bk-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="clock"> 顺时针
-      </bk-button>
-      <bk-button :theme="'default'" :title="'基础按钮'" class="mr10" type="submit" @click.stop="counterClock"> 逆时针
-      </bk-button>
+    <div class="pdf-style" :style="{width:pdfsize+'%'}">
+      <iframe ref="pdf" :page="pageNum" :rotate="pageRotate" :src="url" @error="pdfError($event)"
+           @progress="loadedRatio = $event" @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event"
+           @link-clicked="page = $event" frameborder="0" style="width: 1000px; height: 1000px">
+      </iframe>
     </div>
-    <pdf ref="pdf" :page="pageNum" :rotate="pageRotate" :src="url" @error="pdfError($event)"
-         @progress="loadedRatio = $event" @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event"
-         @link-clicked="page = $event">
-    </pdf>
   </div>
 </template>
 
 <script>
-import pdf from 'vue-pdf'
+import pdf from 'vue-pdf';
 
 export default {
   name: 'Home',
@@ -28,50 +19,50 @@ export default {
   },
   data() {
     return {
-      url: "http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf",
+      // url: 'http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf',
+      url: 'https://vue.warmnight.site/pmbook.pdf',
       pageNum: 1,
       pageTotalNum: 1,
       pageRotate: 0,
       // 加载进度
       loadedRatio: 0,
       curPageNum: 0,
-    }
+      pdfsize:100
+    };
   },
   mounted: function () {
   },
   methods: {
-    // 上一页函数，
-    prePage() {
-      var page = this.pageNum
-      page = page > 1 ? page - 1 : this.pageTotalNum
-      this.pageNum = page
-    },
-    // 下一页函数
-    nextPage() {
-      var page = this.pageNum
-      page = page < this.pageTotalNum ? page + 1 : 1
-      this.pageNum = page
-    },
-    // 页面顺时针翻转90度。
-    clock() {
-      this.pageRotate += 90
-    },
-    // 页面逆时针翻转90度。
-    counterClock() {
-      this.pageRotate -= 90
-    },
     // 页面加载回调函数，其中e为当前页数
     pageLoaded(e) {
-      this.curPageNum = e
+      this.curPageNum = e;
     },
     // 其他的一些回调函数。
     pdfError(error) {
-      console.error(error)
+      console.error(error);
+    },
+    handlein(){
+      this.pdfsize=this.pdfsize+10;
+    },
+    handleout(){
+      this.pdfsize=this.pdfsize-10;
     },
   }
-}
+};
 </script>
 
 <style scoped>
-
+.pdf-style{
+  margin: auto;
+}
+.div1{
+  margin-left: 40%;
+  margin-top: 20px;
+}
+.page{
+  float: left;
+}
+.page2{
+  margin: 8px;
+}
 </style>

@@ -3,7 +3,7 @@
   <!-- <q-page class="q-pa-sm"> -->
   <div class="app-wrap">
     <div class="title">
-      <!-- <h1>甘特图</h1> -->
+      <h1>甘特图</h1>
     </div>
     <gantt-elastic :options="options" :tasks="tasks" @tasks-changed="tasksUpdate" @options-changed="optionsUpdate"
                    @dynamic-style-changed="styleUpdate">
@@ -18,9 +18,9 @@
 <style></style>
 
 <script>
-import GanttElastic from "gantt-elastic";
-import GanttHeader from "gantt-elastic-header";
-import dayjs from "dayjs";
+import GanttElastic from 'gantt-elastic';
+import GanttHeader from 'gantt-elastic-header';
+import dayjs from 'dayjs';
 
 function getDate(hours) {
   const currentDate = new Date();
@@ -48,10 +48,10 @@ let tasks = [{
   type: "project",
   collapsed: true,
   style: {
-  base: {
-  fill: "#00FFFF",
-  stroke: "#7E349D",
-  },
+    base: {
+      fill: "#00FFFF",
+      stroke: "#7E349D",
+    },
   },
 },
   {
@@ -79,10 +79,10 @@ let tasks = [{
     percent: 100,
     type: "task",
     style: {
-    base: {
-    fill: "#FF00FF",
-    stroke: "#0EAC51",
-    },
+      base: {
+        fill: "#FF00FF",
+        stroke: "#0EAC51",
+      },
     },
   },
   {
@@ -137,10 +137,10 @@ let tasks = [{
     type: "task",
     collapsed: true,
     style: {
-    base: {
-    fill: "#99FF66",
-    stroke: "#7E349D",
-    },
+      base: {
+        fill: "#99FF66",
+        stroke: "#7E349D",
+      },
     },
   },
   {
@@ -153,10 +153,10 @@ let tasks = [{
     percent: 0,
     type: "task",
     style: {
-    base: {
-    fill: "#FFFFCC",
-    stroke: "#7E349D",
-    },
+      base: {
+        fill: "#FFFFCC",
+        stroke: "#7E349D",
+      },
     },
   },
   {
@@ -185,10 +185,10 @@ let tasks = [{
     percent: 0,
     type: "task",
     style: {
-    base: {
-    fill: "#993366",
-    stroke: "#7E349D",
-    },
+      base: {
+        fill: "#993366",
+        stroke: "#7E349D",
+      },
     },
   },
 ];

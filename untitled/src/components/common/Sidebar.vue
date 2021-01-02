@@ -10,7 +10,7 @@
         text-color="#bfcbd9"
         unique-opened
     >
-      <template v-for="item in items" v-if="username==='admin'">
+      <template v-for="item in items" v-if="roleName==='Student'">
         <template v-if="item.subs">
           <el-submenu :key="item.index" :index="item.index">
             <template slot="title">
@@ -47,7 +47,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items2" v-if="username==='tang'">
+      <template v-for="i in items2" v-if="roleName==='Leader'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -55,7 +55,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items3" v-if="username==='teacher'">
+      <template v-for="i in items3" v-if="roleName==='Teacher'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -73,7 +73,7 @@ import bus from '../common/bus';
 export default {
   data() {
     return {
-      username: localStorage.getItem('ms_username'),
+      roleName: this.$cookie.get('RoleName'),
       collapse: false,
       items: [
         {
@@ -82,14 +82,14 @@ export default {
           title: '我的面板'
         },
         {
-          icon: 'el-icon-ice-cream-round',
+          icon: 'el-icon-s-data',
           index: 'entire',
-          title: '项目可视化'
+          title: '日期规划'
         },
         {
-          icon: 'el-icon-lollipop',
+          icon: 'el-icon-document',
           index: 'individual',
-          title: '项目成员'
+          title: '待做任务'
         },
         {
           icon: 'el-icon-upload',
@@ -97,14 +97,9 @@ export default {
           title: '文件上传'
         },
         {
-        icon: 'el-icon-view',
-        index: 'pdfView',
-        title: 'PDF预览'
-        },
-        {
-          icon: 'el-icon-pie-chart',
-          index: 'journal',
-          title: '项目日志'
+          icon: 'el-icon-reading',
+          index: 'pdfView',
+          title: '项目文档'
         },
         {
           icon: 'el-icon-chat-line-round',
@@ -129,11 +124,6 @@ export default {
           title: '小组选题'
         },
         {
-          icon: 'el-icon-lx-copy',
-          index: 'tabs',
-          title: '公告'
-        },
-        {
           icon: 'el-icon-document',
           index: 'missionset',
           title: '任务发布'
@@ -147,11 +137,6 @@ export default {
           icon: 'el-icon-chat-line-round',
           index: 'vueeditor',
           title: '交流讨论'
-        },
-        {
-          icon: 'el-icon-pie-chart',
-          index: 'journal',
-          title: '项目日志'
         }
       ],
       items3:
@@ -166,11 +151,6 @@ export default {
               index: 'groupprogress',
               title: '项目各小组进度'
             },
-            {
-              icon: 'el-icon-tickets',
-              index: 'messagesend',
-              title: '公告发布'
-            }
           ]
     };
   },

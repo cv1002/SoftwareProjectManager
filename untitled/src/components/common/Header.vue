@@ -8,24 +8,11 @@
     <div class="logo">项目管理系统</div>
     <div class="header-right">
       <div class="header-user-con">
-        <!-- 消息中心 -->
-        <!-- <div v-if="username!='teacher'" class="btn-bell">
-          <el-tooltip
-              :content="message?`有${message}条未读消息`:`消息中心`"
-              effect="dark"
-              placement="bottom"
-          >
-            <router-link to="/tabs">
-              <i class="el-icon-bell"></i>
-            </router-link>
-          </el-tooltip>
-          <span v-if="message" class="btn-bell-badge"></span>
-        </div> -->
         <!-- 用户头像 -->
         <div class="user-avator">
           <router-link to="/person">
             <el-tooltip class="item" content="个人资料" effect="dark" placement="bottom">
-              <img src="../../statics/img/g.jpg" alt=""/>
+              <img alt="" src="../../statics/img/g.jpg"/>
             </el-tooltip>
           </router-link>
         </div>
@@ -57,15 +44,9 @@ export default {
     return {
       collapse: false,
       fullscreen: false,
-      name: 'linxin',
-      message: 2
+      message: 2,
+      username: this.$cookie.get("UserName")
     };
-  },
-  computed: {
-    username() {
-      let username = localStorage.getItem('ms_username');
-      return username ? username : this.name;
-    }
   },
   methods: {
     // 用户名下拉菜单选择事件
@@ -96,13 +77,13 @@ export default {
       } else {
         if (element.requestFullscreen) {
           element.requestFullscreen();
-        } else if (element.webkitRequestFullScreen) {
-          element.webkitRequestFullScreen();
-        } else if (element.mozRequestFullScreen) {
-          element.mozRequestFullScreen();
-        } else if (element.msRequestFullscreen) {
+        } else if (element['webkitRequestFullScreen']) {
+          element['webkitRequestFullScreen']();
+        } else if (element['mozRequestFullScreen']) {
+          element['mozRequestFullScreen']();
+        } else if (element['msRequestFullscreen']) {
           // IE11
-          element.msRequestFullscreen();
+          element['msRequestFullscreen']();
         }
       }
       this.fullscreen = !this.fullscreen;

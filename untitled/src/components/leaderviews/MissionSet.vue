@@ -29,6 +29,7 @@
       </el-table>
     </div>
     <div class="block" style="float: left; margin-left: 30px">
+      <span class="fontstyle">选择成员完成任务的时间：</span>
       <el-date-picker
           v-model="value2"
           :picker-options="pickerOptions"
@@ -43,6 +44,7 @@
       </el-date-picker>
     </div>
     <div style="float: left; margin-left: 100px">
+      <span class="fontstyle">指定完成任务的成员：</span>
       <el-select v-model="value" placeholder="指定成员">
         <el-option
             v-for="item in options"
@@ -63,7 +65,7 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import {quillEditor} from 'vue-quill-editor';
+import { quillEditor } from 'vue-quill-editor';
 
 export default {
   data: function () {
@@ -139,13 +141,21 @@ export default {
   methods: {
     submit() {
       let textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
-      let starttime = this.value2[0];
-      let endtime = this.value2[1];
-      let name = this.value;
-      this.tableData.push({starttime: starttime, endtime: endtime, name: name, comment: textcontent});
-      console.log(this.content);
-      console.log(textcontent);
-      this.$message.success('发布成功！');
+      if(this.value===''){
+        this.$message.warning('请指定成员');
+      }else if(this.value2[0]===''||this.value2[1]===''){
+        this.$message.warning('请指定成员完成任务的时间');
+      }else if(textcontent===''){
+        this.$message.warning('请输入指定的任务');
+      }else {
+        let starttime = this.value2[0];
+        let endtime = this.value2[1];
+        let name = this.value;
+        this.tableData.push({ starttime: starttime, endtime: endtime, name: name, comment: textcontent });
+        console.log(this.content);
+        console.log(textcontent);
+        this.$message.success('发布成功！');
+      }
     }
   }
 };
@@ -158,5 +168,7 @@ export default {
 .areasize {
   height: 230px;
 }
-
+.fontstyle{
+  opacity: 0.7;
+}
 </style>

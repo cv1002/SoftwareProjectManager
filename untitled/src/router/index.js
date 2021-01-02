@@ -20,17 +20,12 @@ export default new Router({
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
                     meta: { title: '系统首页' }
                 },
-                // {
-                //     path: '/tabs',
-                //     component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
-                //     meta: { title: '公告' }
-                // },
                 {
                     // 图片上传组件
                     path: '/upload',
                     component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
                     meta: { title: '文件上传' }
-                },             
+                },
                 {
                     // vue-schart组件
                     path: '/charts',
@@ -67,17 +62,17 @@ export default new Router({
                     path: '/pdfview',
                     component: () => import('../components/subviews/pdfView'),
                     meta: { title: 'PDF预览' }
-                },             
+                },
                 {
                     path: '/individual',
                     component: () => import('../components/subviews/Individual'),
                     meta: { title: '项目个人进度' }
                 },
-                {
-                    path: '/journal',
-                    component: () => import('../components/subviews/Journal'),
-                    meta: { title: '项目日志记录' }
-                },
+                // {
+                //     path: '/journal',
+                //     component: () => import('../components/subviews/Journal'),
+                //     meta: { title: '项目日志记录' }
+                // },
                 {
                     path: '/person',
                     component: () => import('../components/subviews/Person'),
@@ -114,11 +109,6 @@ export default new Router({
                     meta: { title: '项目各小组进度' }
                 },
                 {
-                    path: '/messagesend',
-                    component: () => import('../components/teacherviews/MessageSend'),
-                    meta: { title: '发布公告' }
-                },
-                {
                     path: '/ogp',
                     component: () => import('../components/teacherviews/OneGroupProgress'),
                     meta: { title: '项目单小组进度' }
@@ -127,7 +117,7 @@ export default new Router({
         },
         {
             path: '/login',
-            component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
+            component: () => import(/* webpackChunkName: "login" */ '../components/common/Login.vue'),
             meta: { title: '登录' }
         },
         {
