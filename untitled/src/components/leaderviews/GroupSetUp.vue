@@ -5,10 +5,10 @@
         <el-timeline>
           <el-timeline-item
               v-for="(activity, index) in activities"
-              :color="activity.color"
               :key="index"
+              :color="activity.color"
               :timestamp="activity.timestamp">
-            {{activity.content}}
+            {{ activity.content }}
           </el-timeline-item>
         </el-timeline>
       </div>
@@ -49,7 +49,7 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="自拟题目" style="width: 80%">
-          <el-input v-model="form.desc" type="textarea" ></el-input>
+          <el-input v-model="form.desc" type="textarea"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -106,11 +106,11 @@ export default {
       activities: [{
         content: '小组审题',
         timestamp: '2018-04-11',
-        color:'red',
+        color: 'red'
       }, {
         content: '审核中',
         timestamp: '2018-04-13',
-        color: 'blue',
+        color: 'blue'
       }, {
         content: '创建成功',
         timestamp: '2018-04-15',
@@ -124,7 +124,7 @@ export default {
       this.$router.push('/groupinfo');
       this.$router.go(0);
       console.log('submit!');
-    },
+    }
   }
 };
 </script>

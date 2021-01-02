@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
+            <img alt class="user-avator" src="../../statics/img/g.jpg" />
             <div class="user-info-cont">
               <div class="user-info-name">{{ name }}</div>
               <div>{{ role }}</div>
@@ -24,13 +24,13 @@
             <span>项目进展</span>
           </div>
           <el-table :data="groupProgressData" style="width:100%">
-            <el-table-column prop="completion" label="进展阶段" />
-            <el-table-column prop="upToDateFile" label="最新上传的文件" />
+            <el-table-column label="进展阶段" prop="completion" />
+            <el-table-column label="最新上传的文件" prop="upToDateFile" />
           </el-table>
           <el-table :data="taskCompletion" style="width:100%">
             <el-table-column label="发布任务完成情况">
               <template slot-scope="scope">
-                <div>完成度: {{scope.row['percentage']}}%</div>
+                <div>完成度: {{ scope.row['percentage'] }}%</div>
               </template>
             </el-table-column>
             <el-table-column label="总任务数">
@@ -46,7 +46,7 @@
           <el-col :span="8">
             <el-card :body-style="{padding: '0px'}" shadow="hover">
               <router-link to="/groupinfo">
-                <div class="grid-content grid-con-1" >
+                <div class="grid-content grid-con-1">
                   <i class="el-icon-lx-people grid-con-icon"></i>
                   <div class="grid-cont-right">
                     <div class="grid-num">{{ numberofmembers }}</div>
@@ -244,13 +244,13 @@ export default {
       formData.append('TodoListID', this.todoList[index]['TodoListID']);
       formData.append('FinishState', this.todoList[index]['FinishState']);
       this.$axios({
-        url:'/todoList',
-        method:'PUT',
+        url: '/todoList',
+        method: 'PUT',
         data: formData
       }).then(
           resolve => {
             this.$message.success(resolve.data['resultInfo']);
-            console.log(resolve.data)
+            console.log(resolve.data);
           },
           reject => {
             this.todoList[index]['status'] = this.todoList[index].status !== true;
@@ -272,7 +272,7 @@ export default {
         formData.append('TodoListID', this.todoList[index]['TodoListID']);
         formData.append('FinishState', this.todoList[index]['FinishState']);
         this.$axios({
-          url:'/todoList',
+          url: '/todoList',
           method: 'PUT',
           data: formData
         }).then(
@@ -283,7 +283,7 @@ export default {
             reject => {
               this.$message.error(reject);
             }
-        )
+        );
       }).catch(() => this.$message('取消输入'));
     },
     addTodoListItem() {
@@ -296,7 +296,7 @@ export default {
         formData.append('UserPassword', this.$cookie.get('UserPassword'));
         formData.append('TodoThings', value);
         this.$axios({
-          url:'/todoList',
+          url: '/todoList',
           method: 'POST',
           data: formData
         }).then(
@@ -307,7 +307,7 @@ export default {
             reject => {
               this.$message.error(reject);
             }
-        )
+        );
       }).catch(() => this.$message('取消输入'));
     },
     deleteTodoListItem(index) {
@@ -321,7 +321,7 @@ export default {
         formData.append('UserPassword', this.$cookie.get('UserPassword'));
         formData.append('TodoListID', this.todoList[index]['TodoListID']);
         this.$axios({
-          url:'/todoList',
+          url: '/todoList',
           method: 'DELETE',
           data: formData
         }).then(
@@ -333,14 +333,14 @@ export default {
               }
             },
             reject => {
-              this.$message.error(reject)
+              this.$message.error(reject);
             }
         );
         this.sortTodoListItems();
       }).catch(() => this.$message('已取消删除'));
     }
   }
-}
+};
 </script>
 
 

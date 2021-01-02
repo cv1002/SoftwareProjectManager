@@ -45,7 +45,7 @@ import 'quill/dist/quill.bubble.css';
 import { quillEditor } from 'vue-quill-editor';
 
 export default {
-  data: function () {
+  data: function() {
     return {
       username: localStorage.getItem('ms_username'),
       tableData: [{
@@ -86,7 +86,7 @@ export default {
       this.$message.success('提交成功！');
     }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -160,7 +160,7 @@ export default {
               icon: 'el-icon-s-custom',
               index: 'groupprogress',
               title: '项目各小组进度'
-            },
+            }
           ]
     };
   },

@@ -8,7 +8,7 @@
       <i class="el-icon-zoom-in i-style" @click="handlein"></i>
       <i class="el-icon-zoom-out i-style" @click="handleout"></i>
     </div>
-    <div class="pdf-style" :style="{width:pdfsize+'%'}">
+    <div :style="{width:pdfsize+'%'}" class="pdf-style">
       <pdf ref="pdf" :page="pageNum" :rotate="pageRotate" :src="url" @error="pdfError($event)"
            @progress="loadedRatio = $event" @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event"
            @link-clicked="page = $event">
@@ -45,10 +45,10 @@ export default {
       // 加载进度
       loadedRatio: 0,
       curPageNum: 0,
-      pdfsize:70
+      pdfsize: 70
     };
   },
-  mounted: function () {
+  mounted: function() {
   },
   methods: {
     // 上一页函数，
@@ -79,35 +79,40 @@ export default {
     pdfError(error) {
       console.error(error);
     },
-    handlein(){
-      this.pdfsize=this.pdfsize+10;
+    handlein() {
+      this.pdfsize = this.pdfsize + 10;
     },
-    handleout(){
-      this.pdfsize=this.pdfsize-10;
+    handleout() {
+      this.pdfsize = this.pdfsize - 10;
     }
   }
 };
 </script>
 
 <style scoped>
-.pdf-style{
+.pdf-style {
   margin: auto;
 }
-.div1{
+
+.div1 {
   margin-left: 40%;
   margin-top: 20px;
 }
-.page{
+
+.page {
   float: left;
 }
-.page2{
+
+.page2 {
   margin-top: 8px;
 }
-.i-style{
+
+.i-style {
   font-size: 25px;
   color: gray;
 }
-.tools{
+
+.tools {
   letter-spacing: 10px;
 }
 </style>
