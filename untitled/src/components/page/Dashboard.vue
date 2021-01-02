@@ -19,16 +19,26 @@
             <span> {{ login.location }}</span>
           </div>
         </el-card>
-        <el-card shadow="hover" style="height:250px;">
+        <el-card shadow="hover" style="height:270px;">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
-          <el-card shadow="hover">
-            进展阶段: {{ milestone }}
-          </el-card>
-          <el-card shadow="hover">
-            最新上传的文件: {{ upToDateFile }}
-          </el-card>
+          <el-table :data="groupProgressData" style="width:100%">
+            <el-table-column prop="completion" label="进展阶段" />
+            <el-table-column prop="upToDateFile" label="最新上传的文件" />
+          </el-table>
+          <el-table :data="taskCompletion" style="width:100%">
+            <el-table-column label="发布任务完成情况">
+              <template slot-scope="scope">
+                <div>完成度: {{scope.row['percentage']}}%</div>
+              </template>
+            </el-table-column>
+            <el-table-column label="总任务数">
+              <template slot-scope="scope">
+                <div>{{ scope.row['tasklength'] }}</div>
+              </template>
+            </el-table-column>
+          </el-table>
         </el-card>
       </el-col>
       <el-col :span="16">
@@ -69,7 +79,7 @@
             </el-card>
           </el-col>
         </el-row>
-        <el-card shadow="hover" style="height:403px;">
+        <el-card shadow="hover" style="height:410px;">
           <div slot="header" class="clearfix">
             <span>待办事项</span>
             <el-button style="float: right; padding: 3px 0" type="text" @click="addTodoListItem">添加</el-button>
@@ -115,15 +125,21 @@ export default {
     return {
       finishedtask: undefined,
       unfinishedtask: undefined,
-      tasks: undefined,
+      tasks: [],
+      taskCompletion: [{
+        percentage: 0,
+        tasklength: 0
+      }],
       login: {
-        date: '2020-01-01',
+        date: undefined,
         location: '西安'
       },
       numberofmembers: undefined,
-      todoList: undefined,
-      milestone: '收尾',
-      upToDateFile: '项目总结报告.pdf'
+      todoList: [],
+      groupProgressData: [{
+        completion: '收尾阶段',
+        upToDateFile: '项目总结报告.pdf'
+      }]
     };
   },
   components: {
@@ -189,6 +205,8 @@ export default {
               }
               this.finishedtask = this.tasks.length - unfinishedCount;
               this.unfinishedtask = unfinishedCount;
+              this.taskCompletion[0].percentage = Math.floor(100 * this.finishedtask / this.tasks.length);
+              this.taskCompletion[0].tasklength = this.tasks.length;
             }
           }
       );
