@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <div>
     <el-row :gutter="20">
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
@@ -109,8 +109,7 @@
         </el-card>
       </el-col>
     </el-row>
-  </el-card>
-
+  </div>
 </template>
 
 <script>
@@ -339,6 +338,9 @@ export default {
         this.sortTodoListItems();
       }).catch(() => this.$message('已取消删除'));
     }
+  },
+  created() {
+    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
   }
 };
 </script>

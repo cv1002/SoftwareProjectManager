@@ -35,7 +35,6 @@
 
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -95,18 +94,10 @@ export default {
       }
     }
   }
-};
 </script>
-
 <style scoped>
-.button1 {
-  height: 70px;
-  width: 20%;
-  margin-left: 39%;
-  margin-top: 20px;
-  border-radius: 45px;
-  background-color: lightskyblue;
-  color: white;
+.dashboard-container {
+margin: 30px;
 }
 
 .div1 {
@@ -131,36 +122,10 @@ export default {
   margin-left: 40px;
 }
 
-.div4 {
-  margin-left: 44%;
-  margin-top: 50px;
+.el-upload__tip {
+display: flex;
+justify-content: center;
+font-size: 20px;
+color:rebeccapurple;
 }
-
-.div5 {
-  margin-left: 44%;
-  margin-top: 80px;
-}
-
-.button2 {
-  background-color: hotpink;
-  height: 60px;
-  width: 180px;
-  border-radius: 45px;
-  font-size: 20px;
-}
-
-.crop-input {
-  position: absolute;
-  margin-left: 450px;
-  margin-top: 140px;
-  width: 10%;
-  height: 20px;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
 </style>
-
-

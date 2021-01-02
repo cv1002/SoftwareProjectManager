@@ -45,5 +45,20 @@ export default {
 </script>
 
 <style scoped>
+.top {
+    display: flex;
+    justify-content: center;
+}
 
+.block {
+  background-color: rgb(19, 77, 134);
+  width:300px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background-color: orange;
+  width: 240px;
+}
 </style>

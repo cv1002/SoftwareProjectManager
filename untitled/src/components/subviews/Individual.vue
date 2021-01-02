@@ -1,69 +1,68 @@
 <template>
   <div>
-    <div>
-      <div v-on:click="addNode()">
-        <div class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide" data-repeater-create=""
-             style="text-align: center">
-            <span>
-                <span> 添加 </span>
-            </span>
-        </div>
-      </div>
-    </div>
     <div v-for="(v,i) in list">
       <el-col :span="8">
-        <el-card class="mgb20" shadow="hover" style="height:240px;">
+        <el-row :gutter="20" type="flex" justify="center">
+        <el-card class="mgb20" shadow="hover">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg" />
+            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
             <div class="user-info-cont">
               <div class="user-info-name">{{ v.mission }}</div>
-              <div>{{ v.person }}</div>
+              <div>{{v.person}}</div>
             </div>
           </div>
           <div class="user-info-list">
             任务内容：
-            <span>{{ v.content }}</span>
+            <span>{{v.content}}</span>
           </div>
           <div class="user-info-list">
             截止时间：
-            <span>{{ v.time }}</span>
+            <span>{{v.time}}</span>
           </div>
-          <div>
-            <div class="button1" data-repeater-delete="" v-on:click="deleteNode(i)">
-              <span> 删除 </span>
-            </div>
+            <div data-repeater-delete="" v-on:click="deleteNode(i)" class="btn-del">
+              <el-button type="danger" icon="el-icon-delete">删除</el-button>
           </div>
         </el-card>
+        </el-row>
       </el-col>
     </div>
+      <div v-on:click="addNode()">
+        <div data-repeater-create="" style="text-align: right">
+          <el-button type="primary" icon="el-icon-plus" size="medium">添加</el-button>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
-export default {
+export default{
   data() {
-    return {
-      list: [
-        {
-          mission: '任务1',
-          person: '开发者1',
-          content: '完成任务1',
-          time: '2020-12-31'
-        },
-        {
-          mission: '任务2',
-          person: '开发者2',
-          content: '完成任务2',
-          time: '2021-1-1'
-        },
-        {
-          mission: '任务3',
-          person: '开发者3',
-          content: '完成任务3',
-          time: '2021-1-2'
-        }
-      ]
-    };
+   return{
+     list:[
+       {
+         mission:'任务1',
+         person:'开发者1',
+         content:'完成任务1',
+         time:'2020-12-31'
+       },
+       {
+         mission:'任务2',
+         person:'开发者2',
+         content:'完成任务2',
+         time:'2021-1-1'
+       },
+       {
+         mission:'任务3',
+         person:'开发者3',
+         content:'完成任务3',
+         time:'2021-1-2'
+       }
+     ],
+   }
+  },
+  //初始化方法
+  mounted:function () {
+
   },
   //初始化方法
   mounted: function() {
@@ -72,20 +71,20 @@ export default {
   methods: {
 
     //添加标本div
-    addNode: function() {
+    addNode:function() {
       this.list.push({
-        mission: '任务4',
-        person: '开发者4',
-        content: '完成任务4',
-        time: '2021-1-3'
+        mission:'任务4',
+        person:'开发者4',
+        content:'完成任务4',
+        time:'2021-1-3'
       });
     },
     //删除样本div
-    deleteNode: function(i) {
-      this.list.splice(i, 1);  //删除index为i,位置的数组元素
+    deleteNode:function(i) {
+      this.list.splice(i,1);  //删除index为i,位置的数组元素
     }
   }
-};
+}
 </script>
 
 <style scoped>
@@ -123,6 +122,21 @@ export default {
 
 .user-info-list span {
   margin-left: 70px;
+}
+
+.mgb20 {
+  margin-bottom: 100px;
+}
+
+/* .button1{
+  position: absolute;
+  margin-top: -230px;
+  margin-left: 60%;
+} */
+
+.btn-del {
+  display: flex;
+  justify-content: center;
 }
 
 .mgb20 {

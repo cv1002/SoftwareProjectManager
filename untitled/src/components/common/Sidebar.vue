@@ -82,14 +82,14 @@ export default {
           title: '我的面板'
         },
         {
-          icon: 'el-icon-ice-cream-round',
+          icon: 'el-icon-s-data',
           index: 'entire',
-          title: '项目可视化'
+          title: '日期规划'
         },
         {
-          icon: 'el-icon-lollipop',
+          icon: 'el-icon-document',
           index: 'individual',
-          title: '未完成的任务'
+          title: '待做任务'
         },
         {
           icon: 'el-icon-upload',
@@ -97,14 +97,9 @@ export default {
           title: '文件上传'
         },
         {
-          icon: 'el-icon-upload',
+          icon: 'el-icon-reading',
           index: 'pdfView',
-          title: 'PDF预览'
-        },
-        {
-          icon: 'el-icon-pie-chart',
-          index: 'journal',
-          title: '项目日志'
+          title: '项目文档'
         },
         {
           icon: 'el-icon-chat-line-round',
@@ -142,11 +137,6 @@ export default {
           icon: 'el-icon-chat-line-round',
           index: 'vueeditor',
           title: '交流讨论'
-        },
-        {
-          icon: 'el-icon-pie-chart',
-          index: 'journal',
-          title: '项目日志'
         }
       ],
       items3:
