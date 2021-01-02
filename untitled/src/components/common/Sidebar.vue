@@ -170,6 +170,11 @@ export default {
               icon: 'el-icon-reading',
               index: 'fileview',
               title: '文件预览'
+            },
+            {
+              icon: 'el-icon-check',
+              index: 'checkpage',
+              title: '审核页面'
             }
           ]
     };

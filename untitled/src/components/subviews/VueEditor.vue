@@ -6,8 +6,9 @@
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>交流讨论</span>
-              <el-button style="float: right; padding: 3px 0" type="text"
-                         v-if="rolename==='Teacher'" @click="cancel(i)">删除</el-button>
+              <el-button v-if="rolename==='Teacher'" style="float: right; padding: 3px 0"
+                         type="text" @click="cancel(i)">删除
+              </el-button>
             </div>
             <div class="user-info-list">
               日期：
@@ -83,8 +84,8 @@ export default {
       console.log(textcontent);
       this.$message.success('提交成功！');
     },
-    cancel(i){
-      this.tableData.splice(i,1);
+    cancel(i) {
+      this.tableData.splice(i, 1);
     }
   }
 };

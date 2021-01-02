@@ -49,10 +49,10 @@
         <el-timeline>
           <el-timeline-item
               v-for="(activity, index) in activities"
-              :color="activity.color"
               :key="index"
+              :color="activity.color"
               :timestamp="activity.timestamp">
-            {{activity.content}}
+            {{ activity.content }}
           </el-timeline-item>
         </el-timeline>
       </div>
@@ -69,7 +69,7 @@ export default {
         region: '',
         type: [],
         desc: '',
-        value2:''
+        value2: ''
       },
       pickerOptions: {
         shortcuts: [{
@@ -101,11 +101,11 @@ export default {
       activities: [{
         content: '小组选题',
         timestamp: '2018-04-11',
-        color: 'lightskyblue',
+        color: 'lightskyblue'
       }, {
         content: '审核中',
         timestamp: '2018-04-13',
-        color: 'white',
+        color: 'white'
       }, {
         content: '创建成功',
         timestamp: '2018-04-15',

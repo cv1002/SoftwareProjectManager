@@ -32,11 +32,11 @@
 import pdf from 'vue-pdf';
 
 export default {
-  props:{
-    url:{
-      type:String,
-      default: ()=>{
-        return require("../../statics/pdf/test.pdf")
+  props: {
+    url: {
+      type: String,
+      default: () => {
+        return require('../../statics/pdf/test.pdf');
       }
     }
   },
@@ -52,7 +52,7 @@ export default {
       // 加载进度
       loadedRatio: 0,
       curPageNum: 0,
-      pdfsize:60
+      pdfsize: 60
     };
   },
   mounted: function() {

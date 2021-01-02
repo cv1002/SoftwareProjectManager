@@ -23,7 +23,7 @@ export default new Router({
                 {
                     path: '/teacherboard',
                     component: () => import('../components/teacherviews/DashboardOfTeachers'),
-                    meta: {title: '老师首页'}
+                    meta: { title: '老师首页' }
                 },
                 {
                     // 图片上传组件
@@ -122,12 +122,17 @@ export default new Router({
                     path: '/fileview',
                     component: () => import('../components/teacherviews/FileView'),
                     meta: { title: '文件预览' }
+                },
+                {
+                    path: '/checkpage',
+                    component: () => import('../components/teacherviews/CheckPage'),
+                    meta: { title: '审查页面' }
                 }
             ]
         },
         {
             path: '/login',
-            component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
+            component: () => import(/* webpackChunkName: "login" */ '../components/common/Login.vue'),
             meta: { title: '登录' }
         },
         {

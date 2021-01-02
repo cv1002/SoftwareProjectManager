@@ -99,7 +99,7 @@ export default {
             this.logining = false;
             this.$cookie.set('UserName', this.form.name, 1);
             this.$cookie.set('RoleName', 'Teacher', 1);
-            this.$router.push('/');
+            this.$router.push('/teacherboard');
           } else {
             this.$alert('name or password wrong!', 'info', {
               confirmButtonText: 'ok'
@@ -114,7 +114,6 @@ export default {
     resetForm() {
       this.$refs.form.resetFields();
     }
-
   }
 };
 </script>
