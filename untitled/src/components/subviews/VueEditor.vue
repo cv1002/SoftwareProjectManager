@@ -11,7 +11,7 @@
                   <div>UserID：{{ scope.row['UserID'] }}</div>
                 </div>
                 <div class="user-info-list">
-                  评论：<span v-html="scope.row['Context']"></span>
+                  <span v-html="scope.row['Context']" />
                 </div>
               </el-card>
             </template>
@@ -79,7 +79,6 @@ export default {
       formData.append('UserPassword', this.$cookie.get('UserPassword'));
       formData.append('TeamID', this.$cookie.get('TeamID'));
       formData.append('Context', this.content);
-      console.log(this.content);
       this.$axios({
         url: '/communication',
         method: 'POST',

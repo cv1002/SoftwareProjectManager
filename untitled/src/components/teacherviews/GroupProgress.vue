@@ -40,30 +40,6 @@
         </router-link>
       </el-col>
     </div>
-    <div class="">
-      <el-col :span="8">
-        <p>group3</p>
-      </el-col>
-    </div>
-    <el-row>
-      <div class="">
-        <el-col :span="8">
-          <p>group4</p>
-        </el-col>
-      </div>
-      <div class="">
-        <el-col :span="8">
-          <p>group5</p>
-          <el-progress :percentage="50" status="exception" type="circle"></el-progress>
-        </el-col>
-      </div>
-      <div class="">
-        <el-col :span="8">
-          <p>group6</p>
-          <el-progress :percentage="50" status="exception" type="circle"></el-progress>
-        </el-col>
-      </div>
-    </el-row>
   </div>
 </template>
 
