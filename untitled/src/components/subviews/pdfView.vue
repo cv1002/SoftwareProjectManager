@@ -52,9 +52,6 @@ export default {
     },
     handleout() {
       this.pdfsize = this.pdfsize - 10;
-    },
-    handleout() {
-      this.pdfsize = this.pdfsize - 10;
     }
   }
 };
