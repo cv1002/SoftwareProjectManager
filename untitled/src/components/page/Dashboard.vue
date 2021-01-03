@@ -157,7 +157,7 @@ export default {
       } else if (this.$cookie.get('RoleName') === 'Leader') {
         this.role = '小组: ' + '"' + this.$cookie.get('TeamName') + '"' + ' 组长';
       } else {
-        this.role = this.$cookie.get('TeamName') + '小组 组员';
+        this.role = '小组: ' + '"' + this.$cookie.get('TeamName') + '"' + ' 组员';
       }
     },
     fetchLocationAndDate() {

@@ -6,25 +6,25 @@
     <div style="width: 60%;float: left;">
       <table class="table">
         <el-row class="row_distance" style="margin-top: 30px">
-          组长：{{leadername}}
+          组长：{{ leadername }}
         </el-row>
         <el-row class="row_distance">
-          组名：{{groupname}}
+          组名：{{ groupname }}
         </el-row>
         <el-row class="row_distance">
-          题目：{{subject}}
+          题目：{{ subject }}
         </el-row>
         <el-row class="row_distance">
-          类型：{{type}}
+          类型：{{ type }}
         </el-row>
         <el-row class="row_distance">
-          时间：{{time}}
+          时间：{{ time }}
         </el-row>
         <el-row class="row_distance">
           小组成员名单：
         </el-row>
-        <el-row class="row_distance" v-for="item in groupmember">
-          {{item.name}}
+        <el-row v-for="item in groupmember" :key="item" class="row_distance">
+          {{ item.name }}
         </el-row>
         <el-row class="row_distance">
           <el-button type="primary">审核通过</el-button>
@@ -39,22 +39,22 @@
 export default {
   data() {
     return {
-      leadername:this.$route.query.name,
-      groupname:'group1',
+      leadername: this.$route.query.name,
+      groupname: 'group1',
       subject: '',   //题目
       type: '',
       desc: '',
       time: '',
-      groupmember:[
+      groupmember: [
         {
-          name:'张学良',
+          name: '张学良'
         },
         {
-          name:'蒋介石',
+          name: '蒋介石'
         },
         {
-          name:'孙中山',
-        },
+          name: '孙中山'
+        }
       ]
     };
   },
@@ -67,14 +67,15 @@ export default {
 </script>
 
 <style scoped>
-.table{
+.table {
   margin: auto;
   margin-top: 40px;
   border: solid 1px;
   border-radius: 10px;
   width: 600px;
 }
-.row_distance{
+
+.row_distance {
   margin-bottom: 20px;
 }
 </style>

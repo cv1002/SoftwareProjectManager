@@ -69,8 +69,8 @@ export default {
     };
   },
   methods: {
-    check(index,rows){
-      this.$router.push({path:'/checkpageplus',query:{name:rows[index].name}});
+    check(index, rows) {
+      this.$router.push({ path: '/checkpageplus', query: { name: rows[index].name } });
     }
   }
 };

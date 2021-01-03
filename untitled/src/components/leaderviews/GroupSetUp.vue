@@ -8,15 +8,15 @@
           <el-input v-model="form.groupname"></el-input>
         </el-form-item>
         <el-form-item label="选题" style="width: 800px;margin-bottom: 30px">
-          <el-select v-model="form.subject"  placeholder="请选择题目" style="width: 30%" @change="getChange(form.subject)">
+          <el-select v-model="form.subject" placeholder="请选择题目" style="width: 30%" @change="getChange(form.subject)">
             <el-option label="项目管理系统" value="项目管理系统"></el-option>
             <el-option label="游戏" value="游戏"></el-option>
             <el-option label="操作系统" value="操作系统"></el-option>
             <el-option label="其他" value="其他"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="自拟题目" style="width: 430px;margin-bottom: 30px" v-if="subjectVisible">
-          <el-input v-model="form.desc" type="textarea" ></el-input>
+        <el-form-item v-if="subjectVisible" label="自拟题目" style="width: 430px;margin-bottom: 30px">
+          <el-input v-model="form.desc" type="textarea"></el-input>
         </el-form-item>
         <el-form-item label="项目时间" style="margin-bottom: 30px">
           <el-col :span="11">
@@ -123,10 +123,9 @@ export default {
       console.log(this.form.value2[0]);
       console.log(this.form.value2[1]);
       console.log(this.form.type);
-      if(this.form.subject !== '其他'){
+      if (this.form.subject !== '其他') {
         console.log(this.form.subject);
-      }
-      else{
+      } else {
         console.log(this.form.desc);
       }
       this.$cookie.set('groupsetenable', false);
@@ -134,12 +133,11 @@ export default {
       this.activities[1].color = 'lightskyblue';
       console.log('submit!');
     },
-    getChange(item){
+    getChange(item) {
       console.log(item);
-      if(item==='其他'){
+      if (item === '其他') {
         this.subjectVisible = true;
-      }
-      else {
+      } else {
         this.subjectVisible = false;
       }
     }
