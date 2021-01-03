@@ -18,6 +18,7 @@
             <el-date-picker
                 v-model="form.value2"
                 :picker-options="pickerOptions"
+                align="right"
                 end-placeholder="结束日期"
                 format="yyyy 年 MM 月 dd 日"
                 range-separator="至"
@@ -38,7 +39,7 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="自拟题目" style="width: 80%">
-          <el-input v-model="form.desc" type="textarea"></el-input>
+          <el-input v-model="form.desc" type="textarea" ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">立即创建</el-button>

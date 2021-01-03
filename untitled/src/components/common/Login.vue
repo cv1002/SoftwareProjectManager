@@ -34,18 +34,18 @@
         </el-form-item>
         <el-form-item>
           <el-button
-              :loading="logining"
-              class="homeBut"
-              plain
-              type="primary"
-              @click="submit"
+            class="homeBut"
+            type="primary"
+            plain
+            @click="submit"
+            :loading="logining"
           >登录
           </el-button>
           <el-button
-              class="loginBut"
-              plain
-              type="primary"
-              @click="resetForm()"
+            class="loginBut"
+            type="primary"
+            plain
+            @click="resetForm()"
           >重置
           </el-button>
         </el-form-item>
@@ -66,13 +66,13 @@ export default {
       },
       ruleForm: {
         name: [
-          { required: true, message: '请输入账号', trigger: 'blur' }
+          {required: true, message: '请输入账号', trigger: 'blur'},
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          {required: true, message: '请输入密码', trigger: 'blur'},
         ]
       }
-    };
+    }
   },
   methods: {
     submit() {
@@ -80,20 +80,21 @@ export default {
         if (valid) {
           this.logining = true;
           if (this.form.name === '1' &&
+            this.form.password === '123456') {
+            sessionStorage.setItem('user', this.form.name);
+            this.logining = false;
+            this.$cookie.set('UserName', this.form.name, 1);
+            this.$cookie.set('RoleName','Student',1)
+            this.$router.push('/');
+          }else if (this.form.name === '2' &&
               this.form.password === '123456') {
             sessionStorage.setItem('user', this.form.name);
             this.logining = false;
             this.$cookie.set('UserName', this.form.name, 1);
-            this.$cookie.set('RoleName', 'Student', 1);
+            this.$cookie.set('RoleName','Leader',1)
             this.$router.push('/');
-          } else if (this.form.name === '2' &&
-              this.form.password === '123456') {
-            sessionStorage.setItem('user', this.form.name);
-            this.logining = false;
-            this.$cookie.set('UserName', this.form.name, 1);
-            this.$cookie.set('RoleName', 'Leader', 1);
-            this.$router.push('/');
-          } else if (this.form.name === '3' &&
+          }
+          else if (this.form.name === '3' &&
               this.form.password === '123456') {
             sessionStorage.setItem('user', this.form.name);
             this.logining = false;
@@ -103,19 +104,19 @@ export default {
           } else {
             this.$alert('name or password wrong!', 'info', {
               confirmButtonText: 'ok'
-            });
+            })
           }
         } else {
           console.log('error submit!');
           return false;
         }
-      });
+      })
     },
     resetForm() {
       this.$refs.form.resetFields();
     }
   }
-};
+}
 </script>
 <style>
 .loginToHome {

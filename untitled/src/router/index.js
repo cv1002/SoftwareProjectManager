@@ -73,11 +73,11 @@ export default new Router({
                     component: () => import('../components/subviews/Individual'),
                     meta: { title: '项目个人进度' }
                 },
-                {
-                    path: '/journal',
-                    component: () => import('../components/subviews/Journal'),
-                    meta: { title: '项目日志记录' }
-                },
+                // {
+                //     path: '/journal',
+                //     component: () => import('../components/subviews/Journal'),
+                //     meta: { title: '项目日志记录' }
+                // },
                 {
                     path: '/person',
                     component: () => import('../components/subviews/Person'),
@@ -105,7 +105,7 @@ export default new Router({
                 },
                 {
                     path: '/progressset',
-                    component: () => import('../components/leaderviews/ProgressSet'),
+                    component: () => import('../components/subviews/Homework'),
                     meta: { title: '进度上传' }
                 },
                 {

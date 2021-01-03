@@ -81,7 +81,9 @@ export default {
       value6: null
     };
   },
-  methods: {}
+  methods: {
+
+  }
 };
 </script>
 
@@ -90,7 +92,6 @@ export default {
   font-size: 20px;
   text-decoration: none;
 }
-
 .div0 {
   margin-bottom: 50px;
 }

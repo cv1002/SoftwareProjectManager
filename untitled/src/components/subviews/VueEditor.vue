@@ -2,7 +2,7 @@
   <div>
     <div>
       <el-row :gutter="20">
-        <el-col v-for="(items,i) in tableData" :span="8">
+        <el-col v-for="(items,i) in tableData" :key="items" :span="8">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>交流讨论</span>
@@ -30,12 +30,12 @@
       <el-tag><span class="tag">编辑器</span></el-tag>
     </div>
     <div class="container">
-      <div>
-        <quill-editor ref="myTextEditor" v-model="content" :options="editorOption" class="areasize"></quill-editor>
+      <div class="plugins-tips">
+        Vue-Quill-Editor：基于Quill、适用于Vue2的富文本编辑器。
+        访问地址：<a href="https://github.com/surmon-china/vue-quill-editor" target="_blank">vue-quill-editor</a>
       </div>
-      <div>
-        <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
-      </div>
+      <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
+      <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
     </div>
   </div>
 </template>
@@ -47,7 +47,8 @@ import 'quill/dist/quill.bubble.css';
 import { quillEditor } from 'vue-quill-editor';
 
 export default {
-  data: function() {
+  name: 'editor',
+  data: function () {
     return {
       username: this.$cookie.get('UserName'),
       rolename: this.$cookie.get('RoleName'),
@@ -66,7 +67,7 @@ export default {
       }],
       content: '',
       editorOption: {
-        placeholder: '请输入互动内容'
+        placeholder: 'Hello World'
       }
     };
   },
@@ -74,14 +75,11 @@ export default {
     quillEditor
   },
   methods: {
+    onEditorChange({ editor, html, text }) {
+      this.content = html;
+    },
     submit() {
-      let now = new Date();
-      let textcontent = this.content.replace(/<[^>]+>/g, '');  //消除标签
-      let timenow = now.toLocaleString();
-      this.tableData.push({ date: timenow, name: this.username, comment: textcontent });
-      console.log(now.toLocaleString());
       console.log(this.content);
-      console.log(textcontent);
       this.$message.success('提交成功！');
     },
     cancel(i) {
@@ -90,40 +88,8 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 .editor-btn {
-  margin-top: 230px;
-}
-
-.areasize {
-
-  height: 230px;
-}
-
-.tag {
-  font-size: 20px;
-}
-
-.text {
-  font-size: 14px;
-}
-
-.item {
-  margin-bottom: 4px;
-}
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-
-.clearfix:after {
-  clear: both
-}
-
-.box-card {
-  height: 300px;
+  margin-top: 20px;
 }
 </style>

@@ -3,7 +3,7 @@
   <!-- <q-page class="q-pa-sm"> -->
   <div class="app-wrap">
     <div class="title">
-      <!-- <h1>甘特图</h1> -->
+      <h1>甘特图</h1>
     </div>
     <gantt-elastic :options="options" :tasks="tasks" @tasks-changed="tasksUpdate" @options-changed="optionsUpdate"
                    @dynamic-style-changed="styleUpdate">

@@ -20,10 +20,8 @@
       </div>
     </div>
     <div class="div4">
-      <div slot="tip" class="el-upload-list__item-name">文件拖到此处也可上传</div>
-      <div slot="tip" class="el-upload-list__item-name">&nbsp;&nbsp;&nbsp;{{
-          this.files === null ? '' : this.files.name
-        }}
+      <div slot="tip" class="el-upload-list__item-name">&nbsp;&nbsp;&nbsp;
+        {{ this.files === null ? '' : this.files.name }}
       </div>
     </div>
     <div class="div5">
@@ -32,10 +30,8 @@
         |&nbsp;确认上传
       </el-button>
     </div>
-
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -95,9 +91,8 @@ export default {
       }
     }
   }
-};
+}
 </script>
-
 <style scoped>
 .button1 {
   height: 70px;
@@ -108,7 +103,6 @@ export default {
   background-color: lightskyblue;
   color: white;
 }
-
 .div1 {
   background-image: url("../../statics/img/bg_homework.png");
   background-repeat: no-repeat;
@@ -130,7 +124,6 @@ export default {
   margin-top: 135px;
   margin-left: 40px;
 }
-
 .div4 {
   margin-left: 44%;
   margin-top: 50px;
@@ -148,7 +141,6 @@ export default {
   border-radius: 45px;
   font-size: 20px;
 }
-
 .crop-input {
   position: absolute;
   margin-left: 450px;
@@ -160,7 +152,4 @@ export default {
   opacity: 0;
   cursor: pointer;
 }
-
 </style>
-
-
