@@ -9,25 +9,25 @@
       <table class="table">
         <div class="label-margin">
           <el-row class="row_distance" style="margin-top: 30px">
-            组长：{{leadername}}
+            组长：{{ leadername }}
           </el-row>
           <el-row class="row_distance">
-            组名：{{groupname}}
+            组名：{{ groupname }}
           </el-row>
           <el-row class="row_distance">
-            题目：{{subject}}
+            题目：{{ subject }}
           </el-row>
           <el-row class="row_distance">
-            类型：{{type}}
+            类型：{{ type }}
           </el-row>
           <el-row class="row_distance">
-            时间：{{time}}
+            时间：{{ time }}
           </el-row>
           <el-row class="row_distance">
             小组成员名单：
           </el-row>
-          <el-row class="row_distance" v-for="(item,index) in groupmember" :key="index">
-            {{item.name}}
+          <el-row v-for="(item,index) in groupmember" :key="index" class="row_distance">
+            {{ item.name }}
           </el-row>
           <el-row class="row_distance">
             <el-button type="primary">审核通过</el-button>
@@ -64,10 +64,10 @@ export default {
     };
   },
   methods: {
-    CheckPass(){
+    CheckPass() {
       console.log('通过');
     },
-    CheckFail(){
+    CheckFail() {
       console.log('未通过');
     }
   }
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style scoped>
-.table{
+.table {
   margin-left: 13%;
   border: solid 1px;
   border-radius: 10px;
@@ -85,16 +85,19 @@ export default {
 .row_distance {
   margin-bottom: 20px;
 }
-.label-margin{
+
+.label-margin {
   margin-left: 30px;
 }
-.finish-wrap{
-  background-color:white;
-  height:100%;
+
+.finish-wrap {
+  background-color: white;
+  height: 100%;
   position: fixed;
   width: 100%;
 }
-.h{
+
+.h {
   position: absolute;
   margin-left: 25%;
   margin-top: 30px;

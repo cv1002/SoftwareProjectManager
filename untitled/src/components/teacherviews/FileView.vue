@@ -24,7 +24,7 @@ export default {
       pdfurl: [
         {
           name: 'PDF1',
-          url:'https://vue.warmnight.site/pmbook.pdf'
+          url: 'https://vue.warmnight.site/pmbook.pdf'
         },
         {
           name: 'PDF2',

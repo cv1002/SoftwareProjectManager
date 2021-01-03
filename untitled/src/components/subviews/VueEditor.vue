@@ -33,7 +33,7 @@
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-import {quillEditor} from 'vue-quill-editor';
+import { quillEditor } from 'vue-quill-editor';
 
 export default {
   name: 'editor',
@@ -46,7 +46,7 @@ export default {
       editorOption: {
         placeholder: 'Hello World'
       }
-    }
+    };
   },
   created() {
     this.fetchCommunications();
@@ -94,7 +94,7 @@ export default {
       });
     }
   }
-}
+};
 </script>
 
 <style>
@@ -106,9 +106,10 @@ export default {
 
 <style scoped>
 .editor-btn {
-  margin-top: 230px;
+  margin-top: 60px;
 }
-.areasize{
+
+.areasize {
   height: 230px;
 }
 

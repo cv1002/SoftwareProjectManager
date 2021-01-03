@@ -3,42 +3,36 @@
     <div>
       <el-row :gutter="20" class="div0">
         <el-col v-for="item in group" :key="item.no" :span="8">
-          <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}" class="font1"
-                       style="color: darkblue">
-            <el-card>
+
+          <el-card>
+            <router-link :to="{path: '/ogp', query: {groupnumber:item.no}}" class="font1"
+                         style="color: darkblue">
               <div class="text">小组{{ item.no }}</div>
-              <el-progress :color="colors1" :percentage="percentage" stroke-width="3" type="dashboard"></el-progress>
-              <div class="text">评价完成进度：</div>
-              <div class="text">
-                <el-button-group>
-                  <el-button icon="el-icon-minus" @click="decrease"></el-button>
-                  <el-button icon="el-icon-plus" @click="increase"></el-button>
-                </el-button-group>
-              </div>
-              <div class="text">评语：{{ comment }} <br>
-                <el-button plain type="primary" @click="centerDialogVisible = true">添加/修改</el-button>
-                <el-dialog :visible.sync="centerDialogVisible" center title="提示" width="30%">
-                  <el-input v-model="comment" placeholder="请输入评语"></el-input>
-                  <span slot="footer" class="dialog-footer">
+            </router-link>
+            <el-progress :color="colors1" :percentage="percentage" :stroke-width="3" type="dashboard"></el-progress>
+            <div class="text">评价完成进度：</div>
+            <div class="text">
+              <el-button-group>
+                <el-button icon="el-icon-minus" @click="decrease"></el-button>
+                <el-button icon="el-icon-plus" @click="increase"></el-button>
+              </el-button-group>
+            </div>
+            <div class="text">评语：{{ comment }} <br>
+              <el-button plain type="primary" @click="centerDialogVisible = true">添加/修改</el-button>
+              <el-dialog :visible.sync="centerDialogVisible" center title="提示" width="30%">
+                <el-input v-model="comment" placeholder="请输入评语"></el-input>
+                <span slot="footer" class="dialog-footer">
               <el-button @click="centerDialogVisible = false">取 消</el-button>
               <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
             </span>
-                </el-dialog>
-              </div>
-              <span class="text">评分：</span>
-              <el-rate v-model="item.value" show-text>
-              </el-rate>
-            </el-card>
-          </router-link>
+              </el-dialog>
+            </div>
+            <span class="text">评分：</span>
+            <el-rate v-model="item.value" show-text>
+            </el-rate>
+          </el-card>
         </el-col>
       </el-row>
-    </div>
-    <div class="">
-      <el-col :span="8">
-        <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
-                     class="font1" style="color: darkblue">{{ groupname2 }}
-        </router-link>
-      </el-col>
     </div>
   </div>
 </template>
