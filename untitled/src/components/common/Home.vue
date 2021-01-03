@@ -3,14 +3,13 @@
     <v-head></v-head>
     <v-sidebar></v-sidebar>
     <div :class="{'content-collapse':collapse}" class="content-box">
-<!--       <v-tags></v-tags>-->
       <div class="content">
         <transition mode="out-in" name="move">
           <keep-alive :include="tagsList">
             <router-view></router-view>
           </keep-alive>
         </transition>
-        <el-backtop target=".content"></el-backtop>
+        <el-backtop target=".content" />
       </div>
     </div>
   </div>

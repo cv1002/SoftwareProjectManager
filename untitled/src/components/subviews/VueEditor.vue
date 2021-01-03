@@ -2,12 +2,13 @@
   <div>
     <div>
       <el-row :gutter="20">
-        <el-col v-for="(items,i) in tableData" :key="items" :span="8">
+        <el-col v-for="(items,i) in tableData" :key="i" :span="8">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>交流讨论</span>
-              <el-button style="float: right; padding: 3px 0" type="text"
-                         v-if="rolename==='Teacher'" @click="cancel(i)">删除</el-button>
+              <el-button v-if="rolename==='Teacher'" style="float: right; padding: 3px 0"
+                         type="text" @click="cancel(i)">删除
+              </el-button>
             </div>
             <div class="user-info-list">
               日期：
@@ -29,10 +30,6 @@
       <el-tag><span class="tag">编辑器</span></el-tag>
     </div>
     <div class="container">
-      <div class="plugins-tips">
-        Vue-Quill-Editor：基于Quill、适用于Vue2的富文本编辑器。
-        访问地址：<a href="https://github.com/surmon-china/vue-quill-editor" target="_blank">vue-quill-editor</a>
-      </div>
       <quill-editor ref="myTextEditor" v-model="content" :options="editorOption"></quill-editor>
       <el-button class="editor-btn" type="primary" @click="submit">提交</el-button>
     </div>
@@ -47,7 +44,7 @@ import { quillEditor } from 'vue-quill-editor';
 
 export default {
   name: 'editor',
-  data: function () {
+  data: function() {
     return {
       username: this.$cookie.get('UserName'),
       rolename: this.$cookie.get('RoleName'),
@@ -81,8 +78,8 @@ export default {
       console.log(this.content);
       this.$message.success('提交成功！');
     },
-    cancel(i){
-      this.tableData.splice(i,1);
+    cancel(i) {
+      this.tableData.splice(i, 1);
     }
   }
 };

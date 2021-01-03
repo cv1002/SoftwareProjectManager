@@ -91,7 +91,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 <style scoped>
 .button1 {
@@ -103,6 +103,7 @@ export default {
   background-color: lightskyblue;
   color: white;
 }
+
 .div1 {
   background-image: url("../../statics/img/bg_homework.png");
   background-repeat: no-repeat;
@@ -124,6 +125,7 @@ export default {
   margin-top: 135px;
   margin-left: 40px;
 }
+
 .div4 {
   margin-left: 44%;
   margin-top: 50px;
@@ -141,6 +143,7 @@ export default {
   border-radius: 45px;
   font-size: 20px;
 }
+
 .crop-input {
   position: absolute;
   margin-left: 450px;

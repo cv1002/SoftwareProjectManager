@@ -27,8 +27,14 @@
           {{ item.name }}
         </el-row>
         <el-row class="row_distance">
-          <el-button type="primary">审核通过</el-button>
-          <el-button>审核未通过</el-button>
+          <el-button @click="dialogVisible = true" class='btn'>审核</el-button>
+          <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+            <span>是否通过审核</span>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogVisible = false">不通过审核</el-button>
+              <el-button type="primary" @click="dialogVisible = false">通过审核</el-button>
+            </span>
+          </el-dialog>
         </el-row>
       </table>
     </div>
@@ -39,6 +45,7 @@
 export default {
   data() {
     return {
+      dialogVisible: false,
       leadername: this.$route.query.name,
       groupname: 'group1',
       subject: '',   //题目
@@ -61,6 +68,13 @@ export default {
   methods: {
     deleteRow(index, rows) {
       rows.splice(index, 1);
+    },
+    handleClose(done) {
+    this.$confirm('确认关闭？')
+    .then(_ => {
+    done();
+    })
+    .catch(_ => {});
     }
   }
 };
@@ -77,5 +91,9 @@ export default {
 
 .row_distance {
   margin-bottom: 20px;
+}
+
+.btn {
+  color: darkslateblue;
 }
 </style>
