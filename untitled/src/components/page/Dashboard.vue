@@ -19,7 +19,7 @@
             <span> {{ login.location }}</span>
           </div>
         </el-card>
-        <el-card shadow="hover" style="height:270px;">
+        <el-card shadow="hover" style="height:270px;" v-if="this.role !== '老师'">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
@@ -40,12 +40,28 @@
             </el-table-column>
           </el-table>
         </el-card>
+        <el-card shadow="hover" style="height:270px;" v-if="this.role === '老师'">
+          <div slot="header" class="clearfix">
+            <span>项目进展</span>
+          </div>
+          <el-table :data="groupProgressData" style="width:100%">
+            <el-table-column label="实验进展阶段" prop="completion" />
+            <el-table-column label="最新上传的文件" prop="upToDateFile" />
+          </el-table>
+          <el-table :data="taskCompletion" style="width:100%">
+            <el-table-column label="总项目数">
+              <template slot-scope="scope">
+                <div>{{ scope.row['tasklength'] }}</div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-card>
       </el-col>
       <el-col :span="16">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
             <el-card :body-style="{padding: '0px'}" shadow="hover">
-              <router-link to="/groupinfo">
+              <router-link to="/groupinfo" v-if="this.role !== '老师'">
                 <div class="grid-content grid-con-1">
                   <i class="el-icon-lx-people grid-con-icon"></i>
                   <div class="grid-cont-right">
@@ -54,21 +70,40 @@
                   </div>
                 </div>
               </router-link>
+              <router-link to="/groupprogress" v-if="this.role === '老师'">
+                <div class="grid-content grid-con-1">
+                  <i class="el-icon-lx-people grid-con-icon"></i>
+                  <div class="grid-cont-right">
+                    <div>小组情况</div>
+                  </div>
+                </div>
+              </router-link>
             </el-card>
           </el-col>
           <el-col :span="8">
-            <el-card :body-style="{padding: '0px'}" shadow="hover">
+            <el-card :body-style="{padding: '0px'}" shadow="hover" v-if="this.role !== '老师'">
               <div class="grid-content grid-con-2">
                 <i class="el-icon-lx-notice grid-con-icon"></i>
                 <div class="grid-cont-right">
                   <div class="grid-num">{{ finishedtask }}</div>
                   <div>已完成任务数</div>
+                  <div v-if="this.role === '老师'">交流讨论</div>
                 </div>
               </div>
             </el-card>
+            <router-link to="/vueeditor" v-if="this.role === '老师'">
+              <el-card :body-style="{padding: '0px'}" shadow="hover">
+                <div class="grid-content grid-con-2">
+                  <i class="el-icon-connection grid-con-icon"></i>
+                  <div class="grid-cont-right">
+                    交流讨论
+                  </div>
+                </div>
+              </el-card>
+            </router-link>
           </el-col>
           <el-col :span="8">
-            <el-card :body-style="{padding: '0px'}" shadow="hover">
+            <el-card :body-style="{padding: '0px'}" shadow="hover" v-if="this.role !== '老师'">
               <div class="grid-content grid-con-3">
                 <i class="el-icon-lx-goods grid-con-icon"></i>
                 <div class="grid-cont-right">
@@ -77,6 +112,16 @@
                 </div>
               </div>
             </el-card>
+            <router-link to="/fileview" v-if="this.role === '老师'">
+              <el-card :body-style="{padding: '0px'}" shadow="hover">
+                <div class="grid-content grid-con-3">
+                  <i class="el-icon-s-order grid-con-icon"></i>
+                  <div class="grid-cont-right">
+                    文件预览
+                  </div>
+                </div>
+              </el-card>
+            </router-link>
           </el-col>
         </el-row>
         <el-card shadow="hover" style="height:410px;">

@@ -143,7 +143,7 @@ export default {
           [
             {
               icon: 'el-icon-lx-home',
-              index: 'teacherboard',
+              index: '/dashboard',
               title: '系统首页'
             },
             {

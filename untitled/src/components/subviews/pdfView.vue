@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :style="{width:pdfsize+'%'}" class="pdf-style">
-      <iframe ref="pdf" :page="pageNum" :rotate="pageRotate" :src="url" frameborder="0"
+      <iframe ref="pdf" :page="pageNum" :rotate="pageRotate" :src="url"
               style="width: 1000px; height: 1000px" @error="pdfError($event)" @progress="loadedRatio = $event"
               @page-loaded="pageLoaded($event)" @num-pages="pageTotalNum=$event" @link-clicked="page = $event">
       </iframe>

@@ -21,11 +21,6 @@ export default new Router({
                     meta: { title: '系统首页' }
                 },
                 {
-                    path: '/teacherboard',
-                    component: () => import('../components/teacherviews/DashboardOfTeachers'),
-                    meta: { title: '老师首页' }
-                },
-                {
                     // 图片上传组件
                     path: '/upload',
                     component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
