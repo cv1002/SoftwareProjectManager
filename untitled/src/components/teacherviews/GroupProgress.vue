@@ -3,15 +3,42 @@
     <el-row :gutter="20" class="div0">
         <el-col v-for="item in group" :key="item.no" :span="8">
           <el-card>
-          <!-- <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
+          <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
                        class="font1" style="color: darkblue">{{ groupname1 }}
-          </router-link> -->
-          <div class='text'>小组{{item.no}}</div>
-          <el-progress :percentage="item.percent" :status="item.status" type="circle"></el-progress>
-          <div class='text'>评分:<el-rate v-model="item.grade"></el-rate></div>
-          <div class='text'>评论：{{item.comment}}</div>
-          </el-card>
+          </router-link>
         </el-col>
+      </div>
+      <div class="">
+        <el-col :span="8">
+          <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
+                       class="font1" style="color: darkblue">{{ groupname2 }}
+          </router-link>
+        </el-col>
+      </div>
+      <div class="">
+        <el-col :span="8">
+          <p>group3</p>
+        </el-col>
+      </div>
+    </el-row>
+    <el-row>
+      <div class="">
+        <el-col :span="8">
+          <p>group4</p>
+        </el-col>
+      </div>
+      <div class="">
+        <el-col :span="8">
+          <p>group5</p>
+          <el-progress :percentage="50" status="exception" type="circle"></el-progress>
+        </el-col>
+      </div>
+      <div class="">
+        <el-col :span="8">
+          <p>group6</p>
+          <el-progress :percentage="50" status="exception" type="circle"></el-progress>
+        </el-col>
+      </div>
     </el-row>
   </div>
 </template>
@@ -59,9 +86,7 @@ export default {
       ]
     };
   },
-  methods: {
-
-  }
+  methods: {}
 };
 </script>
 
@@ -70,6 +95,7 @@ export default {
   font-size: 20px;
   text-decoration: none;
 }
+
 .div0 {
   margin-bottom: 50px;
 }

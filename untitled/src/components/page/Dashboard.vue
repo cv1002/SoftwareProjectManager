@@ -11,15 +11,15 @@
             </div>
           </div>
           <div class="user-info-list">
-            当前时间：<span>{{nowDate}}{{nowWeek}}{{nowTime}}</span>
-            <!-- <span>{{ login.date }}</span> -->
+            本次登录时间：
+            <span>{{ login.date }}</span>
           </div>
           <div class="user-info-list">
-            当前地点：
+            本次登录地点：
             <span> {{ login.location }}</span>
           </div>
         </el-card>
-        <el-card shadow="hover" style="height:270px;">
+        <el-card v-if="this.role !== '老师'" shadow="hover" style="height:270px;">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
@@ -40,12 +40,28 @@
             </el-table-column>
           </el-table>
         </el-card>
+        <el-card v-if="this.role === '老师'" shadow="hover" style="height:270px;">
+          <div slot="header" class="clearfix">
+            <span>项目进展</span>
+          </div>
+          <el-table :data="groupProgressData" style="width:100%">
+            <el-table-column label="实验进展阶段" prop="completion" />
+            <el-table-column label="最新上传的文件" prop="upToDateFile" />
+          </el-table>
+          <el-table :data="taskCompletion" style="width:100%">
+            <el-table-column label="总项目数">
+              <template slot-scope="scope">
+                <div>{{ scope.row['tasklength'] }}</div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-card>
       </el-col>
       <el-col :span="16">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
             <el-card :body-style="{padding: '0px'}" shadow="hover">
-              <router-link to="/groupinfo">
+              <router-link v-if="this.role !== '老师'" to="/groupinfo">
                 <div class="grid-content grid-con-1">
                   <i class="el-icon-lx-people grid-con-icon"></i>
                   <div class="grid-cont-right">
@@ -54,21 +70,40 @@
                   </div>
                 </div>
               </router-link>
+              <router-link v-if="this.role === '老师'" to="/groupprogress">
+                <div class="grid-content grid-con-1">
+                  <i class="el-icon-lx-people grid-con-icon"></i>
+                  <div class="grid-cont-right">
+                    <div>小组情况</div>
+                  </div>
+                </div>
+              </router-link>
             </el-card>
           </el-col>
           <el-col :span="8">
-            <el-card :body-style="{padding: '0px'}" shadow="hover">
+            <el-card v-if="this.role !== '老师'" :body-style="{padding: '0px'}" shadow="hover">
               <div class="grid-content grid-con-2">
                 <i class="el-icon-lx-notice grid-con-icon"></i>
                 <div class="grid-cont-right">
                   <div class="grid-num">{{ finishedtask }}</div>
                   <div>已完成任务数</div>
+                  <div v-if="this.role === '老师'">交流讨论</div>
                 </div>
               </div>
             </el-card>
+            <router-link v-if="this.role === '老师'" to="/vueeditor">
+              <el-card :body-style="{padding: '0px'}" shadow="hover">
+                <div class="grid-content grid-con-2">
+                  <i class="el-icon-connection grid-con-icon"></i>
+                  <div class="grid-cont-right">
+                    交流讨论
+                  </div>
+                </div>
+              </el-card>
+            </router-link>
           </el-col>
           <el-col :span="8">
-            <el-card :body-style="{padding: '0px'}" shadow="hover">
+            <el-card v-if="this.role !== '老师'" :body-style="{padding: '0px'}" shadow="hover">
               <div class="grid-content grid-con-3">
                 <i class="el-icon-lx-goods grid-con-icon"></i>
                 <div class="grid-cont-right">
@@ -77,6 +112,16 @@
                 </div>
               </div>
             </el-card>
+            <router-link v-if="this.role === '老师'" to="/fileview">
+              <el-card :body-style="{padding: '0px'}" shadow="hover">
+                <div class="grid-content grid-con-3">
+                  <i class="el-icon-s-order grid-con-icon"></i>
+                  <div class="grid-cont-right">
+                    文件预览
+                  </div>
+                </div>
+              </el-card>
+            </router-link>
           </el-col>
         </el-row>
         <el-card shadow="hover" style="height:410px;">
@@ -118,13 +163,11 @@ import Schart from 'vue-schart';
 export default {
   name: 'dashboard',
   created() {
-    this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
+    this.fetchRole() || this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
   },
   data() {
     return {
-    nowDate: "", // 当前日期
-    nowTime: "", // 当前时间
-    nowWeek: "", // 当前星期
+      role: undefined,
       finishedtask: undefined,
       unfinishedtask: undefined,
       tasks: [],
@@ -134,7 +177,7 @@ export default {
       }],
       login: {
         date: undefined,
-        location: '陕西省西安市'
+        location: '西安'
       },
       numberofmembers: undefined,
       todoList: [],
@@ -150,19 +193,19 @@ export default {
   computed: {
     name() {
       return this.$cookie.get('UserName');
-    },
-    role() {
-      if (this.$cookie.get('RoleName') === 'Teacher') {
-        return '老师';
-      } else if (this.$cookie.get('RoleName') === 'Leader') {
-        return '组长';
-      } else {
-        return '普通用户';
-      }
     }
   },
   methods: {
-      dealWithTime(data) { // 获取当前时间
+    fetchRole() {
+      if (this.$cookie.get('RoleName') === 'Teacher') {
+        this.role = '老师';
+      } else if (this.$cookie.get('RoleName') === 'Leader') {
+        this.role = '小组: ' + '"' + this.$cookie.get('TeamName') + '"' + ' 组长';
+      } else {
+        this.role = '小组: ' + '"' + this.$cookie.get('TeamName') + '"' + ' 组员';
+      }
+    },
+    dealWithTime(data) { // 获取当前时间
       let formatDateTime;
       let Y = data.getFullYear();
       let M = data.getMonth() + 1;
@@ -171,11 +214,40 @@ export default {
       let Min = data.getMinutes();
       let S = data.getSeconds();
       let W = data.getDay();
-      H = H < 10 ? "0" + H : H; Min=Min < 10 ? "0" + Min : Min; S=S < 10 ? "0" + S : S; switch (W) { case 0: W="日" ;
-        break; case 1: W="一" ; break; case 2: W="二" ; break; case 3: W="三" ; break; case 4: W="四" ; break; case 5: W="五"
-        ; break; case 6: W="六" ; break; default: break; } this.nowDate=Y + "年" + M + "月" + D + "日 " ; this.nowWeek="周" +
-        W ; this.nowTime=H + ":" + Min + ":" + S; // formatDateTime=Y + "年" + M + "月" + D + "日 " + " 周" +W + H + ":" +
-        Min + ":" + S; },
+      H = H < 10 ? '0' + H : H;
+      Min = Min < 10 ? '0' + Min : Min;
+      S = S < 10 ? '0' + S : S;
+      switch (W) {
+        case 0:
+          W = '日';
+          break;
+        case 1:
+          W = '一';
+          break;
+        case 2:
+          W = '二';
+          break;
+        case 3:
+          W = '三';
+          break;
+        case 4:
+          W = '四';
+          break;
+        case 5:
+          W = '五'
+          ;
+          break;
+        case 6:
+          W = '六';
+          break;
+        default:
+          break;
+      }
+      this.nowDate = Y + '年' + M + '月' + D + '日 ';
+      this.nowWeek = '周' +
+          W;
+      this.nowTime = H + ':' + Min + ':' + S; // formatDateTime=Y + "年" + M + "月" + D + "日 " + " 周" +W + H + ":" + Min + ':' + S;
+    },
     fetchLocationAndDate() {
       this.login.date = new Date().toLocaleDateString();
       this.login.location = '西安';
@@ -356,31 +428,24 @@ export default {
       }).catch(() => this.$message('已取消删除'));
     }
   },
-  created() {
-    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
-  },
-    mounted() {
+  mounted() {
     // 页面加载完后显示当前时间
-    this.dealWithTime(new Date())
+    this.dealWithTime(new Date());
     // 定时刷新时间
-    this.timer = setInterval(()=> {
-    this.dealWithTime(new Date()) // 修改数据date
-    }, 500)
-    },
-    destroyed() {
+    this.timer = setInterval(() => {
+      this.dealWithTime(new Date()); // 修改数据date
+    }, 500);
+  },
+  destroyed() {
     if (this.timer) { // 注意在vue实例销毁前，清除我们的定时器
-    clearInterval(this.timer);
+      clearInterval(this.timer);
     }
-    }
+  }
 };
 </script>
 
 
 <style scoped>
-.el-row {
-  margin-bottom: 20px;
-}
-
 .grid-content {
   display: flex;
   align-items: center;
@@ -474,23 +539,5 @@ export default {
 
 .todo-item {
   font-size: 14px;
-}
-
-.todo-item-del {
-  text-decoration: line-through;
-  color: #999;
-}
-
-.schart {
-  width: 100%;
-  height: 300px;
-}
-
-.message-title {
-  cursor: pointer;
-}
-
-.handle-row {
-  margin-top: 30px;
 }
 </style>
