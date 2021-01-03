@@ -538,6 +538,7 @@ export default {
 .mgb20 {
   margin-bottom: 20px;
 }
+
 .todo-item {
   font-size: 14px;
 }

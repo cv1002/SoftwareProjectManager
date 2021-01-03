@@ -5,15 +5,15 @@
         <el-table :data="tableData" :show-header="false" style="width:100%;">
           <el-table-column>
             <template slot-scope="scope">
-                <el-card class="box-card">
-                  <div slot="header" class="clearfix">
-                    <div>交流讨论[{{scope.row['CommunicationID']}}]</div>
-                    <div>UserID：{{ scope.row['UserID'] }}</div>
-                  </div>
-                  <div class="user-info-list">
-                    评论：<span v-html="scope.row['Context']"></span>
-                  </div>
-                </el-card>
+              <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                  <div>交流讨论[{{ scope.row['CommunicationID'] }}]</div>
+                  <div>UserID：{{ scope.row['UserID'] }}</div>
+                </div>
+                <div class="user-info-list">
+                  评论：<span v-html="scope.row['Context']"></span>
+                </div>
+              </el-card>
             </template>
           </el-table-column>
         </el-table>
@@ -66,11 +66,11 @@ export default {
         method: 'POST',
         data: formData
       }).then(response => {
-            if (response.data['resultInfo'] !== '无权访问！！') {
-              this.tableData = response.data;
-            } else {
-              this.$message.error(response.data['resultInfo']);
-            }
+        if (response.data['resultInfo'] !== '无权访问！！') {
+          this.tableData = response.data;
+        } else {
+          this.$message.error(response.data['resultInfo']);
+        }
       });
     },
     submit() {
@@ -79,13 +79,13 @@ export default {
       formData.append('UserPassword', this.$cookie.get('UserPassword'));
       formData.append('TeamID', this.$cookie.get('TeamID'));
       formData.append('Context', this.content);
-      console.log(this.content)
+      console.log(this.content);
       this.$axios({
         url: '/communication',
         method: 'POST',
         data: formData
       }).then(response => {
-        console.log(response)
+        console.log(response);
         if (response.data['resultInfo'] !== '无权访问！！') {
           this.$message.success(response.data['resultInfo']);
           this.fetchCommunications();

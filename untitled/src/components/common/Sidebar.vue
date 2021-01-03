@@ -139,34 +139,33 @@ export default {
           title: '交流讨论'
         }
       ],
-      items3:
-          [
-            {
-              icon: 'el-icon-lx-home',
-              index: '/dashboard',
-              title: '系统首页'
-            },
-            {
-              icon: 'el-icon-s-custom',
-              index: 'groupprogress',
-              title: '项目各小组进度'
-            },
-            {
-              icon: 'el-icon-chat-line-round',
-              index: 'vueeditor',
-              title: '交流讨论'
-            },
-            {
-              icon: 'el-icon-reading',
-              index: 'fileview',
-              title: '文件预览'
-            },
-            {
-              icon: 'el-icon-check',
-              index: 'checkpage',
-              title: '审核页面'
-            }
-          ]
+      items3: [
+        {
+          icon: 'el-icon-lx-home',
+          index: 'dashboard',
+          title: '系统首页'
+        },
+        {
+          icon: 'el-icon-s-custom',
+          index: 'groupprogress',
+          title: '项目各小组进度'
+        },
+        {
+          icon: 'el-icon-chat-line-round',
+          index: 'vueeditor',
+          title: '交流讨论'
+        },
+        {
+          icon: 'el-icon-reading',
+          index: 'fileview',
+          title: '文件预览'
+        },
+        {
+          icon: 'el-icon-check',
+          index: 'checkpage',
+          title: '审核页面'
+        }
+      ]
     };
   },
   computed: {

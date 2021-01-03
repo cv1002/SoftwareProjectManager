@@ -4,7 +4,7 @@
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
+            <img alt class="user-avator" src="../../statics/img/g.jpg" />
             <div class="user-info-cont">
               <div class="user-info-name">{{ name }}</div>
               <div>{{ role }}</div>
@@ -24,7 +24,7 @@
       <el-col :span="16">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
-            <router-link to="/groupprogress" style="color: black">
+            <router-link style="color: black" to="/groupprogress">
               <el-card :body-style="{padding: '0px'}" shadow="hover">
                 <div class="grid-content grid-con-1">
                   <i class="el-icon-lx-people grid-con-icon"></i>
@@ -62,34 +62,34 @@
             </router-link>
           </el-col>
         </el-row>
-<!--        <el-card shadow="hover" style="height:403px;">-->
-<!--          <div slot="header" class="clearfix">-->
-<!--            <span>待办事项</span>-->
-<!--            <el-button style="float: right; padding: 3px 0" type="text" @click="addTodoListItem">添加</el-button>-->
-<!--          </div>-->
-<!--          <el-table :data="todoList" :show-header="false" style="width:100%;">-->
-<!--            <el-table-column width="40">-->
-<!--              <template slot-scope="scope">-->
-<!--                <el-checkbox v-model="scope.row['FinishState'] === 0" @change="finishTodoListItem(scope.$index)" />-->
-<!--              </template>-->
-<!--            </el-table-column>-->
-<!--            <el-table-column>-->
-<!--              <template slot-scope="scope">-->
-<!--                <div :class="{'todo-item-del': scope.row['FinishState'] === 0}" class="todo-item">-->
-<!--                  {{ scope.row['TodoThings'] }}-->
-<!--                </div>-->
-<!--              </template>-->
-<!--            </el-table-column>-->
-<!--            <el-table-column width="80">-->
-<!--              <template slot-scope="scope">-->
-<!--                <el-button class="el-icon-edit" style="padding:2px;font-size:13px;"-->
-<!--                           type="primary" @click.native.prevent="updateTodoListItem(scope.$index)"></el-button>-->
-<!--                <el-button class="el-icon-delete" style="padding:2px;font-size:13px;"-->
-<!--                           type="danger" @click.native.prevent="deleteTodoListItem(scope.$index)"></el-button>-->
-<!--              </template>-->
-<!--            </el-table-column>-->
-<!--          </el-table>-->
-<!--        </el-card>-->
+        <!--        <el-card shadow="hover" style="height:403px;">-->
+        <!--          <div slot="header" class="clearfix">-->
+        <!--            <span>待办事项</span>-->
+        <!--            <el-button style="float: right; padding: 3px 0" type="text" @click="addTodoListItem">添加</el-button>-->
+        <!--          </div>-->
+        <!--          <el-table :data="todoList" :show-header="false" style="width:100%;">-->
+        <!--            <el-table-column width="40">-->
+        <!--              <template slot-scope="scope">-->
+        <!--                <el-checkbox v-model="scope.row['FinishState'] === 0" @change="finishTodoListItem(scope.$index)" />-->
+        <!--              </template>-->
+        <!--            </el-table-column>-->
+        <!--            <el-table-column>-->
+        <!--              <template slot-scope="scope">-->
+        <!--                <div :class="{'todo-item-del': scope.row['FinishState'] === 0}" class="todo-item">-->
+        <!--                  {{ scope.row['TodoThings'] }}-->
+        <!--                </div>-->
+        <!--              </template>-->
+        <!--            </el-table-column>-->
+        <!--            <el-table-column width="80">-->
+        <!--              <template slot-scope="scope">-->
+        <!--                <el-button class="el-icon-edit" style="padding:2px;font-size:13px;"-->
+        <!--                           type="primary" @click.native.prevent="updateTodoListItem(scope.$index)"></el-button>-->
+        <!--                <el-button class="el-icon-delete" style="padding:2px;font-size:13px;"-->
+        <!--                           type="danger" @click.native.prevent="deleteTodoListItem(scope.$index)"></el-button>-->
+        <!--              </template>-->
+        <!--            </el-table-column>-->
+        <!--          </el-table>-->
+        <!--        </el-card>-->
       </el-col>
     </el-row>
   </el-card>
@@ -111,7 +111,7 @@ export default {
         place: '西安'
       },
       numberofmembers: undefined,
-      todoList: undefined,
+      todoList: undefined
 
     };
   },
@@ -129,7 +129,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 
@@ -225,6 +225,7 @@ export default {
   display: inline-block;
   margin: 20px;
 }
+
 .schart {
   width: 100%;
   height: 300px;

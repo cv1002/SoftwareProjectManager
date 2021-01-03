@@ -27,8 +27,8 @@
           {{ item.name }}
         </el-row>
         <el-row class="row_distance">
-          <el-button @click="dialogVisible = true" class='btn'>审核</el-button>
-          <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+          <el-button class="btn" @click="dialogVisible = true">审核</el-button>
+          <el-dialog :before-close="handleClose" :visible.sync="dialogVisible" title="提示" width="30%">
             <span>是否通过审核</span>
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogVisible = false">不通过审核</el-button>
@@ -70,11 +70,12 @@ export default {
       rows.splice(index, 1);
     },
     handleClose(done) {
-    this.$confirm('确认关闭？')
-    .then(_ => {
-    done();
-    })
-    .catch(_ => {});
+      this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {
+          });
     }
   }
 };
