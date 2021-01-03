@@ -19,7 +19,7 @@
             <span>{{ login.location }}</span>
           </div>
         </el-card>
-        <el-card v-if="this.role !== '老师'" shadow="hover" style="height:270px;">
+        <el-card shadow="hover" style="height:270px;">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
@@ -40,28 +40,12 @@
             </el-table-column>
           </el-table>
         </el-card>
-        <el-card v-if="this.role === '老师'" shadow="hover" style="height:270px;">
-          <div slot="header" class="clearfix">
-            <span>项目进展</span>
-          </div>
-          <el-table :data="groupProgressData" style="width:100%">
-            <el-table-column label="实验进展阶段" prop="completion" />
-            <el-table-column label="最新上传的文件" prop="upToDateFile" />
-          </el-table>
-          <el-table :data="taskCompletion" style="width:100%">
-            <el-table-column label="总项目数">
-              <template slot-scope="scope">
-                <div>{{ scope.row['tasklength'] }}</div>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-card>
       </el-col>
       <el-col :span="16">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
             <el-card :body-style="{padding: '0px'}" shadow="hover">
-              <router-link v-if="this.role !== '老师'" to="/groupinfo">
+              <router-link to="/groupinfo">
                 <div class="grid-content grid-con-1">
                   <i class="el-icon-lx-people grid-con-icon"></i>
                   <div class="grid-cont-right">
@@ -81,7 +65,7 @@
             </el-card>
           </el-col>
           <el-col :span="8">
-            <el-card v-if="this.role !== '老师'" :body-style="{padding: '0px'}" shadow="hover">
+            <el-card :body-style="{padding: '0px'}" shadow="hover">
               <div class="grid-content grid-con-2">
                 <i class="el-icon-lx-notice grid-con-icon"></i>
                 <div class="grid-cont-right">
@@ -102,7 +86,7 @@
             </router-link>
           </el-col>
           <el-col :span="8">
-            <el-card v-if="this.role !== '老师'" :body-style="{padding: '0px'}" shadow="hover">
+            <el-card :body-style="{padding: '0px'}" shadow="hover">
               <div class="grid-content grid-con-3">
                 <i class="el-icon-lx-goods grid-con-icon"></i>
                 <div class="grid-cont-right">
@@ -162,7 +146,7 @@ import Schart from 'vue-schart';
 export default {
   name: 'dashboard',
   created() {
-    this.fetchRole() || this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
+    this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
   },
   mounted() {
     // 页面加载完后显示当前时间
@@ -179,7 +163,9 @@ export default {
   },
   data() {
     return {
-      role: undefined,
+    nowDate: "", // 当前日期
+    nowTime: "", // 当前时间
+    nowWeek: "", // 当前星期
       finishedtask: undefined,
       unfinishedtask: undefined,
       tasks: [],
@@ -210,16 +196,14 @@ export default {
   computed: {
     name() {
       return this.$cookie.get('UserName');
-    }
-  },
-  methods: {
-    fetchRole() {
+    },
+    role() {
       if (this.$cookie.get('RoleName') === 'Teacher') {
-        this.role = '老师';
+        return '老师';
       } else if (this.$cookie.get('RoleName') === 'Leader') {
-        this.role = '小组: ' + '"' + this.$cookie.get('TeamName') + '"' + ' 组长';
+        return '组长';
       } else {
-        this.role = '小组: ' + '"' + this.$cookie.get('TeamName') + '"' + ' 组员';
+        return '普通用户';
       }
     },
     dealWithTime(data) { // 获取当前时间
@@ -448,6 +432,10 @@ export default {
 
 
 <style scoped>
+.el-row {
+  margin-bottom: 20px;
+}
+
 .grid-content {
   display: flex;
   align-items: center;
