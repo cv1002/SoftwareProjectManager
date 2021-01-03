@@ -1,7 +1,6 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :span="4" />
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
