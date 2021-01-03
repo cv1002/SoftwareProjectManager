@@ -127,6 +127,11 @@ export default new Router({
                     path: '/checkpage',
                     component: () => import('../components/teacherviews/CheckPage'),
                     meta: { title: '审查页面' }
+                },
+                {
+                    path: '/checkpageplus',
+                    component: () => import('../components/teacherviews/CheckPagePlus'),
+                    meta: { title: '审核' }
                 }
             ]
         },

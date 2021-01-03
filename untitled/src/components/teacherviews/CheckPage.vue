@@ -1,10 +1,9 @@
 <template>
   <div>
     <div style="width: 10%;height: 100%;float: left">
-      1
+      &nbsp;
     </div>
     <div style="width: 70%;height: 400px;float: left">
-      2
       <el-table
           :data="tableData"
           style="width: 100%">
@@ -21,7 +20,7 @@
         <el-table-column align="center" label="状态">
           <template slot-scope="scope">
             <el-tag
-                :type="scope.row.status==='成功'?'success':(scope.row.status==='失败'?'danger':'')"
+                :type="scope.row.status==='审核通过'?'success':(scope.row.status==='未通过'?'danger':'')"
             >{{ scope.row.status }}
             </el-tag>
           </template>
@@ -34,16 +33,13 @@
             <el-button
                 size="small"
                 type="text"
-                @click.native.prevent="deleteRow(scope.$index, tableData)">
-              移除
+                @click.native.prevent="check(scope.$index, tableData)">
+              审核
             </el-button>
           </template>
         </el-table-column>
       </el-table>
       <hr>
-      <p>审理人意见</p>
-      <el-button type="primary">审核通过</el-button>
-      <el-button>审核不通过</el-button>
     </div>
   </div>
 </template>
@@ -56,25 +52,25 @@ export default {
       tableData: [{
         date: '2016-05-02',
         name: '王小虎',
-        status: '成功'
+        status: '审核通过'
       }, {
         date: '2016-05-04',
-        name: '王小虎',
-        status: '失败'
+        name: '张学良',
+        status: '待审核'
       }, {
         date: '2016-05-01',
-        name: '王小虎',
-        status: '上海市普陀区金沙江路 1519 弄'
+        name: '蒋介石',
+        status: '未通过'
       }, {
         date: '2016-05-03',
-        name: '王小虎',
-        status: '上海市普陀区金沙江路 1516 弄'
+        name: '蔡徐坤',
+        status: '未通过'
       }]
     };
   },
   methods: {
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
+    check(index,rows){
+      this.$router.push({path:'/checkpageplus',query:{name:rows[index].name}});
     }
   }
 };
