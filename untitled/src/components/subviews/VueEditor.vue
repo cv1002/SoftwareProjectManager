@@ -6,9 +6,8 @@
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>交流讨论</span>
-              <el-button v-if="rolename==='Teacher'" style="float: right; padding: 3px 0"
-                         type="text" @click="cancel(i)">删除
-              </el-button>
+              <el-button style="float: right; padding: 3px 0" type="text"
+                         v-if="rolename==='Teacher'" @click="cancel(i)">删除</el-button>
             </div>
             <div class="user-info-list">
               日期：
@@ -48,7 +47,7 @@ import { quillEditor } from 'vue-quill-editor';
 
 export default {
   name: 'editor',
-  data: function() {
+  data: function () {
     return {
       username: this.$cookie.get('UserName'),
       rolename: this.$cookie.get('RoleName'),
@@ -82,8 +81,8 @@ export default {
       console.log(this.content);
       this.$message.success('提交成功！');
     },
-    cancel(i) {
-      this.tableData.splice(i, 1);
+    cancel(i){
+      this.tableData.splice(i,1);
     }
   }
 };

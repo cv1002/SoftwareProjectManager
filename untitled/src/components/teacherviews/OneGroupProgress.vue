@@ -9,15 +9,11 @@
       </div>
       <div style="float: left;width:40%">
         小组成员
-        <p v-for="item in group[groupnumber].group">{{ item.membername }}</p>
+        <p v-for="item in group[groupnumber].group">{{item.membername}}</p>
       </div>
       <div style="float: left;width:30%">
         进度
       </div>
-    </div>
-    <div>
-      <div>评语</div>
-      <div>最终得分</div>
     </div>
   </div>
 </template>
@@ -31,25 +27,25 @@ export default {
       group: [
         {
           group: [
-            { membername: 'zhang' },
+            { membername: 'zhang'},
             { membername: 'wang' },
-            { membername: 'li' },
+            { membername: 'li'},
             { membername: 'zhu' },
             { membername: 'wu' },
-            { membername: 'shan' }
+            { membername: 'shan'}
           ]
         },
         {
           group: [
-            { membername: 'zhang' },
+            { membername: 'zhang'},
             { membername: 'wang' },
             { membername: 'li' },
             { membername: 'zhu' },
-            { membername: 'wu' },
-            { membername: 'shan' }
+            { membername: 'wu'},
+            { membername: 'shan'}
           ]
         }
-      ]
+      ],
     };
   }
 };

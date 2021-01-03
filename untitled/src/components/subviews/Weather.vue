@@ -30,7 +30,7 @@ export default {
         'key': 'ZBq0HxyLbF'
       }
     };
-    (function(d) {
+    (function (d) {
       var c = d.createElement('link');
       c.rel = 'stylesheet';
       c.href = 'https://apip.weatherdt.com/simple/static/css/weather-simple.css?v=2.0';

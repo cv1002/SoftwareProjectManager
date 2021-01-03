@@ -22,6 +22,7 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm()">登录</el-button>
         </div>
+        <p class="login-tips">密码114514</p>
       </el-form>
     </div>
   </div>
@@ -54,20 +55,21 @@ export default {
             url: '/login',
             method: 'POST',
             data: formData
-          }).then(response => {
-            if (response.data['finish'] === 'wrong password') {
-              this.$message.error(response.data['finish']);
-            } else {
-              this.$message.success(response.data['finish']);
-              this.$cookie.set('LoginType', response.data['loginType']);
-              this.$cookie.set('TeamID', response.data['teamID']);
-              this.$cookie.set('UserName', response.data['userName']);
-              this.$cookie.set('TeamName', response.data['teamName']);
-              this.$cookie.set('RoleName', response.data['roleName']);
-              this.$cookie.set('TeamName', response.data['teamName']);
-              this.$router.push('/');
-            }
-          }).catch(err => {
+          }).then(
+              resolve => {
+                console.log(resolve.data);
+                this.$message.success(resolve.data['finish']);
+                this.$cookie.set('LoginType', resolve.data['loginType']);
+                this.$cookie.set('TeamID', resolve.data['teamID']);
+                this.$cookie.set('UserName', resolve.data['userName']);
+                this.$cookie.set('TeamName', resolve.data['teamName']);
+                this.$cookie.set('RoleName', resolve.data['roleName']);
+                this.$router.push('/');
+              },
+              reject => {
+                this.$message.error(reject);
+              }
+          ).catch(err => {
             console.log(err);
           });
         } else {
