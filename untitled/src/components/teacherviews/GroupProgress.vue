@@ -3,10 +3,9 @@
     <div>
     <el-row :gutter="20" class="div0">
         <el-col v-for="item in group" :key="item.no" :span="8">
+          <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}" class="font1"
+            style="color: darkblue">
           <el-card>
-          <!-- <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
-                       class="font1" style="color: darkblue">{{ groupname1 }}
-          </router-link> -->
           <div class='text'>小组{{item.no}}</div>
           <el-progress type="dashboard" :percentage="percentage" :color="colors1" stroke-width='3'></el-progress>
           <div class='text'>评价完成进度：</div>
@@ -29,6 +28,7 @@
           <span class="text">评分：</span><el-rate v-model="item.value" show-text>
           </el-rate>
           </el-card>
+          </router-link>
         </el-col>
     </el-row>
   </div>
