@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-row :gutter="20">
+      <el-col :span="4" />
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
@@ -171,6 +172,9 @@ export default {
       finishedtask: undefined,
       unfinishedtask: undefined,
       tasks: [],
+      nowdate: '',
+      nowTime: '',
+      nowWeek: '',
       taskCompletion: [{
         percentage: 0,
         tasklength: 0
@@ -234,8 +238,7 @@ export default {
           W = '四';
           break;
         case 5:
-          W = '五'
-          ;
+          W = '五';
           break;
         case 6:
           W = '六';
