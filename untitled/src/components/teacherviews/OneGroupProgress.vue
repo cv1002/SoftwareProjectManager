@@ -1,31 +1,31 @@
 <template>
   <div>
     <el-row :gutter="8">
-      <el-col :span="6">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>小组1成员</span>
-          </div>
-          <div v-for="item in group[groupnumber].group" :key="item" class="text item">
-            {{ item.membername }}
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="6">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>提交文件</span>
-          </div>
-          <router-link class="font1" style="color: darkblue"
-                       to="/fileview">
-            <div v-for="o in 4" :key="o" class="text item">
-              {{ '文件 ' + o }}
-            </div>
-          </router-link>
-        </el-card>
-      </el-col>
-      <el-col :span="6">
-        <el-card class="box-card" shadow="hover">
+    <el-col :span='6'>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>小组1成员</span>
+        </div>
+        <div v-for="item in group[groupnumber].group" :key="item" class="text item">
+          {{ item.membername }}
+        </div>
+      </el-card>
+    </el-col>
+    <el-col :span='6'>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>提交文件</span>
+        </div>
+        <div v-for="o in 4" :key="o" class="text item">
+        <router-link :to="{path:'/fileview',query:{url:'https://vue.warmnight.site/pmbook.pdf'}}" class="font1"
+          style="color: darkblue">
+            {{'文件 ' + o }}           
+        </router-link>
+         </div>
+      </el-card>
+    </el-col>
+    <el-col :span='6'>
+        <el-card shadow="hover" class="box-card">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
@@ -46,18 +46,20 @@
             </el-table-column>
           </el-table>
         </el-card>
-      </el-col>
-      <el-col :span="6">
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            最终评分
-            <el-button style="float: right; padding: 3px 0" type="text" @click="centerDialogVisible = true">修改
-            </el-button>
-            <el-dialog :visible.sync="centerDialogVisible" center title="提示" width="30%">
-              <el-input v-model="score" placeholder="请输入得分（0~100）"></el-input>
-              <span slot="footer" class="dialog-footer">
-              <el-button @click="centerDialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+    </el-col>
+    <el-col :span='6'>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          最终评分
+          <el-button style="float: right; padding: 3px 0" type="text" @click="centerDialogVisible = true">修改</el-button>
+          <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
+            <el-input v-model="score0" placeholder="请输入得分（0~100）"></el-input>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="centerDialogVisible = false;quitScore()">取 消</el-button>
+              <el-button @click="isScore">test</el-button>
+              <el-button type="primary" @click="centerDialogVisible = false;submitScore()">
+                  确 定
+                </el-button>
             </span>
             </el-dialog>
           </div>
@@ -71,13 +73,14 @@
       <el-card class="box-card1">
         <div slot="header" class="clearfix">
           <span>评语</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="centerDialogVisible1 = true">修改
-          </el-button>
-          <el-dialog :visible.sync="centerDialogVisible1" center title="提示" width="30%">
-            <el-input v-model="comment" placeholder="请输入评论"></el-input>
+          <el-button style="float: right; padding: 3px 0" type="text" @click="centerDialogVisible1 = true">修改</el-button>
+          <el-dialog title="提示" :visible.sync="centerDialogVisible1" width="30%" center>
+            <el-input v-model="comment0" placeholder="请输入评论"></el-input>
             <span slot="footer" class="dialog-footer">
-              <el-button @click="centerDialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+              <el-button @click="centerDialogVisible1 = false;quitCommit()">取 消</el-button>
+              <el-button type="primary" @click="centerDialogVisible1 = false;submitComment()">
+                确 定
+              </el-button>
             </span>
           </el-dialog>
         </div>
@@ -93,10 +96,12 @@
 export default {
   data() {
     return {
-      score: '80',
+      score0:'',
+      score:'80',
       centerDialogVisible: false,
       centerDialogVisible1: false,
-      comment: '很好',
+      comment:'很好',
+      comment0:'',
       groupnumber: this.$route.query.groupnumber,
       groupname: this.$route.query.groupname,
       group: [
@@ -131,10 +136,28 @@ export default {
       }]
     };
   },
-  methods: {
-    pdfchange(index) {
-      this.purl = this.pdfurl[index].url;
-      console.log(this.pdfurl[index].url);
+  methods:{ 
+    isScore() {
+      const Regex = /^([0-9]{1,2}|100)$/
+      let numRe = new RegExp(Regex)
+      let result = numRe.test(80)
+      if(!result) {
+        console.log('123');
+      }
+    },
+    submitScore(){
+      this.score = this.score0;
+      this.score0 = '';
+    },
+    submitComment() {
+      this.comment = this.comment0;
+      this.comment0 = '';
+    },
+    quitScore() {
+      this.score0 = '';
+    },
+    quitCommit() {
+    this.comment0 = '';
     }
   }
 };
@@ -181,7 +204,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 150px;
+  font-size: 200px;
   color: firebrick;
 }
 

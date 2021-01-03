@@ -20,11 +20,11 @@ export default {
   components: { PdfView },
   data() {
     return {
-      url: 'https://vue.warmnight.site/pmbook.pdf',
+      url: this.$route.query.url,
       pdfurl: [
         {
           name: 'PDF1',
-          url: require('@/statics/pdf/需求管理系统.pdf')
+          url:'https://vue.warmnight.site/pmbook.pdf'
         },
         {
           name: 'PDF2',
