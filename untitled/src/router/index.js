@@ -21,6 +21,11 @@ export default new Router({
                     meta: { title: '系统首页' }
                 },
                 {
+                    path: '/teacherboard',
+                    component: () => import('../components/teacherviews/DashboardOfTeachers'),
+                    meta: {title: '老师首页'}
+                },
+                {
                     // 图片上传组件
                     path: '/upload',
                     component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
@@ -100,7 +105,7 @@ export default new Router({
                 },
                 {
                     path: '/progressset',
-                    component: () => import('../components/leaderviews/ProgressSet'),
+                    component: () => import('../components/subviews/Homework'),
                     meta: { title: '进度上传' }
                 },
                 {
@@ -112,12 +117,17 @@ export default new Router({
                     path: '/ogp',
                     component: () => import('../components/teacherviews/OneGroupProgress'),
                     meta: { title: '项目单小组进度' }
+                },
+                {
+                    path: '/fileview',
+                    component: () => import('../components/teacherviews/FileView'),
+                    meta: { title: '文件预览' }
                 }
             ]
         },
         {
             path: '/login',
-            component: () => import(/* webpackChunkName: "login" */ '../components/common/Login.vue'),
+            component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
             meta: { title: '登录' }
         },
         {

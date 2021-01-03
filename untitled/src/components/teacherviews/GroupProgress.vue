@@ -1,68 +1,17 @@
 <template>
   <div>
-    <el-row class="div0">
-      <div>
-        <el-col :span="8">
-          <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
+    <el-row :gutter="20" class="div0">
+        <el-col v-for="item in group" :key="item.no" :span="8">
+          <el-card>
+          <!-- <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
                        class="font1" style="color: darkblue">{{ groupname1 }}
-          </router-link>
-          <br>
-          <el-progress :percentage="0" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value1"></el-rate>
+          </router-link> -->
+          <div class='text'>小组{{item.no}}</div>
+          <el-progress :percentage="item.percent" :status="item.status" type="circle"></el-progress>
+          <div class='text'>评分:<el-rate v-model="item.grade"></el-rate></div>
+          <div class='text'>评论：{{item.comment}}</div>
+          </el-card>
         </el-col>
-      </div>
-      <div class="">
-        <el-col :span="8">
-          <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
-                       class="font1" style="color: darkblue">{{ groupname2 }}
-          </router-link>
-          <br>
-          <el-progress :percentage="25" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value2"></el-rate>
-        </el-col>
-      </div>
-      <div class="">
-        <el-col :span="8">
-          <p>group3</p>
-          <el-progress :percentage="100" status="success" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value3"></el-rate>
-        </el-col>
-      </div>
-    </el-row>
-    <el-row>
-      <div class="">
-        <el-col :span="8">
-          <p>group4</p>
-          <el-progress :percentage="70" status="warning" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value4"></el-rate>
-        </el-col>
-      </div>
-      <div class="">
-        <el-col :span="8">
-          <p>group5</p>
-          <el-progress :percentage="50" status="exception" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value5"></el-rate>
-        </el-col>
-      </div>
-      <div class="">
-        <el-col :span="8">
-          <p>group6</p>
-          <el-progress :percentage="50" status="exception" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value6"></el-rate>
-        </el-col>
-      </div>
     </el-row>
   </div>
 </template>
@@ -71,14 +20,43 @@
 export default {
   data() {
     return {
-      groupname1: 'group1',
-      groupname2: 'group2',
-      value1: 3,
-      value2: null,
-      value3: null,
-      value4: null,
-      value5: null,
-      value6: null
+      group: [{
+      no: '1',
+      percent: '10',
+      status:'success',
+      grade:'1',
+      comment:'111'},
+      {
+      no: '2',
+      percent: '20',
+      status:'warning',
+      grade:'2',
+      comment:'111'},
+      {
+      no: '3',
+      percent: '30',
+      status:'exception',
+      grade:'3',
+      comment:'111'},
+      {
+      no: '4',
+      percent: '40',
+      status:'warning',
+      grade:'4',
+      comment:'111'},
+      {
+      no: '5',
+      percent: '40',
+      status:'warning',
+      grade:'4',
+      comment:'111'},
+      {
+      no: '6',
+      percent: '40',
+      status:'warning',
+      grade:'4',
+      comment:'111'}
+      ]
     };
   },
   methods: {
@@ -94,5 +72,27 @@ export default {
 }
 .div0 {
   margin-bottom: 50px;
+}
+
+.el-card {
+margin: 20px;
+transition: all .5s;
+width: 300px;
+display: flex;
+justify-content: space-around;
+}
+.el-card:hover{
+margin-top: -1px;
+}
+
+.text {
+  font-size: 18px;
+  text-align:center;
+  margin: 8px;
+}
+
+el-progress {
+  text-align:center;
+  margin: 20px;
 }
 </style>

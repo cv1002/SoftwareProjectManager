@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="ms-login">
-      <div class="ms-title">后台管理系统</div>
+      <div class="ms-title">项目管理系统</div>
       <el-form ref="login" :model="param" :rules="rules" class="ms-content" label-width="0px">
         <el-form-item prop="username">
           <el-input v-model="param.username" placeholder="username"
@@ -22,7 +22,7 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm()">登录</el-button>
         </div>
-        <p class="login-tips">Tips : 用户名和密码随便填。</p>
+        <p class="login-tips">密码114514</p>
       </el-form>
     </div>
   </div>
@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       param: {
         username: this.$cookie.get('UserID'),
@@ -57,13 +57,13 @@ export default {
             data: formData
           }).then(
               resolve => {
-                console.log(resolve.data)
+                console.log(resolve.data);
                 this.$message.success(resolve.data['finish']);
                 this.$cookie.set('LoginType', resolve.data['loginType']);
                 this.$cookie.set('TeamID', resolve.data['teamID']);
                 this.$cookie.set('UserName', resolve.data['userName']);
                 this.$cookie.set('TeamName', resolve.data['teamName']);
-                this.$cookie.set('RoleName', resolve.data['roleName'])
+                this.$cookie.set('RoleName', resolve.data['roleName']);
                 this.$router.push('/');
               },
               reject => {
@@ -96,7 +96,7 @@ export default {
   line-height: 50px;
   text-align: center;
   font-size: 20px;
-  color: #fff;
+  color: navy;
   border-bottom: 1px solid #ddd;
 }
 

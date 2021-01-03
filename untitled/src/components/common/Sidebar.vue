@@ -143,7 +143,7 @@ export default {
           [
             {
               icon: 'el-icon-lx-home',
-              index: 'dashboard',
+              index: 'teacherboard',
               title: '系统首页'
             },
             {
@@ -151,6 +151,16 @@ export default {
               index: 'groupprogress',
               title: '项目各小组进度'
             },
+            {
+              icon: 'el-icon-chat-line-round',
+              index: 'vueeditor',
+              title: '交流讨论'
+            },
+            {
+              icon: 'el-icon-reading',
+              index: 'fileview',
+              title: '文件预览'
+            }
           ]
     };
   },

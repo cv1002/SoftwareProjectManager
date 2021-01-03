@@ -64,6 +64,10 @@ export default{
   mounted:function () {
 
   },
+  //初始化方法
+  mounted: function() {
+
+  },
   methods: {
 
     //添加标本div
@@ -136,6 +140,12 @@ export default{
 }
 
 .mgb20 {
-margin-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.button1 {
+  position: absolute;
+  margin-top: -230px;
+  margin-left: 27%;
 }
 </style>

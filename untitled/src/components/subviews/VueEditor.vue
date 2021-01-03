@@ -1,10 +1,32 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item><i class="el-icon-lx-calendar"></i> 表单</el-breadcrumb-item>
-        <el-breadcrumb-item>编辑器</el-breadcrumb-item>
-      </el-breadcrumb>
+    <div>
+      <el-row :gutter="20">
+        <el-col v-for="(items,i) in tableData" :key="items" :span="8">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>交流讨论</span>
+              <el-button style="float: right; padding: 3px 0" type="text"
+                         v-if="rolename==='Teacher'" @click="cancel(i)">删除</el-button>
+            </div>
+            <div class="user-info-list">
+              日期：
+              <span>{{ items.date }}</span>
+            </div>
+            <div class="user-info-list">
+              姓名：
+              <span>{{ items.name }}</span>
+            </div>
+            <div class="user-info-list">
+              评论：
+              <span>{{ items.comment }}</span>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
+    <div slot="header" class="clearfix">
+      <el-tag><span class="tag">编辑器</span></el-tag>
     </div>
     <div class="container">
       <div class="plugins-tips">
@@ -27,6 +49,21 @@ export default {
   name: 'editor',
   data: function () {
     return {
+      username: this.$cookie.get('UserName'),
+      rolename: this.$cookie.get('RoleName'),
+      tableData: [{
+        date: '2020-12-21',
+        name: 'A',
+        comment: '老师的评价如何'
+      }, {
+        date: '2020-12-22',
+        name: 'B',
+        comment: 'A表现不错'
+      }, {
+        date: '2020-12-24',
+        name: '老师',
+        comment: '页面布局还是有问题'
+      }],
       content: '',
       editorOption: {
         placeholder: 'Hello World'
@@ -43,6 +80,9 @@ export default {
     submit() {
       console.log(this.content);
       this.$message.success('提交成功！');
+    },
+    cancel(i){
+      this.tableData.splice(i,1);
     }
   }
 };

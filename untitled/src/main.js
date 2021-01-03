@@ -5,7 +5,6 @@ import router from './router';
 import ElementUI from 'element-ui';
 import VueCookie from 'vue-cookie';
 import VueResource from 'vue-resource';
-
 // import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 import './assets/css/theme-green/index.css'; // 浅绿色主题
 import './assets/css/icon.css';
@@ -19,8 +18,8 @@ axios.defaults.withCredentials = true;
 axios.defaults.baseURL = '/api';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.delete['Content-Type'] = 'application/json';
-Vue.prototype["$axios"] = axios;
-Vue.prototype["$DEVTYPE"] = 'DEV';
+Vue.prototype['$axios'] = axios;
+Vue.prototype['$DEVTYPE'] = 'DEV';
 
 Vue.use(VueResource);
 Vue.config.productionTip = false;

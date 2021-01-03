@@ -4,48 +4,56 @@
       <el-col :span="8">
         <el-card class="mgb20" shadow="hover" style="height:240px;">
           <div class="user-info">
-            <img alt class="user-avator" src="../../statics/img/g.jpg"/>
+            <img alt class="user-avator" src="../../statics/img/g.jpg" />
             <div class="user-info-cont">
               <div class="user-info-name">{{ name }}</div>
               <div>{{ role }}</div>
             </div>
           </div>
           <div class="user-info-list">
-            上次登录时间：
-            <span>{{ lastLogin.time }}</span>
+            当前时间：<span>{{nowDate}}{{nowWeek}}{{nowTime}}</span>
+            <!-- <span>{{ login.date }}</span> -->
           </div>
           <div class="user-info-list">
-            上次登录地点：
-            <span> {{ lastLogin.place }}</span>
+            当前地点：
+            <span> {{ login.location }}</span>
           </div>
         </el-card>
-        <el-card shadow="hover" style="height:250px;">
+        <el-card shadow="hover" style="height:270px;">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
-          时间
-          <el-progress :percentage="71.3" color="#42b983"></el-progress>
-          资金
-          <el-progress :percentage="64.1" color="#f1e05a"></el-progress>
-          人力成本
-          <el-progress :percentage="73.7"></el-progress>
-          预算
-          <el-progress :percentage="65.9" color="#f56c6c"></el-progress>
+          <el-table :data="groupProgressData" style="width:100%">
+            <el-table-column label="进展阶段" prop="completion" />
+            <el-table-column label="最新上传的文件" prop="upToDateFile" />
+          </el-table>
+          <el-table :data="taskCompletion" style="width:100%">
+            <el-table-column label="发布任务完成情况">
+              <template slot-scope="scope">
+                <div>完成度: {{ scope.row['percentage'] }}%</div>
+              </template>
+            </el-table-column>
+            <el-table-column label="总任务数">
+              <template slot-scope="scope">
+                <div>{{ scope.row['tasklength'] }}</div>
+              </template>
+            </el-table-column>
+          </el-table>
         </el-card>
       </el-col>
       <el-col :span="16">
         <el-row :gutter="20" class="mgb20">
           <el-col :span="8">
             <el-card :body-style="{padding: '0px'}" shadow="hover">
-              <div class="grid-content grid-con-1">
-                <i class="el-icon-lx-people grid-con-icon"></i>
-                <div class="grid-cont-right">
-                  <div class="grid-num">{{ numberofmembers }}</div>
-                  <div>
-                    <router-link to="/individual">小组成员数</router-link>
+              <router-link to="/groupinfo">
+                <div class="grid-content grid-con-1">
+                  <i class="el-icon-lx-people grid-con-icon"></i>
+                  <div class="grid-cont-right">
+                    <div class="grid-num">{{ numberofmembers }}</div>
+                    <div>小组成员数</div>
                   </div>
                 </div>
-              </div>
+              </router-link>
             </el-card>
           </el-col>
           <el-col :span="8">
@@ -71,7 +79,7 @@
             </el-card>
           </el-col>
         </el-row>
-        <el-card shadow="hover" style="height:403px;">
+        <el-card shadow="hover" style="height:410px;">
           <div slot="header" class="clearfix">
             <span>待办事项</span>
             <el-button style="float: right; padding: 3px 0" type="text" @click="addTodoListItem">添加</el-button>
@@ -109,19 +117,31 @@ import Schart from 'vue-schart';
 
 export default {
   name: 'dashboard',
+  created() {
+    this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
+  },
   data() {
     return {
+    nowDate: "", // 当前日期
+    nowTime: "", // 当前时间
+    nowWeek: "", // 当前星期
       finishedtask: undefined,
       unfinishedtask: undefined,
-      tasks: undefined,
-      message: 'first',
-      showHeader: false,
-      lastLogin: {
-        time: '2020-01-01',
-        place: '西安'
+      tasks: [],
+      taskCompletion: [{
+        percentage: 0,
+        tasklength: 0
+      }],
+      login: {
+        date: undefined,
+        location: '陕西省西安市'
       },
       numberofmembers: undefined,
-      todoList: undefined
+      todoList: [],
+      groupProgressData: [{
+        completion: '收尾阶段',
+        upToDateFile: '项目总结报告.pdf'
+      }]
     };
   },
   components: {
@@ -142,6 +162,24 @@ export default {
     }
   },
   methods: {
+      dealWithTime(data) { // 获取当前时间
+      let formatDateTime;
+      let Y = data.getFullYear();
+      let M = data.getMonth() + 1;
+      let D = data.getDate();
+      let H = data.getHours();
+      let Min = data.getMinutes();
+      let S = data.getSeconds();
+      let W = data.getDay();
+      H = H < 10 ? "0" + H : H; Min=Min < 10 ? "0" + Min : Min; S=S < 10 ? "0" + S : S; switch (W) { case 0: W="日" ;
+        break; case 1: W="一" ; break; case 2: W="二" ; break; case 3: W="三" ; break; case 4: W="四" ; break; case 5: W="五"
+        ; break; case 6: W="六" ; break; default: break; } this.nowDate=Y + "年" + M + "月" + D + "日 " ; this.nowWeek="周" +
+        W ; this.nowTime=H + ":" + Min + ":" + S; // formatDateTime=Y + "年" + M + "月" + D + "日 " + " 周" +W + H + ":" +
+        Min + ":" + S; },
+    fetchLocationAndDate() {
+      this.login.date = new Date().toLocaleDateString();
+      this.login.location = '西安';
+    },
     fetchNumberOfMembers() {
       let formData = new FormData();
       formData.append('UserID', this.$cookie.get('UserID'));
@@ -183,6 +221,8 @@ export default {
               }
               this.finishedtask = this.tasks.length - unfinishedCount;
               this.unfinishedtask = unfinishedCount;
+              this.taskCompletion[0].percentage = Math.floor(100 * this.finishedtask / this.tasks.length);
+              this.taskCompletion[0].tasklength = this.tasks.length;
             }
           }
       );
@@ -220,13 +260,13 @@ export default {
       formData.append('TodoListID', this.todoList[index]['TodoListID']);
       formData.append('FinishState', this.todoList[index]['FinishState']);
       this.$axios({
-        url:'/todoList',
-        method:'PUT',
+        url: '/todoList',
+        method: 'PUT',
         data: formData
       }).then(
           resolve => {
             this.$message.success(resolve.data['resultInfo']);
-            console.log(resolve.data)
+            console.log(resolve.data);
           },
           reject => {
             this.todoList[index]['status'] = this.todoList[index].status !== true;
@@ -248,7 +288,7 @@ export default {
         formData.append('TodoListID', this.todoList[index]['TodoListID']);
         formData.append('FinishState', this.todoList[index]['FinishState']);
         this.$axios({
-          url:'/todoList',
+          url: '/todoList',
           method: 'PUT',
           data: formData
         }).then(
@@ -259,7 +299,7 @@ export default {
             reject => {
               this.$message.error(reject);
             }
-        )
+        );
       }).catch(() => this.$message('取消输入'));
     },
     addTodoListItem() {
@@ -272,7 +312,7 @@ export default {
         formData.append('UserPassword', this.$cookie.get('UserPassword'));
         formData.append('TodoThings', value);
         this.$axios({
-          url:'/todoList',
+          url: '/todoList',
           method: 'POST',
           data: formData
         }).then(
@@ -283,7 +323,7 @@ export default {
             reject => {
               this.$message.error(reject);
             }
-        )
+        );
       }).catch(() => this.$message('取消输入'));
     },
     deleteTodoListItem(index) {
@@ -297,7 +337,7 @@ export default {
         formData.append('UserPassword', this.$cookie.get('UserPassword'));
         formData.append('TodoListID', this.todoList[index]['TodoListID']);
         this.$axios({
-          url:'/todoList',
+          url: '/todoList',
           method: 'DELETE',
           data: formData
         }).then(
@@ -309,7 +349,7 @@ export default {
               }
             },
             reject => {
-              this.$message.error(reject)
+              this.$message.error(reject);
             }
         );
         this.sortTodoListItems();
@@ -318,8 +358,21 @@ export default {
   },
   created() {
     this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
-  }
-}
+  },
+    mounted() {
+    // 页面加载完后显示当前时间
+    this.dealWithTime(new Date())
+    // 定时刷新时间
+    this.timer = setInterval(()=> {
+    this.dealWithTime(new Date()) // 修改数据date
+    }, 500)
+    },
+    destroyed() {
+    if (this.timer) { // 注意在vue实例销毁前，清除我们的定时器
+    clearInterval(this.timer);
+    }
+    }
+};
 </script>
 
 

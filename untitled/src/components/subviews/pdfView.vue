@@ -13,24 +13,30 @@
 import pdf from 'vue-pdf';
 
 export default {
-  name: 'Home',
+  props:{
+    url:{
+      type:String,
+      default: ()=>{
+        return require("../../statics/pdf/test.pdf")
+      }
+    }
+  },
+  name: 'PdfView',
   components: {
     pdf
   },
   data() {
     return {
-      // url: 'http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf',
-      url: 'https://vue.warmnight.site/pmbook.pdf',
       pageNum: 1,
       pageTotalNum: 1,
       pageRotate: 0,
       // 加载进度
       loadedRatio: 0,
       curPageNum: 0,
-      pdfsize:100
+      pdfsize:60
     };
   },
-  mounted: function () {
+  mounted: function() {
   },
   methods: {
     // 页面加载回调函数，其中e为当前页数
@@ -47,6 +53,9 @@ export default {
     handleout(){
       this.pdfsize=this.pdfsize-10;
     },
+    handleout() {
+      this.pdfsize = this.pdfsize - 10;
+    }
   }
 };
 </script>

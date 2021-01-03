@@ -138,7 +138,7 @@ export default {
 
 .schart {
   width: 600px;
-  height: 400px;
+  height: 300px;
 }
 
 .content-title {

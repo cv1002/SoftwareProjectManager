@@ -2,34 +2,34 @@
   <div id="login">
     <div class="loginToHome">
       <el-form
-        ref="form"
-        :model="form"
-        :rules="ruleForm"
-        status-icon
-        label-width="80px"
-        class="loginForm"
+          ref="form"
+          :model="form"
+          :rules="ruleForm"
+          class="loginForm"
+          label-width="80px"
+          status-icon
       >
         <h3>登陆</h3>
         <el-form-item
-          label="用户名"
-          prop="name"
+            label="用户名"
+            prop="name"
         >
           <el-input
-            type="text"
-            v-model="form.name"
-            auto-complete="off"
-            placeholder="请输入用户名"
+              v-model="form.name"
+              auto-complete="off"
+              placeholder="请输入用户名"
+              type="text"
           ></el-input>
         </el-form-item>
         <el-form-item
-          label="密码"
-          prop="password"
+            label="密码"
+            prop="password"
         >
           <el-input
-            type="password"
-            v-model="form.password"
-            auto-complete="off"
-            placeholder="请输入密码"
+              v-model="form.password"
+              auto-complete="off"
+              placeholder="请输入密码"
+              type="password"
           ></el-input>
         </el-form-item>
         <el-form-item>
