@@ -23,7 +23,7 @@ export default new Router({
                 {
                     path: '/teacherboard',
                     component: () => import('../components/teacherviews/DashboardOfTeachers'),
-                    meta: {title: '老师首页'}
+                    meta: { title: '老师首页' }
                 },
                 {
                     // 图片上传组件

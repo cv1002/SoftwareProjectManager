@@ -18,7 +18,6 @@
             <el-date-picker
                 v-model="form.value2"
                 :picker-options="pickerOptions"
-                align="right"
                 end-placeholder="结束日期"
                 format="yyyy 年 MM 月 dd 日"
                 range-separator="至"
@@ -31,29 +30,29 @@
         </el-form-item>
 
         <el-form-item label="项目类型">
-          <el-checkbox-group v-model="form.type">
-            <el-checkbox label="微信小程序" name="type"></el-checkbox>
-            <el-checkbox label="网页" name="type"></el-checkbox>
-            <el-checkbox label="游戏" name="type"></el-checkbox>
-            <el-checkbox label="其他" name="type"></el-checkbox>
-          </el-checkbox-group>
+          <el-radio-group v-model="form.type">
+            <el-radio :label="0" label="微信小程序" name="type"></el-radio>
+            <el-radio :label="1" label="网页" name="type"></el-radio>
+            <el-radio :label="2" label="游戏" name="type"></el-radio>
+            <el-radio :label="3" label="其他" name="type"></el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="自拟题目" style="width: 80%">
-          <el-input v-model="form.desc" type="textarea" ></el-input>
+          <el-input v-model="form.desc" type="textarea"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">立即创建</el-button>
-          <el-button>取消</el-button>
+          <el-button>重置</el-button>
         </el-form-item>
       </el-form>
       <div class="block" style="margin-left: 50px;margin-top: 50px">
         <el-timeline>
           <el-timeline-item
               v-for="(activity, index) in activities"
-              :color="activity.color"
               :key="index"
+              :color="activity.color"
               :timestamp="activity.timestamp">
-            {{activity.content}}
+            {{ activity.content }}
           </el-timeline-item>
         </el-timeline>
       </div>
@@ -68,9 +67,9 @@ export default {
       form: {
         name: '',
         region: '',
-        type: [],
+        type: 0,
         desc: '',
-        value2:''
+        value2: ''
       },
       pickerOptions: {
         shortcuts: [{
@@ -102,11 +101,11 @@ export default {
       activities: [{
         content: '小组选题',
         timestamp: '2018-04-11',
-        color: 'lightskyblue',
+        color: 'lightskyblue'
       }, {
         content: '审核中',
         timestamp: '2018-04-13',
-        color: 'white',
+        color: 'white'
       }, {
         content: '创建成功',
         timestamp: '2018-04-15',

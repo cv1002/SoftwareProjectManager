@@ -118,10 +118,11 @@ import Schart from 'vue-schart';
 export default {
   name: 'dashboard',
   created() {
-    this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
+    this.fetchRole() || this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
   },
   data() {
     return {
+      role: undefined,
       finishedtask: undefined,
       unfinishedtask: undefined,
       tasks: [],
@@ -147,18 +148,18 @@ export default {
   computed: {
     name() {
       return this.$cookie.get('UserName');
-    },
-    role() {
-      if (this.$cookie.get('RoleName') === 'Teacher') {
-        return '老师';
-      } else if (this.$cookie.get('RoleName') === 'Leader') {
-        return '组长';
-      } else {
-        return '普通用户';
-      }
     }
   },
   methods: {
+    fetchRole() {
+      if (this.$cookie.get('RoleName') === 'Teacher') {
+        this.role = '老师';
+      } else if (this.$cookie.get('RoleName') === 'Leader') {
+        this.role = '小组: ' + '"' + this.$cookie.get('TeamName') + '"' + ' 组长';
+      } else {
+        this.role = this.$cookie.get('TeamName') + '小组 组员';
+      }
+    },
     fetchLocationAndDate() {
       this.login.date = new Date().toLocaleDateString();
       this.login.location = '西安';
@@ -338,9 +339,6 @@ export default {
         this.sortTodoListItems();
       }).catch(() => this.$message('已取消删除'));
     }
-  },
-  created() {
-    this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks()
   }
 };
 </script>
