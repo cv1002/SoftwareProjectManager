@@ -46,15 +46,6 @@ export default {
     // 其他的一些回调函数。
     pdfError(error) {
       console.error(error);
-    },
-    handlein(){
-      this.pdfsize=this.pdfsize+10;
-    },
-    handleout(){
-      this.pdfsize=this.pdfsize-10;
-    },
-    handleout() {
-      this.pdfsize = this.pdfsize - 10;
     }
   }
 };
@@ -63,15 +54,5 @@ export default {
 <style scoped>
 .pdf-style{
   margin: auto;
-}
-.div1{
-  margin-left: 40%;
-  margin-top: 20px;
-}
-.page{
-  float: left;
-}
-.page2{
-  margin: 8px;
 }
 </style>

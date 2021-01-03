@@ -39,7 +39,7 @@ export default {
   methods: {
     pdfchange(index) {
       this.url = this.pdfurl[index].url,
-          console.log(this.url);
+      console.log(this.url);
     }
   }
 };

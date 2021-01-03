@@ -3,16 +3,58 @@
     <el-row class="div0">
       <div>
         <el-col :span="8">
-          <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
-                       class="font1" style="color: darkblue">{{ groupname1 }}
-          </router-link>
+          <el-card shadow="hover" style="height:270px;">
+            <div slot="header" class="clearfix">
+              <span>项目进展</span>
+              <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
+                           class="font1" style="color: darkblue;margin-left: 60%">{{ groupname1 }}
+              </router-link>
+            </div>
+            <el-table :data="groupProgressData" style="width:100%">
+              <el-table-column label="进展阶段" prop="completion" />
+              <el-table-column label="最新上传的文件" prop="upToDateFile" />
+            </el-table>
+            <el-table :data="taskCompletion" style="width:100%">
+              <el-table-column label="发布任务完成情况">
+                <template slot-scope="scope">
+                  <div>完成度: {{ scope.row['percentage'] }}%</div>
+                </template>
+              </el-table-column>
+              <el-table-column label="总任务数">
+                <template slot-scope="scope">
+                  <div>{{ scope.row['tasklength'] }}</div>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-card>
         </el-col>
       </div>
       <div class="">
         <el-col :span="8">
-          <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
-                       class="font1" style="color: darkblue">{{ groupname2 }}
-          </router-link>
+          <el-card shadow="hover" style="height:270px;">
+            <div slot="header" class="clearfix">
+              <span>项目进展</span>
+              <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
+                           class="font1" style="color: darkblue;margin-left: 60%">{{ groupname2 }}
+              </router-link>
+            </div>
+            <el-table :data="groupProgressData" style="width:100%">
+              <el-table-column label="进展阶段" prop="completion" />
+              <el-table-column label="最新上传的文件" prop="upToDateFile" />
+            </el-table>
+            <el-table :data="taskCompletion" style="width:100%">
+              <el-table-column label="发布任务完成情况">
+                <template slot-scope="scope">
+                  <div>完成度: {{ scope.row['percentage'] }}%</div>
+                </template>
+              </el-table-column>
+              <el-table-column label="总任务数">
+                <template slot-scope="scope">
+                  <div>{{ scope.row['tasklength'] }}</div>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-card>
         </el-col>
       </div>
       <div class="">
@@ -30,13 +72,11 @@
       <div class="">
         <el-col :span="8">
           <p>group5</p>
-          <el-progress :percentage="50" status="exception" type="circle"></el-progress>
         </el-col>
       </div>
       <div class="">
         <el-col :span="8">
           <p>group6</p>
-          <el-progress :percentage="50" status="exception" type="circle"></el-progress>
         </el-col>
       </div>
     </el-row>
@@ -49,12 +89,14 @@ export default {
     return {
       groupname1: 'group1',
       groupname2: 'group2',
-      value1: 3,
-      value2: null,
-      value3: null,
-      value4: null,
-      value5: null,
-      value6: null
+      taskCompletion: [{
+        percentage: 0,
+        tasklength: 0
+      }],
+      groupProgressData: [{
+        completion: '收尾阶段',
+        upToDateFile: '项目总结报告.pdf'
+      }]
     };
   },
   methods: {
@@ -62,6 +104,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 .font1 {
