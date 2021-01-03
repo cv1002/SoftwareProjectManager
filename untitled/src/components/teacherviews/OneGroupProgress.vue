@@ -15,6 +15,10 @@
         进度
       </div>
     </div>
+    <div>
+      <div>评语</div>
+      <div>最终得分</div>
+    </div>
   </div>
 </template>
 

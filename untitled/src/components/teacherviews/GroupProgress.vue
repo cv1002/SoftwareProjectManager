@@ -6,11 +6,6 @@
           <router-link :to="{path: '/ogp', query: {groupnumber:0,groupname:groupname1}}"
                        class="font1" style="color: darkblue">{{ groupname1 }}
           </router-link>
-          <br>
-          <el-progress :percentage="0" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value1"></el-rate>
         </el-col>
       </div>
       <div class="">
@@ -18,20 +13,11 @@
           <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
                        class="font1" style="color: darkblue">{{ groupname2 }}
           </router-link>
-          <br>
-          <el-progress :percentage="25" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value2"></el-rate>
         </el-col>
       </div>
       <div class="">
         <el-col :span="8">
           <p>group3</p>
-          <el-progress :percentage="100" status="success" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value3"></el-rate>
         </el-col>
       </div>
     </el-row>
@@ -39,28 +25,18 @@
       <div class="">
         <el-col :span="8">
           <p>group4</p>
-          <el-progress :percentage="70" status="warning" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value4"></el-rate>
         </el-col>
       </div>
       <div class="">
         <el-col :span="8">
           <p>group5</p>
           <el-progress :percentage="50" status="exception" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value5"></el-rate>
         </el-col>
       </div>
       <div class="">
         <el-col :span="8">
           <p>group6</p>
           <el-progress :percentage="50" status="exception" type="circle"></el-progress>
-          <br>
-          评分:
-          <el-rate v-model="value6"></el-rate>
         </el-col>
       </div>
     </el-row>
