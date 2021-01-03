@@ -117,22 +117,12 @@ export default new Router({
                     path: '/fileview',
                     component: () => import('../components/teacherviews/FileView'),
                     meta: { title: '文件预览' }
-                },
-                {
-                    path: '/checkpage',
-                    component: () => import('../components/teacherviews/CheckPage'),
-                    meta: { title: '审查页面' }
-                },
-                {
-                    path: '/checkpageplus',
-                    component: () => import('../components/teacherviews/CheckPagePlus'),
-                    meta: { title: '审核' }
                 }
             ]
         },
         {
             path: '/login',
-            component: () => import(/* webpackChunkName: "login" */ '../components/page/Login'),
+            component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
             meta: { title: '登录' }
         },
         {
