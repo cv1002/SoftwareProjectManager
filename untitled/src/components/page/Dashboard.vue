@@ -11,11 +11,11 @@
             </div>
           </div>
           <div class="user-info-list">
-            本次登录时间：
-            <span>{{ login.date }}</span>
+            当前时间：
+            <span>{{ login.nowDate }}{{ login.nowWeek }}{{ login.nowTime }}</span>
           </div>
           <div class="user-info-list">
-            本次登录地点：
+            当前地点：
             <span> {{ login.location }}</span>
           </div>
         </el-card>
@@ -176,8 +176,10 @@ export default {
         tasklength: 0
       }],
       login: {
-        date: undefined,
-        location: '西安'
+        location: '西安',
+        nowTime: '',
+        nowWeek: '',
+        nowDate: ''
       },
       numberofmembers: undefined,
       todoList: [],
@@ -234,8 +236,7 @@ export default {
           W = '四';
           break;
         case 5:
-          W = '五'
-          ;
+          W = '五';
           break;
         case 6:
           W = '六';
@@ -244,9 +245,9 @@ export default {
           break;
       }
       this.nowDate = Y + '年' + M + '月' + D + '日 ';
-      this.nowWeek = '周' +
-          W;
-      this.nowTime = H + ':' + Min + ':' + S; // formatDateTime=Y + "年" + M + "月" + D + "日 " + " 周" +W + H + ":" + Min + ':' + S;
+      this.nowWeek = '周' + W;
+      this.nowTime = H + ':' + Min + ':' + S;
+      // formatDateTime=Y + "年" + M + "月" + D + "日 " + " 周" +W + H + ":" + Min + ':' + S;
     },
     fetchLocationAndDate() {
       this.login.date = new Date().toLocaleDateString();
