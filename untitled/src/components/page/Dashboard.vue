@@ -16,7 +16,7 @@
           </div>
           <div class="user-info-list">
             当前地点：
-            <span> {{ login.location }}</span>
+            <span>{{ login.location }}</span>
           </div>
         </el-card>
         <el-card v-if="this.role !== '老师'" shadow="hover" style="height:270px;">
@@ -70,7 +70,7 @@
                   </div>
                 </div>
               </router-link>
-              <router-link v-if="this.role === '老师'" to="/groupprogress">
+              <router-link v-else to="/groupprogress">
                 <div class="grid-content grid-con-1">
                   <i class="el-icon-lx-people grid-con-icon"></i>
                   <div class="grid-cont-right">
@@ -87,11 +87,10 @@
                 <div class="grid-cont-right">
                   <div class="grid-num">{{ finishedtask }}</div>
                   <div>已完成任务数</div>
-                  <div v-if="this.role === '老师'">交流讨论</div>
                 </div>
               </div>
             </el-card>
-            <router-link v-if="this.role === '老师'" to="/vueeditor">
+            <router-link v-else to="/vueeditor">
               <el-card :body-style="{padding: '0px'}" shadow="hover">
                 <div class="grid-content grid-con-2">
                   <i class="el-icon-connection grid-con-icon"></i>
@@ -112,7 +111,7 @@
                 </div>
               </div>
             </el-card>
-            <router-link v-if="this.role === '老师'" to="/fileview">
+            <router-link v-else to="/fileview">
               <el-card :body-style="{padding: '0px'}" shadow="hover">
                 <div class="grid-content grid-con-3">
                   <i class="el-icon-s-order grid-con-icon"></i>
@@ -165,6 +164,19 @@ export default {
   created() {
     this.fetchRole() || this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
   },
+  mounted() {
+    // 页面加载完后显示当前时间
+    this.dealWithTime(new Date());
+    // 定时刷新时间
+    this.timer = setInterval(() => {
+      this.dealWithTime(new Date()); // 修改数据date
+    }, 1000);
+  },
+  destroyed() {
+    if (this.timer) { // 注意在vue实例销毁前，清除我们的定时器
+      clearInterval(this.timer);
+    }
+  },
   data() {
     return {
       role: undefined,
@@ -211,7 +223,6 @@ export default {
       }
     },
     dealWithTime(data) { // 获取当前时间
-      let formatDateTime;
       let Y = data.getFullYear();
       let M = data.getMonth() + 1;
       let D = data.getDate();
@@ -247,9 +258,9 @@ export default {
         default:
           break;
       }
-      this.nowDate = Y + '年' + M + '月' + D + '日 ';
-      this.nowWeek = '周' + W;
-      this.nowTime = H + ':' + Min + ':' + S;
+      this.login.nowDate = Y + '年' + M + '月' + D + '日 ';
+      this.login.nowWeek = '周' + W;
+      this.login.nowTime = H + ':' + Min + ':' + S;
       // formatDateTime=Y + "年" + M + "月" + D + "日 " + " 周" +W + H + ":" + Min + ':' + S;
     },
     fetchLocationAndDate() {
@@ -431,19 +442,6 @@ export default {
         this.sortTodoListItems();
       }).catch(() => this.$message('已取消删除'));
     }
-  },
-  mounted() {
-    // 页面加载完后显示当前时间
-    this.dealWithTime(new Date());
-    // 定时刷新时间
-    this.timer = setInterval(() => {
-      this.dealWithTime(new Date()); // 修改数据date
-    }, 500);
-  },
-  destroyed() {
-    if (this.timer) { // 注意在vue实例销毁前，清除我们的定时器
-      clearInterval(this.timer);
-    }
   }
 };
 </script>
@@ -540,8 +538,25 @@ export default {
 .mgb20 {
   margin-bottom: 20px;
 }
-
 .todo-item {
   font-size: 14px;
+}
+
+.todo-item-del {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.schart {
+  width: 100%;
+  height: 300px;
+}
+
+.message-title {
+  cursor: pointer;
+}
+
+.handle-row {
+  margin-top: 30px;
 }
 </style>
