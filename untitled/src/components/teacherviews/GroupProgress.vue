@@ -108,6 +108,7 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .font1 {
   font-size: 20px;

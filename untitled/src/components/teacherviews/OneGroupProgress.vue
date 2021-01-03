@@ -130,9 +130,17 @@ export default {
         upToDateFile: '项目总结报告.pdf'
       }]
     };
+  },
+  methods: {
+    pdfchange(index) {
+      this.purl = this.pdfurl[index].url;
+      console.log(this.pdfurl[index].url);
+    }
   }
 };
 </script>
+
+
 
 <style scoped>
 .text {
