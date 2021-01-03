@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>
     <el-row :gutter="20" class="div0">
       <el-col v-for="item in group" :key="item.no" :span="8">
         <el-card>
@@ -40,6 +41,38 @@
         </el-col>
       </div>
     </el-row>
+  </div>
+  <div class="">
+    <el-col :span="8">
+      <router-link :to="{path: '/ogp', query: {groupnumber:1,groupname:groupname2}}"
+                   class="font1" style="color: darkblue">{{ groupname2 }}
+      </router-link>
+    </el-col>
+  </div>
+  <div class="">
+    <el-col :span="8">
+      <p>group3</p>
+    </el-col>
+  </div>
+  <el-row>
+    <div class="">
+      <el-col :span="8">
+        <p>group4</p>
+      </el-col>
+    </div>
+    <div class="">
+      <el-col :span="8">
+        <p>group5</p>
+        <el-progress :percentage="50" status="exception" type="circle"></el-progress>
+      </el-col>
+    </div>
+    <div class="">
+      <el-col :span="8">
+        <p>group6</p>
+        <el-progress :percentage="50" status="exception" type="circle"></el-progress>
+      </el-col>
+    </div>
+  </el-row>
   </div>
 </template>
 
@@ -124,7 +157,7 @@ export default {
   margin: 8px;
 }
 
-el-progress {
+.el-progress {
   text-align: center;
   margin: 20px;
 }
