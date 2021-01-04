@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="finish-wrap">
     <div style="width: 10%;height: 100%;float: left">
       &nbsp;
     </div>
@@ -8,7 +8,7 @@
           :data="tableData"
           style="width: 100%">
         <el-table-column
-            label="发起时间"
+            label="主文件"
             prop="date"
             width="180">
         </el-table-column>
@@ -77,5 +77,12 @@ export default {
 </script>
 
 <style scoped>
-
+.finish-wrap {
+  background-image: url("../../statics/img/check.jpg");
+  background-position: -550px 700px;
+  background-size: 170%;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
 </style>

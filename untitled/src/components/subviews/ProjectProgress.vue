@@ -44,7 +44,7 @@ export default {
         percentage: 0,
         tasklength: 0
       }]
-    }
+    };
   },
   props: ['teamID'],
   methods: {

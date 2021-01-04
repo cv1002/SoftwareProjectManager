@@ -29,18 +29,18 @@
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
-            <el-table :data="groupProgressData" style="width:100%;">
-              <el-table-column label="进展阶段">
-                <template slot-scope="scope">
-                  <div>{{ scope.row['completion'] }}</div>
-                </template>
-              </el-table-column>
-              <el-table-column label="最新上传的文件">
-                <template slot-scope="scope">
-                  <div>{{ scope.row['upToDateFile'] }}</div>
-                </template>
-              </el-table-column>
-            </el-table>
+          <el-table :data="groupProgressData" style="width:100%;">
+            <el-table-column label="进展阶段">
+              <template slot-scope="scope">
+                <div>{{ scope.row['completion'] }}</div>
+              </template>
+            </el-table-column>
+            <el-table-column label="最新上传的文件">
+              <template slot-scope="scope">
+                <div>{{ scope.row['upToDateFile'] }}</div>
+              </template>
+            </el-table-column>
+          </el-table>
           <el-table :data="taskCompletion" style="width:100%">
             <el-table-column label="总项目数">
               <template slot-scope="scope">
@@ -104,7 +104,7 @@
                 </div>
               </div>
             </el-card>
-            <router-link v-else to="/fileview">
+            <router-link v-else :to="{ path:'/fileview', query: {teamID:1}}">
               <el-card :body-style="{padding: '0px'}" shadow="hover">
                 <div class="grid-content grid-con-3">
                   <i class="el-icon-s-order grid-con-icon"></i>

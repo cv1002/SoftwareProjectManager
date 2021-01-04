@@ -2,11 +2,11 @@
   <div>
     <div style="width: 20%;float: left">
       <el-table :data="pdfurl">
-        <el-table-column prop="FileRealName" label="文件名" width="170"/>
+        <el-table-column label="文件名" prop="FileRealName" width="170" />
         <el-table-column label="切换">
           <template slot-scope="scope">
-            <el-button @click.native.prevent="pdfchangeByFileID(scope.row['FileID'])"
-                       size="mini" type="primary">
+            <el-button size="mini"
+                       type="primary" @click.native.prevent="pdfchangeByFileID(scope.row['FileID'])">
               <i class="el-icon-arrow-right el-icon--right" />
             </el-button>
           </template>
@@ -26,7 +26,7 @@ import decodeUTF8 from '../../utils/decodeUTF8';
 export default {
   name: 'FileView',
   components: { PdfView },
-  mounted () {
+  mounted() {
     let teamID = this.$route.query.teamID;
     let formData = new FormData();
     formData.append('UserID', this.$cookie.get('UserID'));
@@ -62,9 +62,9 @@ export default {
       }).then(response => {
         let fileName = response.headers['content-disposition'].match(/filename=(.*)/)[1];
         fileName = decodeUTF8(fileName);
-        let fileBack = new File([(response.data)], fileName,{ type: 'application/pdf;charset=UTF-8' });
+        let fileBack = new File([(response.data)], fileName, { type: 'application/pdf;charset=UTF-8' });
         this.url = window.URL.createObjectURL(fileBack);
-      })
+      });
     },
     pdfchangeByFileID(fileID) {
       let formData = new FormData();
@@ -78,9 +78,9 @@ export default {
       }).then(response => {
         let fileName = response.headers['content-disposition'].match(/filename=(.*)/)[1];
         fileName = decodeUTF8(fileName);
-        let fileBack = new File([(response.data)], fileName,{ type: 'application/pdf;charset=UTF-8' });
+        let fileBack = new File([(response.data)], fileName, { type: 'application/pdf;charset=UTF-8' });
         this.url = window.URL.createObjectURL(fileBack);
-      })
+      });
     }
   }
 };

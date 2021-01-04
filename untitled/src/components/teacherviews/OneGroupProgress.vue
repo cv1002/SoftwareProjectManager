@@ -43,7 +43,7 @@
             </el-button>
             <el-dialog :visible.sync="scoreDialogVisible" center title="提示" width="30%">
               <el-input v-model="scoreCopy" placeholder="请输入得分（0~100）" @change="isScore" />
-              <span class="warning" v-if="numberOutOfBoundsWarning">警告: 您输入的数字不在0~100范围内</span>
+              <span v-if="numberOutOfBoundsWarning" class="warning">警告: 您输入的数字不在0~100范围内</span>
               <span slot="footer" class="dialog-footer">
               <el-button @click="quitScore()">取 消</el-button>
               <el-button type="primary" @click="submitScore()">
@@ -205,11 +205,11 @@ export default {
 }
 
 .warning {
-  color:red;
+  color: red;
   -moz-user-select: none;
-  -webkit-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .el-card {

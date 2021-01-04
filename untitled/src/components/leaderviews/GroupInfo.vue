@@ -14,36 +14,35 @@
       <el-table
           ref="multipleTable"
           :data="tableData"
-          border
           align="center"
-          header-align="center"
+          border
           class="table"
-          header-cell-class-name="table-header"
-          @selection-change="handleSelectionChange">
+          header-align="center"
+          header-cell-class-name="table-header">
         <!-- prop对应tableData内属性名称 label是页面上显示的名称-->
-        <el-table-column label="编号">
+        <el-table-column label="用户编号">
           <template slot-scope="scope">
-            <span>{{scope.row.UserID}}</span>
+            <span>{{ scope.row.UserID }}</span>
           </template>
         </el-table-column>
         <el-table-column label="姓名">
           <template slot-scope="scope">
-            <span>{{scope.row['UserName']}}</span>
+            <span>{{ scope.row['UserName'] }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="学号">
+        <el-table-column label="电话">
           <template slot-scope="scope">
-            <span>{{scope.row['studentID']}}</span>
+            <span>{{ scope.row['Tel'] }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="班级">
+        <el-table-column label="电子邮箱">
           <template slot-scope="scope">
-            <span>{{scope.row['Class']}}</span>
+            <span>{{ scope.row['EMail'] }}</span>
           </template>
         </el-table-column>
         <el-table-column label="职务">
           <template slot-scope="scope">
-            <span>{{scope.row['RoleName']}}</span>
+            <span>{{ scope.row['Job'] }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -54,26 +53,9 @@
             :total="pageTotal"
             background
             layout="total, prev, pager, next"
-            @current-change="handlePageChange"
-        ></el-pagination>
+            @current-change="handlePageChange" />
       </div>
     </div>
-
-    <!-- 编辑弹出框 -->
-    <el-dialog :visible.sync="editVisible" title="编辑" width="30%">
-      <el-form ref="form" :model="form" label-width="70px">
-        <el-form-item label="用户名">
-          <el-input v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="身份">
-          <el-input v-model="form.identity"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -101,7 +83,7 @@ export default {
     };
   },
   created() {
-  this.fetchUser();
+    this.fetchUser();
   },
   methods: {
     getData() {
@@ -126,24 +108,24 @@ export default {
       this.getData();
     },
     fetchUser() {
-    let formData = new FormData();
-    formData.append('UserID', this.$cookie.get('UserID'));
-    formData.append('UserName', this.$cookie.get('UserName'));
-    formData.append('RoleName', this.$cookie.get('RoleName'));
-    formData.append('Class', this.$cookie.get('Class'));
-    formData.append('studentID', this.$cookie.get('studentID'));
-    console.log(formData);
-    this.$axios({
-    url: '/get/allCommunication',
-    method: 'POST',
-    data: formData
-    }).then(response => {
-    if (response.data['resultInfo'] !== '无权访问！！') {
-    this.tableData = response.data;
-    } else {
-    this.$message.error(response.data['resultInfo']);
-    }
-    });
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserName', this.$cookie.get('UserName'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      formData.append('TeamID', this.$cookie.get('TeamID'));
+      console.log(formData);
+      this.$axios({
+        url: '/get/TeamMemberList',
+        method: 'POST',
+        data: formData
+      }).then(response => {
+        if (response.data['resultInfo'] !== '无权访问！！') {
+          console.log(response.data);
+          this.tableData = response.data;
+        } else {
+          this.$message.error(response.data['resultInfo']);
+        }
+      });
     }
   }
 };
