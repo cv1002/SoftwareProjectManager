@@ -1,24 +1,12 @@
 <template>
   <div>
-    <div class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-lx-cascades"></i> 基础表格
-        </el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
     <div class="container">
       <div class="handle-box">
-        <el-button
-            class="handle-del mr10"
-            icon="el-icon-delete"
-            type="primary"
-            @click="delAllSelection"
-        >批量删除
-        </el-button>
         <el-select v-model="query.class" class="handle-select mr10" placeholder="班级">
           <el-option key="1" label="软件81班" value="软件81班"></el-option>
           <el-option key="2" label="软件82班" value="软件82班"></el-option>
+          <el-option key="3" label="软件83班" value="软件83班"></el-option>
+          <el-option key="4" label="软件84班" value="软件84班"></el-option>
         </el-select>
         <el-input v-model="query.name" class="handle-input mr10" placeholder="用户名"></el-input>
         <el-button icon="el-icon-search" type="primary" @click="handleSearch">搜索</el-button>
@@ -27,46 +15,35 @@
           ref="multipleTable"
           :data="tableData"
           border
+          align="center"
+          header-align="center"
           class="table"
           header-cell-class-name="table-header"
-          @selection-change="handleSelectionChange"
-      >
-        <el-table-column align="center" type="selection" width="55"></el-table-column>
-        <el-table-column align="center" label="ID" prop="id" width="55"></el-table-column>
-        <el-table-column label="用户名" prop="name"></el-table-column>
-        <el-table-column align="center" label="头像(查看大图)">
+          @selection-change="handleSelectionChange">
+        <!-- prop对应tableData内属性名称 label是页面上显示的名称-->
+        <el-table-column label="编号">
           <template slot-scope="scope">
-            <el-image
-                :preview-src-list="[scope.row.thumb]"
-                :src="scope.row.thumb"
-                class="table-td-thumb"
-            ></el-image>
+            <span>{{scope.row.UserID}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="班级" prop="class"></el-table-column>
-        <el-table-column align="center" label="状态">
+        <el-table-column label="姓名">
           <template slot-scope="scope">
-            <el-tag
-                :type="scope.row.state==='成功'?'success':(scope.row.state==='失败'?'danger':'')"
-            >{{ scope.row.state }}
-            </el-tag>
+            <span>{{scope.row['UserName']}}</span>
           </template>
         </el-table-column>
-        <el-table-column align="center" label="操作" width="180">
+        <el-table-column label="学号">
           <template slot-scope="scope">
-            <el-button
-                icon="el-icon-edit"
-                type="text"
-                @click="handleEdit(scope.$index, scope.row)"
-            >编辑
-            </el-button>
-            <el-button
-                class="red"
-                icon="el-icon-delete"
-                type="text"
-                @click="handleDelete(scope.$index, scope.row)"
-            >删除
-            </el-button>
+            <span>{{scope.row['studentID']}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="班级">
+          <template slot-scope="scope">
+            <span>{{scope.row['Class']}}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="职务">
+          <template slot-scope="scope">
+            <span>{{scope.row['RoleName']}}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -97,26 +74,25 @@
                 <el-button type="primary" @click="saveEdit">确 定</el-button>
             </span>
     </el-dialog>
-    <div>
-      <el-button @click="Cancel">取消</el-button>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'BaseTable',
   data() {
     return {
+      UserID: this.$cookie.get('UserID'),
+      UserName: this.$cookie.get('UserName'),
+      RoleName: this.$cookie.get('RoleName'),
+      Class: this.$cookie.get('Class'),
+      studentID: this.$cookie.get('studentID'),
+      tableData: [],
       query: {
         class: '',
         name: '',
         pageIndex: 1,
         pageSize: 10
       },
-      tableData: [],
-      multipleSelection: [],
-      delList: [],
       editVisible: false,
       pageTotal: 0,
       form: {},
@@ -124,8 +100,8 @@ export default {
       id: -1
     };
   },
-  mounted() {
-    this.getData();
+  created() {
+  this.fetchUser();
   },
   methods: {
     getData() {
@@ -144,54 +120,30 @@ export default {
       this.$set(this.query, 'pageIndex', 1);
       this.getData();
     },
-    // 删除操作
-    handleDelete(index, row) {
-      // 二次确认删除
-      this.$confirm('确定要删除吗？', '提示', {
-        type: 'warning'
-      })
-          .then(() => {
-            this.$message.success('删除成功');
-            this.tableData.splice(index, 1);
-          })
-          .catch(() => {
-          });
-    },
-    // 多选操作
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-    },
-    delAllSelection() {
-      const length = this.multipleSelection.length;
-      let str = '';
-      this.delList = this.delList.concat(this.multipleSelection);
-      for (let i = 0; i < length; i++) {
-        str += this.multipleSelection[i].name + ' ';
-      }
-      this.$message.error(`删除了${str}`);
-      this.multipleSelection = [];
-    },
-    // 编辑操作
-    handleEdit(index, row) {
-      this.idx = index;
-      this.form = row;
-      this.editVisible = true;
-    },
-    // 保存编辑
-    saveEdit() {
-      this.editVisible = false;
-      this.$message.success(`修改第 ${this.idx + 1} 行成功`);
-      this.$set(this.tableData, this.idx, this.form);
-    },
     // 分页导航
     handlePageChange(val) {
       this.$set(this.query, 'pageIndex', val);
       this.getData();
     },
-    Cancel() {
-      this.$cookie.delete('groupsetenable');
-      this.$router.push('/groupsetup');
-      this.$router.go(0);
+    fetchUser() {
+    let formData = new FormData();
+    formData.append('UserID', this.$cookie.get('UserID'));
+    formData.append('UserName', this.$cookie.get('UserName'));
+    formData.append('RoleName', this.$cookie.get('RoleName'));
+    formData.append('Class', this.$cookie.get('Class'));
+    formData.append('studentID', this.$cookie.get('studentID'));
+    console.log(formData);
+    this.$axios({
+    url: '/get/allCommunication',
+    method: 'POST',
+    data: formData
+    }).then(response => {
+    if (response.data['resultInfo'] !== '无权访问！！') {
+    this.tableData = response.data;
+    } else {
+    this.$message.error(response.data['resultInfo']);
+    }
+    });
     }
   }
 };
@@ -212,7 +164,7 @@ export default {
 }
 
 .table {
-  width: 100%;
+  /* width: 500px; */
   font-size: 14px;
 }
 
