@@ -8,7 +8,7 @@
           :data="tableData"
           style="width: 100%">
         <el-table-column
-            label="主文件"
+            label="发起时间"
             prop="date"
             width="180">
         </el-table-column>

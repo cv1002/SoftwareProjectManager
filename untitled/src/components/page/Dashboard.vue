@@ -23,30 +23,25 @@
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
-          <el-table :data="groupProgressData" style="width:100%">
-            <el-table-column label="进展阶段" prop="completion" />
-            <el-table-column label="最新上传的文件" prop="upToDateFile" />
-          </el-table>
-          <el-table :data="taskCompletion" style="width:100%">
-            <el-table-column label="发布任务完成情况">
-              <template slot-scope="scope">
-                <div>完成度: {{ scope.row['percentage'] }}%</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="总任务数">
-              <template slot-scope="scope">
-                <div>{{ scope.row['tasklength'] }}</div>
-              </template>
-            </el-table-column>
-          </el-table>
+          <ProjectProgress :teamID="teamID"></ProjectProgress>
         </el-card>
         <el-card v-if="this.role === '老师'" shadow="hover" style="height:270px;">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
           <el-table :data="groupProgressData" style="width:100%">
-            <el-table-column label="实验进展阶段" prop="completion" />
-            <el-table-column label="最新上传的文件" prop="upToDateFile" />
+            <el-table :data="groupProgressData" style="width:100%;">
+              <el-table-column label="进展阶段">
+                <template slot-scope="scope">
+                  <div>{{ scope.row['completion'] }}</div>
+                </template>
+              </el-table-column>
+              <el-table-column label="最新上传的文件">
+                <template slot-scope="scope">
+                  <div>{{ scope.row['upToDateFile'] }}</div>
+                </template>
+              </el-table-column>
+            </el-table>
           </el-table>
           <el-table :data="taskCompletion" style="width:100%">
             <el-table-column label="总项目数">
@@ -157,20 +152,21 @@
 </template>
 
 <script>
-import Schart from 'vue-schart';
+import ProjectProgress from '../subviews/ProjectProgress';
 
 export default {
   name: 'dashboard',
+  components: { ProjectProgress },
   created() {
-    this.fetchRole() || this.fetchLocationAndDate() || this.fetchNumberOfMembers() || this.fetchTodoListItems() || this.fetchTasks();
-  },
-  mounted() {
+    this.fetchRole() || this.fetchLocationAndDate() || this.fetchNumberOfMembers() ||
+    this.fetchTodoListItems() || this.fetchTasks();
+
     // 页面加载完后显示当前时间
     this.dealWithTime(new Date());
     // 定时刷新时间
     this.timer = setInterval(() => {
       this.dealWithTime(new Date()); // 修改数据date
-    }, 1000);
+    }, 500);
   },
   destroyed() {
     if (this.timer) { // 注意在vue实例销毁前，清除我们的定时器
@@ -179,13 +175,13 @@ export default {
   },
   data() {
     return {
+      teamID: this.$cookie.get('TeamID'),
+      name: this.$cookie.get('UserName'),
       role: undefined,
       finishedtask: undefined,
       unfinishedtask: undefined,
       tasks: [],
-      nowdate: '',
-      nowTime: '',
-      nowWeek: '',
+      files: [],
       taskCompletion: [{
         percentage: 0,
         tasklength: 0
@@ -197,20 +193,8 @@ export default {
         nowDate: ''
       },
       numberofmembers: undefined,
-      todoList: [],
-      groupProgressData: [{
-        completion: '收尾阶段',
-        upToDateFile: '项目总结报告.pdf'
-      }]
+      todoList: []
     };
-  },
-  components: {
-    Schart
-  },
-  computed: {
-    name() {
-      return this.$cookie.get('UserName');
-    }
   },
   methods: {
     fetchRole() {
@@ -223,45 +207,44 @@ export default {
       }
     },
     dealWithTime(data) { // 获取当前时间
-      let Y = data.getFullYear();
-      let M = data.getMonth() + 1;
-      let D = data.getDate();
-      let H = data.getHours();
-      let Min = data.getMinutes();
-      let S = data.getSeconds();
-      let W = data.getDay();
-      H = H < 10 ? '0' + H : H;
-      Min = Min < 10 ? '0' + Min : Min;
-      S = S < 10 ? '0' + S : S;
-      switch (W) {
+      let year = data.getFullYear();
+      let month = data.getMonth() + 1;
+      let date = data.getDate();
+      let hour = data.getHours();
+      let minutes = data.getMinutes();
+      let seconds = data.getSeconds();
+      let dayOfWeeks = data.getDay();
+      hour = hour < 10 ? '0' + hour : hour;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      switch (dayOfWeeks) {
         case 0:
-          W = '日';
+          dayOfWeeks = '日';
           break;
         case 1:
-          W = '一';
+          dayOfWeeks = '一';
           break;
         case 2:
-          W = '二';
+          dayOfWeeks = '二';
           break;
         case 3:
-          W = '三';
+          dayOfWeeks = '三';
           break;
         case 4:
-          W = '四';
+          dayOfWeeks = '四';
           break;
         case 5:
-          W = '五';
+          dayOfWeeks = '五';
           break;
         case 6:
-          W = '六';
+          dayOfWeeks = '六';
           break;
         default:
           break;
       }
-      this.login.nowDate = Y + '年' + M + '月' + D + '日 ';
-      this.login.nowWeek = '周' + W;
-      this.login.nowTime = H + ':' + Min + ':' + S;
-      // formatDateTime=Y + "年" + M + "月" + D + "日 " + " 周" +W + H + ":" + Min + ':' + S;
+      this.login.nowDate = year + '年' + month + '月' + date + '日 ';
+      this.login.nowWeek = '周' + dayOfWeeks;
+      this.login.nowTime = hour + ':' + minutes + ':' + seconds;
     },
     fetchLocationAndDate() {
       this.login.date = new Date().toLocaleDateString();
@@ -538,6 +521,7 @@ export default {
 .mgb20 {
   margin-bottom: 20px;
 }
+
 .todo-item {
   font-size: 14px;
 }

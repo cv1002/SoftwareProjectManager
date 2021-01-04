@@ -3,6 +3,7 @@ import axios from 'axios';
 import App from './App.vue';
 import router from './router';
 import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
 import VueCookie from 'vue-cookie';
 import VueResource from 'vue-resource';
 // import 'element-ui/lib/theme-chalk/index.css'; // 默认主题

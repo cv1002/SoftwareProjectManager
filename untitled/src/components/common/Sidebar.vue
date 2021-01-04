@@ -8,9 +8,8 @@
         class="sidebar-el-menu"
         router
         text-color="#bfcbd9"
-        unique-opened
-    >
-      <template v-for="item in items" v-if="roleName==='Student'">
+        unique-opened>
+      <template v-for="item in StudentRouters" v-if="roleName==='Student'">
         <template v-if="item.subs">
           <el-submenu :key="item.index" :index="item.index">
             <template slot="title">
@@ -47,7 +46,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items2" v-if="roleName==='Leader'">
+      <template v-for="i in LeaderRouters" v-if="roleName==='Leader'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -55,7 +54,7 @@
           </el-menu-item>
         </template>
       </template>
-      <template v-for="i in items3" v-if="roleName==='Teacher'">
+      <template v-for="i in TeacherRouters" v-if="roleName==='Teacher'">
         <template>
           <el-menu-item :key="i.index" :index="i.index">
             <i :class="i.icon"></i>
@@ -75,7 +74,7 @@ export default {
     return {
       roleName: this.$cookie.get('RoleName'),
       collapse: false,
-      items: [
+      StudentRouters: [
         {
           icon: 'el-icon-lx-home',
           index: 'dashboard',
@@ -107,7 +106,7 @@ export default {
           title: '交流互动'
         }
       ],
-      items2: [
+      LeaderRouters: [
         {
           icon: 'el-icon-lx-home',
           index: 'dashboard',
@@ -139,48 +138,46 @@ export default {
           title: '交流讨论'
         }
       ],
-      items3:
-          [
-            {
-              icon: 'el-icon-lx-home',
-              index: '/dashboard',
-              title: '系统首页'
-            },
-            {
-              icon: 'el-icon-s-custom',
-              index: 'groupprogress',
-              title: '项目各小组进度'
-            },
-            {
-              icon: 'el-icon-chat-line-round',
-              index: 'vueeditor',
-              title: '交流讨论'
-            },
-            {
-              icon: 'el-icon-reading',
-              index: 'fileview',
-              title: '文件预览'
-            },
-            {
-              icon: 'el-icon-check',
-              index: 'checkpage',
-              title: '审核页面'
-            }
-          ]
+      TeacherRouters: [
+        {
+          icon: 'el-icon-lx-home',
+          index: 'dashboard',
+          title: '系统首页'
+        },
+        {
+          icon: 'el-icon-s-custom',
+          index: 'groupprogress',
+          title: '项目各小组进度'
+        },
+        {
+          icon: 'el-icon-chat-line-round',
+          index: 'vueeditor',
+          title: '交流讨论'
+        },
+        {
+          icon: 'el-icon-reading',
+          index: 'fileview',
+          title: '文件预览'
+        },
+        {
+          icon: 'el-icon-check',
+          index: 'checkpage',
+          title: '审核页面'
+        }
+      ]
     };
   },
-  computed: {
-    onRoutes() {
-      return this.$route.path.replace('/', '');
-    }
-  }
-  ,
   created() {
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
     bus.$on('collapse', msg => {
       this.collapse = msg;
       bus.$emit('collapse-content', msg);
     });
+  },
+  computed: {
+    onRoutes() {
+      return this.$route.path.replace('/', '');
+    }
   }
 };
 </script>

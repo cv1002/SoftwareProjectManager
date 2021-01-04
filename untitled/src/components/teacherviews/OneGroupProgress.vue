@@ -1,91 +1,79 @@
 <template>
   <div>
     <el-row :gutter="8">
-    <el-col :span='6'>
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span>小组1成员</span>
-        </div>
-        <div v-for="item in group[groupnumber].group" :key="item" class="text item">
-          {{ item.membername }}
-        </div>
-      </el-card>
-    </el-col>
-    <el-col :span='6'>
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span>提交文件</span>
-        </div>
-        <div v-for="o in 4" :key="o" class="text item">
-        <router-link :to="{path:'/fileview',query:{url:'https://vue.warmnight.site/pmbook.pdf'}}" class="font1"
-          style="color: darkblue">
-            {{'文件 ' + o }}           
-        </router-link>
-         </div>
-      </el-card>
-    </el-col>
-    <el-col :span='6'>
-        <el-card shadow="hover" class="box-card">
+      <el-col :span="6">
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>第 {{ groupnumber }} 小组成员</span>
+          </div>
+          <div v-for="(item, i) in group" :key="i" class="text item">
+            {{ item['UserName'] }}
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="6">
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>提交文件</span>
+          </div>
+          <div v-for="o in 4" :key="o" class="text item">
+            <router-link :to="{path:'/fileview',query:{url:'https://vue.warmnight.site/pmbook.pdf'}}" class="font1"
+                         style="color: darkblue">
+              {{ '文件 ' + o }}
+            </router-link>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="6">
+        <el-card class="box-card" shadow="hover">
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
-          <el-table :data="groupProgressData">
-            <el-table-column label="进展阶段" prop="completion" />
-            <el-table-column label="最新上传的文件" prop="upToDateFile" />
-          </el-table>
-          <el-table :data="taskCompletion">
-            <el-table-column label="发布任务完成情况">
-              <template slot-scope="scope">
-                <div>完成度: {{ scope.row['percentage'] }}%</div>
-              </template>
-            </el-table-column>
-            <el-table-column label="总任务数">
-              <template slot-scope="scope">
-                <div>{{ scope.row['tasklength'] }}</div>
-              </template>
-            </el-table-column>
-          </el-table>
+          <ProjectProgress :teamID="groupnumber"></ProjectProgress>
         </el-card>
-    </el-col>
-    <el-col :span='6'>
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          最终评分
-          <el-button style="float: right; padding: 3px 0" type="text" @click="centerDialogVisible = true">修改</el-button>
-          <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
-            <el-input v-model="score0" placeholder="请输入得分（0~100）"></el-input>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="centerDialogVisible = false;quitScore()">取 消</el-button>
-              <el-button @click="isScore">test</el-button>
-              <el-button type="primary" @click="centerDialogVisible = false;submitScore()">
+      </el-col>
+      <el-col :span="6">
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            最终评分
+            <el-button style="float: right; padding: 3px 0" type="text" @click="scoreDialogVisible = true">
+              修 改
+            </el-button>
+            <el-dialog :visible.sync="scoreDialogVisible" center title="提示" width="30%">
+              <el-input v-model="scoreCopy" placeholder="请输入得分（0~100）" @change="isScore" />
+              <span class="warning" v-if="numberOutOfBoundsWarning">警告: 您输入的数字不在0~100范围内</span>
+              <span slot="footer" class="dialog-footer">
+              <el-button @click="quitScore()">取 消</el-button>
+              <el-button type="primary" @click="submitScore()">
                   确 定
-                </el-button>
+              </el-button>
             </span>
-          </el-dialog>
-        </div>
-        <div class="grade">
-          {{score}}
-        </div>
-      </el-card>
-    </el-col>
+            </el-dialog>
+          </div>
+          <div class="grade">
+            {{ score }}
+          </div>
+        </el-card>
+      </el-col>
     </el-row>
     <div>
       <el-card class="box-card1">
         <div slot="header" class="clearfix">
           <span>评语</span>
-          <el-button style="float: right; padding: 3px 0" type="text" @click="centerDialogVisible1 = true">修改</el-button>
-          <el-dialog title="提示" :visible.sync="centerDialogVisible1" width="30%" center>
-            <el-input v-model="comment0" placeholder="请输入评论"></el-input>
+          <el-button style="float: right; padding: 3px 0" type="text" @click="commentDialogVisible = true">修改
+          </el-button>
+          <el-dialog :visible.sync="commentDialogVisible" center title="提示" width="30%">
+            <el-input v-model="commentCopy" placeholder="请输入评论"></el-input>
             <span slot="footer" class="dialog-footer">
-              <el-button @click="centerDialogVisible1 = false;quitCommit()">取 消</el-button>
-              <el-button type="primary" @click="centerDialogVisible1 = false;submitComment()">
+              <el-button @click="quitCommit()">取 消</el-button>
+              <el-button type="primary" @click="submitComment()">
                 确 定
               </el-button>
             </span>
           </el-dialog>
         </div>
         <div class="text item">
-          {{comment}}
+          {{ comment }}
         </div>
       </el-card>
     </div>
@@ -93,117 +81,122 @@
 </template>
 
 <script>
+import ProjectProgress from '../subviews/ProjectProgress';
+
 export default {
+  created() {
+    this.fetchGroupNumber();
+  },
   data() {
     return {
-      score0:'',
-      score:'80',
-      centerDialogVisible: false,
-      centerDialogVisible1: false,
-      comment:'很好',
-      comment0:'',
+      numberOutOfBoundsWarning: false,
+      scoreCopy: '',
+      score: '80',
+      scoreDialogVisible: false,
+      commentDialogVisible: false,
+      comment: '很好',
+      commentCopy: '',
       groupnumber: this.$route.query.groupnumber,
       groupname: this.$route.query.groupname,
-      group: [
-        {
-          group: [
-            { membername: 'zhang' },
-            { membername: 'wang' },
-            { membername: 'li' },
-            { membername: 'zhu' },
-            { membername: 'wu' },
-            { membername: 'shan' }
-          ]
-        },
-        {
-          group: [
-            { membername: 'zhang' },
-            { membername: 'wang' },
-            { membername: 'li' },
-            { membername: 'zhu' },
-            { membername: 'wu' },
-            { membername: 'shan' }
-          ]
-        }
-      ],
-      taskCompletion: [{
-      percentage: 0,
-      tasklength: 0
-      }],
-      groupProgressData: [{
-      completion: '收尾阶段',
-      upToDateFile: '项目总结报告.pdf'
-      }]
+      group: []
     };
   },
-  methods:{ 
-    isScore() {
-      const Regex = /^([0-9]{1,2}|100)$/
-      let numRe = new RegExp(Regex)
-      let result = numRe.test(80)
-      if(!result) {
-        console.log('123');
-      }
+  methods: {
+    fetchGroupNumber() {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      formData.append('TeamID', this.groupnumber);
+      this.$axios({
+        url: 'get/TeamMemberList',
+        method: 'POST',
+        data: formData
+      }).then((response) => {
+        this.group = response.data;
+      });
     },
-    submitScore(){
-      this.score = this.score0;
-      this.score0 = '';
+    isScore() {
+      const Regex = /^([0-9]{1,2}|100)$/;
+      let regExp = new RegExp(Regex);
+      let result = regExp.test(this.scoreCopy);
+      this.numberOutOfBoundsWarning = !result;
+    },
+    submitScore() {
+      this.scoreDialogVisible = false;
+      this.score = this.scoreCopy;
+      this.scoreCopy = '';
     },
     submitComment() {
-      this.comment = this.comment0;
-      this.comment0 = '';
+      this.scoreDialogVisible = false;
+      this.comment = this.commentCopy;
+      this.commentCopy = '';
     },
     quitScore() {
-      this.score0 = '';
+      this.scoreDialogVisible = false;
+      this.scoreCopy = '';
     },
     quitCommit() {
-    this.comment0 = '';
+      this.commentDialogVisible = false;
+      this.commentCopy = '';
     }
-  }
+  },
+  components: { ProjectProgress }
 };
 </script>
 
-<style scoped>
-  .text {
-  font-size: 16px;
-  }
 
-  .item {
+<style scoped>
+.text {
+  font-size: 16px;
+}
+
+.item {
   margin-bottom: 18px;
   text-align: center;
-  color:grey;
-  }
-  .clearfix {
-    text-align: center;
-  }
-  .clearfix:before,
-  .clearfix:after {
+  color: grey;
+}
+
+.clearfix {
+  text-align: center;
+}
+
+.clearfix:before,
+.clearfix:after {
   display: table;
   content: "";
-  }
-  .clearfix:after {
+}
+
+.clearfix:after {
   clear: both
-  }
+}
 
-  .box-card {
-    height: 300px;
-    margin: 10px;
-  }
+.box-card {
+  height: 390px;
+  margin: 10px;
+}
 
-  .box-card1 {
-    height: 180px;
-    margin: 10px;
-  }
+.box-card1 {
+  height: 180px;
+  margin: 10px;
+}
 
-  .grade {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 200px;
-    color: firebrick;
-  }
+.grade {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200px;
+  color: firebrick;
+}
 
-  .el-card {
-    background-color:ivory;
-  }
+.warning {
+  color:red;
+  -moz-user-select: none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+.el-card {
+  background-color: ivory;
+}
 </style>

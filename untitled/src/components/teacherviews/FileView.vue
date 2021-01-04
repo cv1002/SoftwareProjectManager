@@ -1,9 +1,8 @@
 <template>
   <div>
     <div style="width: 20%;float: left">
-      <p class='text'>PDF文件列表:</p>
-      <div class='text' v-for="(item,index) in pdfurl" style="text-decoration: underline" 
-      :key="index"  @click="pdfchange(index)">
+      <p class="text">PDF文件列表:</p>
+      <div v-for="(item,index) in pdfurl" class="text" style="text-decoration: underline" @click="pdfchange(index)">
         {{ item.name }}
       </div>
     </div>
@@ -25,7 +24,7 @@ export default {
       pdfurl: [
         {
           name: 'PDF1',
-          url:'https://vue.warmnight.site/pmbook.pdf'
+          url: 'https://vue.warmnight.site/pmbook.pdf'
         },
         {
           name: 'PDF2',
