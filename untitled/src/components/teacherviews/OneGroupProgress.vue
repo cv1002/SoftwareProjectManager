@@ -68,7 +68,7 @@
             <el-input v-model="commentCopy" placeholder="请输入评论"></el-input>
             <span slot="footer" class="dialog-footer">
               <el-button @click="quitCommit()">取 消</el-button>
-              <el-button type="primary" @click="submitComment()">
+              <el-button v-if="commentDialogVisible" type="primary" @click="submitComment()">
                 确 定
               </el-button>
             </span>
@@ -87,7 +87,7 @@ import ProjectProgress from '../subviews/ProjectProgress';
 
 export default {
   created() {
-    this.fetchGroupNumber() || this.fetchFiles();
+    this.fetchGroupNumber() || this.fetchFiles() || this.fetchGroupScore();
   },
   data() {
     return {
@@ -105,6 +105,27 @@ export default {
     };
   },
   methods: {
+    fetchGroupScore() {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      formData.append('TeamID', this.groupnumber);
+      this.$axios({
+        url: '/get/groupAssess',
+        method: 'POST',
+        data: formData
+      }).then(
+          response => {
+            if (response.data['resultInfo'] !== undefined) {
+              this.$message.success(response.data['resultInfo']);
+            } else {
+              console.log(response.data);
+              this.score = response.data['Score'];
+              this.comment = response.data['TeamAssess'];
+            }
+          }
+      );
+    },
     fetchGroupNumber() {
       let formData = new FormData();
       formData.append('UserID', this.$cookie.get('UserID'));
@@ -138,14 +159,53 @@ export default {
       this.numberOutOfBoundsWarning = !result;
     },
     submitScore() {
-      this.scoreDialogVisible = false;
-      this.score = this.scoreCopy;
+      this.isScore(this.scoreCopy);
+      if (!this.numberOutOfBoundsWarning) {
+        this.scoreDialogVisible = false;
+        this.score = this.scoreCopy;
+        let formData = new FormData();
+        formData.append('UserID', this.$cookie.get('UserID'));
+        formData.append('UserPassword', this.$cookie.get('UserPassword'));
+        formData.append('TeamID', this.groupnumber);
+        formData.append('Assess', this.comment);
+        formData.append('Score', this.score);
+        this.$axios({
+          url: '/groupAssess',
+          method: 'POST',
+          data: formData
+        }).then(
+            success => {
+              this.$message.success(success.data['resultInfo']);
+            },
+            error => {
+              this.$message.error(error.data['resuultInfo']);
+            }
+        );
+      }
       this.scoreCopy = '';
     },
     submitComment() {
-      this.scoreDialogVisible = false;
+      this.commentDialogVisible = false;
       this.comment = this.commentCopy;
       this.commentCopy = '';
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      formData.append('TeamID', this.groupnumber);
+      formData.append('Assess', this.comment);
+      formData.append('Score', this.score);
+      this.$axios({
+        url: '/groupAssess',
+        method: 'POST',
+        data: formData
+      }).then(
+          success => {
+            this.$message.success(success.data['resultInfo']);
+          },
+          error => {
+            this.$message.error(error.data['resuultInfo']);
+          }
+      );
     },
     quitScore() {
       this.scoreDialogVisible = false;

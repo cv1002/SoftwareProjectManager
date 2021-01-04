@@ -5,7 +5,7 @@
     </div>
     <div style="width: 60%;float: left;">
       <h1 class="h">审核</h1>
-      <img src="../../statics/img/head.png" style="margin-left: 2%">
+      <img alt="" src="../../statics/img/head.png" style="margin-left: 2%">
       <table class="table">
         <div class="label-margin">
           <el-row class="row_distance" style="margin-top: 30px">
@@ -29,10 +29,6 @@
           <el-row v-for="(item,index) in groupmember" :key="index" class="row_distance">
             {{ item.name }}
           </el-row>
-          <el-row class="row_distance">
-            <el-button type="primary">审核通过</el-button>
-            <el-button>审核未通过</el-button>
-          </el-row>
         </div>
       </table>
     </div>
@@ -46,30 +42,9 @@ export default {
       dialogVisible: false,
       leadername: this.$route.query.name,
       groupname: 'group1',
-      subject: '',   //题目
-      type: '',
-      desc: '',
-      time: '',
-      groupmember: [
-        {
-          name: '张学良'
-        },
-        {
-          name: '蒋介石'
-        },
-        {
-          name: '孙中山'
-        }
-      ]
+      subject: '',   //题目,
+      groupmember: []
     };
-  },
-  methods: {
-    CheckPass() {
-      console.log('通过');
-    },
-    CheckFail() {
-      console.log('未通过');
-    }
   }
 };
 </script>

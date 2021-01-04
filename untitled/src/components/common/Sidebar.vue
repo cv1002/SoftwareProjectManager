@@ -81,11 +81,6 @@ export default {
           title: '我的面板'
         },
         {
-          icon: 'el-icon-s-data',
-          index: 'entire',
-          title: '日期规划'
-        },
-        {
           icon: 'el-icon-document',
           index: 'individual',
           title: '待做任务'
@@ -94,11 +89,6 @@ export default {
           icon: 'el-icon-upload',
           index: 'homework',
           title: '文件上传'
-        },
-        {
-          icon: 'el-icon-reading',
-          index: 'pdfView',
-          title: '项目文档'
         },
         {
           icon: 'el-icon-chat-line-round',
@@ -136,6 +126,11 @@ export default {
           icon: 'el-icon-chat-line-round',
           index: 'vueeditor',
           title: '交流讨论'
+        },
+        {
+          icon: 'el-icon-s-data',
+          index: 'entire',
+          title: '日期规划'
         }
       ],
       TeacherRouters: [
@@ -153,11 +148,6 @@ export default {
           icon: 'el-icon-chat-line-round',
           index: 'vueeditor',
           title: '交流讨论'
-        },
-        {
-          icon: 'el-icon-check',
-          index: 'checkpage',
-          title: '审核页面'
         }
       ]
     };
