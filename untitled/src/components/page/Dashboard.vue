@@ -29,7 +29,6 @@
           <div slot="header" class="clearfix">
             <span>项目进展</span>
           </div>
-          <el-table :data="groupProgressData" style="width:100%">
             <el-table :data="groupProgressData" style="width:100%;">
               <el-table-column label="进展阶段">
                 <template slot-scope="scope">
@@ -42,7 +41,6 @@
                 </template>
               </el-table-column>
             </el-table>
-          </el-table>
           <el-table :data="taskCompletion" style="width:100%">
             <el-table-column label="总项目数">
               <template slot-scope="scope">
@@ -159,7 +157,7 @@ export default {
   components: { ProjectProgress },
   created() {
     this.fetchRole() || this.fetchLocationAndDate() || this.fetchNumberOfMembers() ||
-    this.fetchTodoListItems() || this.fetchTasks();
+    this.fetchTodoListItems() || this.fetchTasks() || this.fetchNewestFile();
 
     // 页面加载完后显示当前时间
     this.dealWithTime(new Date());
@@ -175,13 +173,17 @@ export default {
   },
   data() {
     return {
-      teamID: this.$cookie.get('TeamID'),
+      teamID: 2,
       name: this.$cookie.get('UserName'),
       role: undefined,
       finishedtask: undefined,
       unfinishedtask: undefined,
       tasks: [],
       files: [],
+      groupProgressData: [{
+        completion: '收尾阶段',
+        upToDateFile: '项目总结报告.pdf'
+      }],
       taskCompletion: [{
         percentage: 0,
         tasklength: 0
@@ -197,6 +199,26 @@ export default {
     };
   },
   methods: {
+    fetchNewestFile() {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      formData.append('TeamID', this.teamID);
+      this.$axios({
+        url: 'get/files',
+        method: 'POST',
+        data: formData
+      }).then(response => {
+        if (response.data['files'].length !== undefined && response.data['files'].length !== 0) {
+          this.files = response.data['files'];
+          this.groupProgressData[0].upToDateFile = this.files.pop();
+          this.files.push(this.groupProgressData.upToDateFile);
+          this.groupProgressData[0].upToDateFile = this.groupProgressData[0].upToDateFile['FileRealName'];
+        } else {
+          this.groupProgressData[0].upToDateFile = '本组暂时未上传文件';
+        }
+      });
+    },
     fetchRole() {
       if (this.$cookie.get('RoleName') === 'Teacher') {
         this.role = '老师';

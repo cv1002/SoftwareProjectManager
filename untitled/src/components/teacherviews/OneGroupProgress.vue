@@ -16,11 +16,13 @@
           <div slot="header" class="clearfix">
             <span>提交文件</span>
           </div>
-          <div v-for="o in 4" :key="o" class="text item">
-            <router-link :to="{path:'/fileview',query:{url:'https://vue.warmnight.site/pmbook.pdf'}}" class="font1"
+          <div v-for="(file, i) in files" :key="i" class="text item">
+
+            <router-link :to="{path:'/fileview',query:{url: file['FileID'], teamID: file['TeamID']}}" class="font1"
                          style="color: darkblue">
-              {{ '文件 ' + o }}
+              {{ file['FileRealName'] }}
             </router-link>
+
           </div>
         </el-card>
       </el-col>
@@ -85,7 +87,7 @@ import ProjectProgress from '../subviews/ProjectProgress';
 
 export default {
   created() {
-    this.fetchGroupNumber();
+    this.fetchGroupNumber() || this.fetchFiles();
   },
   data() {
     return {
@@ -98,7 +100,8 @@ export default {
       commentCopy: '',
       groupnumber: this.$route.query.groupnumber,
       groupname: this.$route.query.groupname,
-      group: []
+      group: [],
+      files: []
     };
   },
   methods: {
@@ -113,6 +116,19 @@ export default {
         data: formData
       }).then((response) => {
         this.group = response.data;
+      });
+    },
+    fetchFiles() {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      formData.append('TeamID', this.groupnumber);
+      this.$axios({
+        url: 'get/files',
+        method: 'POST',
+        data: formData
+      }).then((response) => {
+        this.files = response.data['files'];
       });
     },
     isScore() {

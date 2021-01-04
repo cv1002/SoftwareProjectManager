@@ -14,12 +14,7 @@ import pdf from 'vue-pdf';
 
 export default {
   props: {
-    url: {
-      type: String,
-      default: () => {
-        return require('../../statics/pdf/test.pdf');
-      }
-    }
+    url: ''
   },
   name: 'PdfView',
   components: {
@@ -36,8 +31,6 @@ export default {
       pdfsize: 60
     };
   },
-  mounted: function() {
-  },
   methods: {
     // 页面加载回调函数，其中e为当前页数
     pageLoaded(e) {
@@ -52,7 +45,8 @@ export default {
     },
     handleout() {
       this.pdfsize = this.pdfsize - 10;
-    }
+    },
+
   }
 };
 </script>

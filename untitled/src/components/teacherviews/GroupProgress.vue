@@ -9,27 +9,27 @@
                          style="color: darkblue">
               <div class="text">小组{{ item.no }}</div>
             </router-link>
-            <el-progress :color="colors1" :percentage="percentage" :stroke-width="3" type="dashboard"></el-progress>
-            <div class="text">评价完成进度：</div>
-            <div class="text">
-              <el-button-group>
-                <el-button icon="el-icon-minus" @click="decrease"></el-button>
-                <el-button icon="el-icon-plus" @click="increase"></el-button>
-              </el-button-group>
-            </div>
-            <div class="text">评语：{{ comment }} <br>
-              <el-button plain type="primary" @click="centerDialogVisible = true">添加/修改</el-button>
-              <el-dialog :visible.sync="centerDialogVisible" center title="提示" width="30%">
-                <el-input v-model="comment" placeholder="请输入评语"></el-input>
-                <span slot="footer" class="dialog-footer">
-              <el-button @click="centerDialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
-            </span>
-              </el-dialog>
-            </div>
-            <span class="text">评分：</span>
-            <el-rate v-model="item.value" show-text>
-            </el-rate>
+<!--            <el-progress :color="colors1" :percentage="item.value" :stroke-width="3" type="dashboard"></el-progress>-->
+<!--            <div class="text">评价完成进度：</div>-->
+<!--            <div class="text">-->
+<!--              <el-button-group>-->
+<!--                <el-button icon="el-icon-minus" @click="decrease(item)"></el-button>-->
+<!--                <el-button icon="el-icon-plus" @click="increase(item)"></el-button>-->
+<!--              </el-button-group>-->
+<!--            </div>-->
+<!--            <div class="text">评语：{{ item.comment }} <br>-->
+<!--              <el-button plain type="primary" @click="centerDialogVisible = true">添加/修改</el-button>-->
+<!--              <el-dialog :visible.sync="centerDialogVisible" center title="提示" width="30%">-->
+<!--                <el-input v-model="item.comment" placeholder="请输入评语"></el-input>-->
+<!--                <span slot="footer" class="dialog-footer">-->
+<!--              <el-button @click="centerDialogVisible = false">取 消</el-button>-->
+<!--              <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>-->
+<!--            </span>-->
+<!--              </el-dialog>-->
+<!--            </div>-->
+<!--            <span class="text">评分：</span>-->
+<!--            <el-rate v-model="item.value" show-text>-->
+<!--            </el-rate>-->
           </el-card>
         </el-col>
       </el-row>
@@ -42,8 +42,6 @@ export default {
   data() {
     return {
       centerDialogVisible: false,
-      comment: '',
-      percentage: 60,
       colors1: [
         { color: '#f56c6c', percentage: 20 },
         { color: '#e6a23c', percentage: 40 },
@@ -52,50 +50,51 @@ export default {
         { color: '#6f7ad3', percentage: 100 }
       ],
       colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
-      group: [{
-        no: '1',
-        value: null,
-        comment: ''
-      },
+      group: [
+        {
+          no: '1',
+          value: 0,
+          comment: ''
+        },
         {
           no: '2',
-          value: null,
+          value: 0,
           comment: ''
         },
         {
           no: '3',
-          value: null,
+          value: 0,
           comment: ''
         },
         {
           no: '4',
-          value: null,
+          value: 0,
           comment: ''
         },
         {
           no: '5',
-          value: null,
+          value: 0,
           comment: ''
         },
         {
           no: '6',
-          value: null,
+          value: 0,
           comment: ''
         }
       ]
     };
   },
   methods: {
-    increase() {
-      this.percentage += 10;
-      if (this.percentage > 100) {
-        this.percentage = 100;
+    increase(item) {
+      item.value += 10;
+      if (item.value > 100) {
+        item.value = 100;
       }
     },
-    decrease() {
-      this.percentage -= 10;
-      if (this.percentage < 0) {
-        this.percentage = 0;
+    decrease(item) {
+      item.value -= 10;
+      if (item.value < 0) {
+        item.value = 0;
       }
     }
   }
@@ -105,7 +104,7 @@ export default {
 
 <style scoped>
 .font1 {
-  font-size: 20px;
+  font-size: 15px;
   text-decoration: none;
 }
 

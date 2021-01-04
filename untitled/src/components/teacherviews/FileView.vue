@@ -1,10 +1,17 @@
 <template>
   <div>
     <div style="width: 20%;float: left">
-      <p class="text">PDF文件列表:</p>
-      <div v-for="(item,index) in pdfurl" class="text" style="text-decoration: underline" @click="pdfchange(index)">
-        {{ item.name }}
-      </div>
+      <el-table :data="pdfurl">
+        <el-table-column prop="FileRealName" label="文件名" width="170"/>
+        <el-table-column label="切换">
+          <template slot-scope="scope">
+            <el-button @click.native.prevent="pdfchangeByFileID(scope.row['FileID'])"
+                       size="mini" type="primary">
+              <i class="el-icon-arrow-right el-icon--right" />
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </div>
     <div>
       <PdfView :url="url"></PdfView>
@@ -13,34 +20,67 @@
 </template>
 
 <script>
-import PdfView from '@/components/subviews/pdfView';
+import PdfView from '../../components/subviews/pdfView';
+import decodeUTF8 from '../../utils/decodeUTF8';
 
 export default {
   name: 'FileView',
   components: { PdfView },
+  mounted () {
+    let teamID = this.$route.query.teamID;
+    let formData = new FormData();
+    formData.append('UserID', this.$cookie.get('UserID'));
+    formData.append('UserPassword', this.$cookie.get('UserPassword'));
+    formData.append('TeamID', teamID);
+    this.$axios({
+      url: '/get/files',
+      method: 'POST',
+      data: formData
+    }).then((response) => {
+      this.pdfurl = response.data['files'];
+      this.pdfchange(0);
+    });
+  },
   data() {
     return {
-      url: this.$route.query.url,
-      pdfurl: [
-        {
-          name: 'PDF1',
-          url: 'https://vue.warmnight.site/pmbook.pdf'
-        },
-        {
-          name: 'PDF2',
-          url: require('@/statics/pdf/test.pdf')
-        },
-        {
-          name: 'PDF3',
-          url: require('@/statics/pdf/现代计算机组成原理实验讲义.pdf')
-        }
-      ]
+      teamID: this.$route.query.teamID,
+      url: '',
+      pdfurl: []
     };
   },
   methods: {
     pdfchange(index) {
-      this.url = this.pdfurl[index].url;
-      console.log(this.url);
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      let fileID = this.pdfurl[index]['FileID'];
+      this.$axios({
+        url: `get/file/${fileID}`,
+        method: 'POST',
+        data: formData,
+        responseType: 'blob'
+      }).then(response => {
+        let fileName = response.headers['content-disposition'].match(/filename=(.*)/)[1];
+        fileName = decodeUTF8(fileName);
+        let fileBack = new File([(response.data)], fileName,{ type: 'application/pdf;charset=UTF-8' });
+        this.url = window.URL.createObjectURL(fileBack);
+      })
+    },
+    pdfchangeByFileID(fileID) {
+      let formData = new FormData();
+      formData.append('UserID', this.$cookie.get('UserID'));
+      formData.append('UserPassword', this.$cookie.get('UserPassword'));
+      this.$axios({
+        url: `get/file/${fileID}`,
+        method: 'POST',
+        data: formData,
+        responseType: 'blob'
+      }).then(response => {
+        let fileName = response.headers['content-disposition'].match(/filename=(.*)/)[1];
+        fileName = decodeUTF8(fileName);
+        let fileBack = new File([(response.data)], fileName,{ type: 'application/pdf;charset=UTF-8' });
+        this.url = window.URL.createObjectURL(fileBack);
+      })
     }
   }
 };
